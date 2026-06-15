@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HS-INFRA — Système RH</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #185FA5; --blue-light: #E6F1FB; --blue-dark: #0C447C;
+    --green: #0F6E56; --green-light: #E1F5EE;
+    --amber: #BA7517; --amber-light: #FAEEDA;
+    --red: #A32D2D; --red-light: #FCEBEB;
+    --gray: #F8F9FA; --gray-2: #E9ECEF; --gray-3: #CED4DA;
+    --text: #1a1a1a; --text-2: #555; --text-3: #888;
+    --white: #fff; --border: #DEE2E6;
+    --radius: 8px; --radius-lg: 12px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #F0F2F5; color: var(--text); font-size: 14px; }
+
+  /* LAYOUT */
+  .app { display: flex; height: 100vh; overflow: hidden; }
+  .sidebar { width: 240px; background: #1C2B40; display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; }
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .content { flex: 1; overflow-y: auto; padding: 24px; }
+
+  /* SIDEBAR */
+  .logo { padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .logo-icon { width: 36px; height: 36px; background: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; margin-bottom: 10px; }
+  .logo h1 { font-size: 14px; font-weight: 600; color: #fff; }
+  .logo p { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .nav-section { padding: 16px 20px 6px; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+  .nav-item.active { background: rgba(24,95,165,0.25); color: #fff; border-left-color: var(--blue); font-weight: 500; }
+  .nav-item i { width: 18px; font-size: 14px; }
+  .nav-badge { margin-left: auto; background: var(--blue); color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 10px; }
+  .sidebar-footer { margin-top: auto; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .user-info { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
+  .user-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.85); }
+  .user-role { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+  /* TOPBAR */
+  .topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .topbar h2 { font-size: 16px; font-weight: 600; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .company-badge { background: var(--blue-light); color: var(--blue-dark); font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--white); color: var(--text); font-family: inherit; transition: all 0.15s; text-decoration: none; }
+  .btn:hover { background: var(--gray); }
+  .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+  .btn-success { background: var(--green); border-color: var(--green); color: #fff; }
+  .btn-success:hover { background: #085041; }
+  .btn-danger { background: var(--red-light); border-color: #f0a0a0; color: var(--red); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+  .btn-xs { padding: 3px 8px; font-size: 11px; }
+  .btn-icon { padding: 6px 8px; }
+
+  /* CARDS */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .card-title { font-size: 14px; font-weight: 600; }
+  .card-sub { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); }
+  .stat-icon { width: 36px; height: 36px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 12px; }
+  .stat-icon.blue { background: var(--blue-light); color: var(--blue); }
+  .stat-icon.green { background: var(--green-light); color: var(--green); }
+  .stat-icon.amber { background: var(--amber-light); color: var(--amber); }
+  .stat-icon.red { background: var(--red-light); color: var(--red); }
+  .stat-value { font-size: 26px; font-weight: 700; color: var(--text); }
+  .stat-label { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); background: var(--gray); }
+  th:first-child { border-radius: var(--radius) 0 0 0; }
+  th:last-child { border-radius: 0 var(--radius) 0 0; }
+  td { padding: 12px 12px; border-bottom: 1px solid var(--gray-2); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbfc; }
+  .td-name { font-weight: 500; }
+
+  /* PILLS */
+  .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
+  .pill-green { background: var(--green-light); color: var(--green); }
+  .pill-amber { background: var(--amber-light); color: var(--amber); }
+  .pill-blue { background: var(--blue-light); color: var(--blue-dark); }
+  .pill-gray { background: var(--gray-2); color: var(--text-3); }
+  .pill-red { background: var(--red-light); color: var(--red); }
+
+  /* FORM */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-2); margin-bottom: 5px; }
+  .form-label span { color: var(--red); }
+  input[type=text], input[type=date], input[type=email], input[type=number], input[type=password], select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px;
+    background: var(--white); color: var(--text); font-family: inherit; transition: border-color 0.15s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,95,165,0.1); }
+  .search-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .search-bar input { flex: 1; }
+  .search-icon { position: relative; }
+  .search-icon i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-3); }
+  .search-icon input { padding-left: 32px; }
+
+  /* PAGE */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: var(--radius-lg); width: 580px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+  .modal-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .modal-title { font-size: 16px; font-weight: 600; }
+  .modal-body { padding: 24px; }
+  .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 8px; }
+
+  /* DOCUMENT PREVIEW */
+  .doc-preview-wrap { background: #E8EBF0; padding: 24px; border-radius: var(--radius); }
+  .doc-page { background: #fff; width: 100%; min-height: 420px; padding: 48px 52px; box-shadow: 0 2px 12px rgba(0,0,0,0.12); font-family: 'Times New Roman', Georgia, serif; font-size: 13.5px; line-height: 1.9; color: #111; position: relative; }
+  .doc-page h3 { text-align: center; text-decoration: underline; font-size: 15px; font-weight: 700; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .doc-page p { text-align: justify; margin-bottom: 14px; }
+  .doc-var { background: #fef9c3; border-bottom: 1px solid #eab308; padding: 0 2px; font-weight: 600; }
+  .doc-company { font-weight: 700; font-style: italic; }
+  .doc-right { text-align: right; }
+  .doc-sign { display: flex; justify-content: space-between; margin-top: 40px; }
+  .sign-box { text-align: center; }
+  .sign-box p { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .sign-line { width: 120px; height: 60px; border: 1px solid #ccc; border-radius: 4px; margin: 0 auto; }
+
+  /* GEN STEPS */
+  .steps-bar { display: flex; align-items: center; margin-bottom: 24px; }
+  .step-item { display: flex; align-items: center; gap: 8px; }
+  .step-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--border); color: var(--text-3); background: var(--white); }
+  .step-circle.done { background: var(--green); border-color: var(--green); color: #fff; }
+  .step-circle.current { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .step-label { font-size: 12px; color: var(--text-3); font-weight: 500; }
+  .step-label.current { color: var(--blue); }
+  .step-label.done { color: var(--green); }
+  .step-line { flex: 1; height: 2px; background: var(--gray-2); margin: 0 8px; min-width: 40px; }
+  .step-line.done { background: var(--green); }
+
+  /* ALERTS */
+  .alert { padding: 12px 16px; border-radius: var(--radius); font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .alert-success { background: var(--green-light); color: var(--green); border: 1px solid #9FE1CB; }
+  .alert-info { background: var(--blue-light); color: var(--blue-dark); border: 1px solid #B5D4F4; }
+
+  /* PRINT */
+  @media print {
+    .app { display: block; }
+    .sidebar, .topbar, .topbar-right, .btn, .steps-bar, .card:not(.print-card) { display: none !important; }
+    .content { padding: 0; }
+    .doc-page { box-shadow: none; padding: 20px; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--gray-3); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-building"></i></div>
+      <h1>HS-INFRA</h1>
+      <p>Infrastructure RH</p>
+    </div>
+    <div class="nav-section">Général</div>
+    <div class="nav-item active" onclick="nav('dashboard',this)"><i class="fa-solid fa-gauge"></i> Tableau de bord</div>
+    <div class="nav-section">Gestion</div>
+    <div class="nav-item" onclick="nav('employes',this)"><i class="fa-solid fa-users"></i> Employés <span class="nav-badge" id="nb-emp">4</span></div>
+    <div class="nav-item" onclick="nav('modeles',this)"><i class="fa-solid fa-file-lines"></i> Modèles <span class="nav-badge">7</span></div>
+    <div class="nav-section">Documents</div>
+    <div class="nav-item" onclick="nav('generation',this)"><i class="fa-solid fa-wand-magic-sparkles"></i> Générer un document</div>
+    <div class="nav-item" onclick="nav('historique',this)"><i class="fa-solid fa-clock-rotate-left"></i> Historique</div>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="avatar">RH</div>
+        <div>
+          <div class="user-name">Responsable RH</div>
+          <div class="user-role">Amanah Real Estate</div>
+        </div>
+        <i class="fa-solid fa-right-from-bracket" style="margin-left:auto;color:rgba(255,255,255,0.3);cursor:pointer;font-size:13px;" title="Déconnexion"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <h2 id="page-title">Tableau de bord</h2>
+      <div class="topbar-right">
+        <span class="company-badge"><i class="fa-solid fa-building"></i> Amanah Real Estate S.A.S</span>
+        <button class="btn btn-primary btn-sm" onclick="nav('generation',null)"><i class="fa-solid fa-plus"></i> Nouveau document</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ======= DASHBOARD ======= -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-value" id="s-emp">4</div>
+            <div class="stat-label">Employés actifs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-file-lines"></i></div>
+            <div class="stat-value">7</div>
+            <div class="stat-label">Modèles disponibles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-file-export"></i></div>
+            <div class="stat-value" id="s-docs">5</div>
+            <div class="stat-label">Documents générés</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-calendar-day"></i></div>
+            <div class="stat-value" style="font-size:18px;">15/06/2026</div>
+            <div class="stat-label">Date du jour</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Documents récents</div><div class="card-sub">Derniers documents générés</div></div>
+            <button class="btn btn-sm" onclick="nav('historique',null)"><i class="fa-solid fa-arrow-right"></i> Voir tout</button>
+          </div>
+          <table>
+            <tr><th>Employé</th><th>Type de document</th><th>Date & heure</th><th>Format</th><th>Action</th></tr>
+            <tbody id="recent-docs"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======= EMPLOYÉS ======= -->
+      <div class="page" id="page-employes">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Liste des employés</div><div class="card-sub">Gérer les informations des employés</div></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('modal-emp')"><i class="fa-solid fa-plus"></i> Ajouter un employé</button>
+          </div>
+          <div class="search-bar">
+            <div class="search-icon" style="flex:1;position:relative;">
+              <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-3)"></i>
+              <input type="text" placeholder="Rechercher par nom, fonction, CIN..." oninput="filterEmployes(this.value)" style="padding-left:32px;width:100%">
+            </div>
+          </div>
+          <table>
+            <tr><th>Nom & Prénom</th><th>Fonction</th><th>CIN</th><th>CNSS</th><th>Date embauche</th><th>Salaire brut</th><th>Statut</th><th>Actions</th></tr>
+            <tbody id="emp-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======= MODÈLES ======= -->
+      <div class="page" id="page-modeles">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Modèles de documents</div><div class="card-sub">Gérer les modèles et leurs variables</div></div>
+          </div>
+          <table>
+            <tr><th>Nom du modèle</th><th>Variables utilisées</th><th>Référence</th><th>Statut</th><th>Actions</th></tr>
+            <tr>
+              <td class="td-name">Attestation de travail</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {cin} {cnss} {fonction} {date_embauche}</code></td>
+              <td>—</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('attestation_travail')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Attestation de travail et salaire</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {cin} {cnss} {fonction} {salaire}</code></td>
+              <td>RH/ATS/1/19</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('attestation_salaire')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Certificat de travail</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {cin} {cnss} {fonction} {date_depart}</code></td>
+              <td>—</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('certificat')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Demande d'avance sur salaire</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {fonction} {montant} {motif}</code></td>
+              <td>RH/DA/1/19</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('avance')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Demande de prime</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {fonction} {motif_prime} {montant}</code></td>
+              <td>—</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('prime')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Attestation de domiciliation irrevocable</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {salaire} {rib} {banque}</code></td>
+              <td>—</td>
+              <td><span class="pill pill-green"><i class="fa-solid fa-circle" style="font-size:6px"></i> Actif</span></td>
+              <td><button class="btn btn-sm btn-icon" onclick="previewModel('domiciliation')"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td class="td-name">Pièce de caisse dépenses</td>
+              <td><code style="font-size:11px;background:#f3f4f6;padding:2px 6px;border-radius:4px;">{nom} {montant} {motif} {date}</code></td>
+              <td>—</td>
+              <td><span class="pill pill-amber"><i class="fa-solid fa-circle" style="font-size:6px"></i> Inactif</span></td>
+              <td><button class="btn btn-sm btn-icon"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======= GÉNÉRATION ======= -->
+      <div class="page" id="page-generation">
+        <div class="steps-bar">
+          <div class="step-item"><div class="step-circle done" id="sc1"><i class="fa-solid fa-check" style="font-size:10px"></i></div><div class="step-label done">Employé</div></div>
+          <div class="step-line done"></div>
+          <div class="step-item"><div class="step-circle done" id="sc2"><i class="fa-solid fa-check" style="font-size:10px"></i></div><div class="step-label done">Document</div></div>
+          <div class="step-line done" id="sl3"></div>
+          <div class="step-item"><div class="step-circle current" id="sc3">3</div><div class="step-label current">Prévisualisation</div></div>
+          <div class="step-line" id="sl4"></div>
+          <div class="step-item"><div class="step-circle" id="sc4">4</div><div class="step-label">Téléchargement</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div class="card">
+              <div class="card-title" style="margin-bottom:16px;">Paramètres de génération</div>
+              <div class="form-group">
+                <label class="form-label">Employé <span>*</span></label>
+                <select id="gen-emp" onchange="updateDocPreview()">
+                  <option value="">— Sélectionner —</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Type de document <span>*</span></label>
+                <select id="gen-doc" onchange="updateDocPreview()">
+                  <option value="attestation_travail">Attestation de travail</option>
+                  <option value="attestation_salaire">Attestation de travail et salaire</option>
+                  <option value="certificat">Certificat de travail</option>
+                  <option value="avance">Demande d'avance sur salaire</option>
+                  <option value="prime">Demande de prime</option>
+                  <option value="domiciliation">Attestation de domiciliation</option>
+                </select>
+              </div>
+              <div id="extra-fields"></div>
+              <div class="form-group">
+                <label class="form-label">Format de téléchargement</label>
+                <select id="gen-fmt">
+                  <option value="pdf">PDF</option>
+                  <option value="print">Imprimer</option>
+                </select>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+                <button class="btn btn-primary" onclick="generateDocument()"><i class="fa-solid fa-wand-magic-sparkles"></i> Générer le document</button>
+                <button class="btn btn-success" id="btn-download" onclick="downloadDocument()" style="display:none"><i class="fa-solid fa-download"></i> Télécharger / Imprimer</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card print-card">
+              <div class="card-header">
+                <div><div class="card-title">Prévisualisation du document</div></div>
+                <div id="gen-status"></div>
+              </div>
+              <div class="doc-preview-wrap">
+                <div class="doc-page" id="doc-preview-content">
+                  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--text-3);gap:12px;">
+                    <i class="fa-regular fa-file-lines" style="font-size:48px;opacity:0.3"></i>
+                    <p style="font-family:var(--font-sans,sans-serif)">Sélectionnez un employé et un type de document pour prévisualiser</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= HISTORIQUE ======= -->
+      <div class="page" id="page-historique">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Historique des documents</div><div class="card-sub">Tous les documents générés</div></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+            <div style="position:relative;flex:1;min-width:200px;">
+              <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-3)"></i>
+              <input type="text" placeholder="Rechercher..." oninput="filterHistory(this.value)" style="padding-left:32px;width:100%">
+            </div>
+            <select style="width:160px;" onchange="filterHistory()">
+              <option>Tous les types</option>
+              <option>Attestation de travail</option>
+              <option>Certificat de travail</option>
+              <option>Demande d'avance</option>
+              <option>Demande de prime</option>
+            </select>
+          </div>
+          <table>
+            <tr><th>Employé</th><th>Type de document</th><th>Date & heure</th><th>Généré par</th><th>Format</th><th>Action</th></tr>
+            <tbody id="history-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Ajouter Employé -->
+<div class="modal-overlay" id="modal-emp">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa-solid fa-user-plus" style="color:var(--blue);margin-right:8px"></i>Ajouter un employé</div>
+      <button class="btn btn-sm btn-icon" onclick="closeModal('modal-emp')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nom & Prénom <span>*</span></label>
+          <input type="text" id="e-nom" placeholder="Ex: ALAMI Mohamed">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date de naissance <span>*</span></label>
+          <input type="date" id="e-naissance">
+        </div>
+        <div class="form-group">
+          <label class="form-label">N° CIN <span>*</span></label>
+          <input type="text" id="e-cin" placeholder="Ex: D123456">
+        </div>
+        <div class="form-group">
+          <label class="form-label">N° CNSS <span>*</span></label>
+          <input type="text" id="e-cnss" placeholder="Ex: 181348958">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fonction <span>*</span></label>
+          <input type="text" id="e-fonction" placeholder="Ex: Responsable Financier">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Département</label>
+          <input type="text" id="e-dept" placeholder="Ex: Finance">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date d'embauche <span>*</span></label>
+          <input type="date" id="e-embauche">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Salaire brut mensuel (DH)</label>
+          <input type="number" id="e-salaire" placeholder="Ex: 15000">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-emp')">Annuler</button>
+      <button class="btn btn-primary" onclick="addEmploye()"><i class="fa-solid fa-check"></i> Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Preview modèle -->
+<div class="modal-overlay" id="modal-model">
+  <div class="modal" style="width:680px">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-model-title">Aperçu du modèle</div>
+      <button class="btn btn-sm btn-icon" onclick="closeModal('modal-model')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="doc-preview-wrap"><div class="doc-page" id="modal-model-content"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+let employes = [
+  { id:1, nom:'QETTARI BADR', naissance:'24/02/1979', cin:'D426934', cnss:'181348958', fonction:'RESPONSABLE FINANCIER', dept:'Finance', embauche:'01/07/2016', salaire:15000, statut:'Actif' },
+  { id:2, nom:'ALAMI SARA', naissance:'10/05/1985', cin:'BE123456', cnss:'223445678', fonction:'COMPTABLE', dept:'Finance', embauche:'15/03/2019', salaire:12000, statut:'Actif' },
+  { id:3, nom:'BERRADA KARIM', naissance:'22/08/1990', cin:'CD789012', cnss:'334556789', fonction:'COMMERCIAL', dept:'Commercial', embauche:'01/01/2021', salaire:10000, statut:'Actif' },
+  { id:4, nom:'TAHIRI LEILA', naissance:'05/12/1993', cin:'EF345678', cnss:'445667890', fonction:'ASSISTANTE RH', dept:'RH', embauche:'10/06/2022', salaire:9000, statut:'Congé' },
+];
+let nextId = 5;
+let historique = [
+  { emp:'QETTARI BADR', doc:'Attestation de travail', date:'12/06/2026 09:14', par:'Responsable RH', fmt:'PDF' },
+  { emp:'QETTARI BADR', doc:'Certificat de travail', date:'12/06/2026 09:22', par:'Responsable RH', fmt:'DOCX' },
+  { emp:'QETTARI BADR', doc:"Demande d'avance — 15 000 DH", date:'12/06/2026 10:05', par:'Agent RH', fmt:'PDF' },
+  { emp:'ALAMI SARA', doc:'Attestation de travail et salaire', date:'10/06/2026 14:30', par:'Responsable RH', fmt:'PDF' },
+  { emp:'BERRADA KARIM', doc:'Demande de prime — 3 000 DH', date:'05/06/2026 11:00', par:'Agent RH', fmt:'PDF' },
+];
+
+const today = '15/06/2026';
+
+// ===== NAV =====
+function nav(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const titles = { dashboard:'Tableau de bord', employes:'Gestion des employés', modeles:'Modèles de documents', generation:'Générer un document', historique:'Historique des documents' };
+  document.getElementById('page-title').textContent = titles[id];
+  if (el) el.classList.add('active');
+  else { const items = document.querySelectorAll('.nav-item'); items.forEach(i => { if (i.textContent.trim().startsWith(titles[id].substring(0,5))) i.classList.add('active'); }); }
+  if (id === 'employes') renderEmployes();
+  if (id === 'historique') renderHistory();
+  if (id === 'generation') { renderGenEmpSelect(); updateDocPreview(); }
+  if (id === 'dashboard') renderDashboard();
+}
+
+// ===== MODAL =====
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ===== FORMAT =====
+function fmt(n) { return n ? n.toLocaleString('fr-MA') : '—'; }
+function fmtDate(d) {
+  if (!d) return '—';
+  const p = d.split('-');
+  if (p.length === 3) return p[2]+'/'+p[1]+'/'+p[0];
+  return d;
+}
+
+// ===== DASHBOARD =====
+function renderDashboard() {
+  document.getElementById('s-emp').textContent = employes.filter(e => e.statut === 'Actif').length;
+  document.getElementById('s-docs').textContent = historique.length;
+  const tbody = document.getElementById('recent-docs');
+  const recent = historique.slice(-5).reverse();
+  tbody.innerHTML = recent.map(h => `
+    <tr>
+      <td class="td-name">${h.emp}</td>
+      <td>${h.doc}</td>
+      <td><span style="color:var(--text-3);font-size:12px">${h.date}</span></td>
+      <td><span class="pill pill-${h.fmt==='PDF'?'green':'amber'}">${h.fmt}</span></td>
+      <td><button class="btn btn-xs btn-icon" title="Télécharger"><i class="fa-solid fa-download"></i></button></td>
+    </tr>`).join('');
+}
+
+// ===== EMPLOYÉS =====
+function renderEmployes(filter='') {
+  const tbody = document.getElementById('emp-table');
+  const list = employes.filter(e => !filter || e.nom.toLowerCase().includes(filter) || e.fonction.toLowerCase().includes(filter) || e.cin.toLowerCase().includes(filter));
+  tbody.innerHTML = list.map(e => `
+    <tr>
+      <td><div class="td-name">${e.nom}</div></td>
+      <td>${e.fonction}</td>
+      <td><code style="font-size:12px">${e.cin}</code></td>
+      <td><code style="font-size:12px">${e.cnss}</code></td>
+      <td>${e.embauche}</td>
+      <td><strong>${fmt(e.salaire)} DH</strong></td>
+      <td><span class="pill pill-${e.statut==='Actif'?'green':e.statut==='Congé'?'amber':'gray'}">${e.statut}</span></td>
+      <td>
+        <button class="btn btn-xs" onclick="genForEmp(${e.id})" title="Générer document"><i class="fa-solid fa-file-export"></i></button>
+        <button class="btn btn-xs btn-danger" onclick="deleteEmp(${e.id})" title="Supprimer" style="margin-left:4px"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+  document.getElementById('nb-emp').textContent = employes.length;
+}
+
+function filterEmployes(v) { renderEmployes(v.toLowerCase()); }
+
+function addEmploye() {
+  const nom = document.getElementById('e-nom').value.trim().toUpperCase();
+  const cin = document.getElementById('e-cin').value.trim().toUpperCase();
+  const cnss = document.getElementById('e-cnss').value.trim();
+  const fn = document.getElementById('e-fonction').value.trim().toUpperCase();
+  const naiss = fmtDate(document.getElementById('e-naissance').value);
+  const emb = fmtDate(document.getElementById('e-embauche').value);
+  const sal = parseInt(document.getElementById('e-salaire').value) || 0;
+  const dept = document.getElementById('e-dept').value.trim();
+  if (!nom || !cin || !cnss || !fn) { alert('Veuillez remplir les champs obligatoires.'); return; }
+  employes.push({ id: nextId++, nom, naissance: naiss, cin, cnss, fonction: fn, dept, embauche: emb, salaire: sal, statut: 'Actif' });
+  closeModal('modal-emp');
+  renderEmployes();
+  renderDashboard();
+  ['e-nom','e-cin','e-cnss','e-fonction','e-dept','e-salaire'].forEach(id => document.getElementById(id).value = '');
+  ['e-naissance','e-embauche'].forEach(id => document.getElementById(id).value = '');
+}
+
+function deleteEmp(id) {
+  if (!confirm('Supprimer cet employé ?')) return;
+  employes = employes.filter(e => e.id !== id);
+  renderEmployes();
+  renderDashboard();
+}
+
+function genForEmp(id) {
+  nav('generation', null);
+  setTimeout(() => {
+    document.getElementById('gen-emp').value = id;
+    updateDocPreview();
+  }, 100);
+}
+
+// ===== GÉNÉRATION =====
+function renderGenEmpSelect() {
+  const sel = document.getElementById('gen-emp');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">— Sélectionner un employé —</option>' +
+    employes.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
+  if (cur) sel.value = cur;
+}
+
+function updateDocPreview() {
+  const empId = parseInt(document.getElementById('gen-emp').value);
+  const docType = document.getElementById('gen-doc').value;
+  const e = employes.find(x => x.id === empId);
+  const preview = document.getElementById('doc-preview-content');
+  const extra = document.getElementById('extra-fields');
+
+  // Extra fields
+  extra.innerHTML = '';
+  if (docType === 'avance') {
+    extra.innerHTML = `
+      <div class="form-group"><label class="form-label">Montant de l'avance (DH)</label><input type="number" id="ex-montant" value="15000" oninput="updateDocPreview()"></div>`;
+  }
+  if (docType === 'prime') {
+    extra.innerHTML = `
+      <div class="form-group"><label class="form-label">Motif de la prime</label>
+        <select id="ex-motif" onchange="updateDocPreview()"><option>Naissance</option><option>Mariage</option><option>Autre</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Montant (DH)</label><input type="number" id="ex-montant" value="3000" oninput="updateDocPreview()"></div>`;
+  }
+  if (docType === 'domiciliation') {
+    extra.innerHTML = `
+      <div class="form-group"><label class="form-label">RIB bancaire</label><input type="text" id="ex-rib" value="147 890 000 12345 00" oninput="updateDocPreview()"></div>
+      <div class="form-group"><label class="form-label">Banque</label><input type="text" id="ex-banque" value="CIH Bank" oninput="updateDocPreview()"></div>`;
+  }
+
+  if (!e) {
+    preview.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--text-3);gap:12px;font-family:sans-serif"><i class="fa-regular fa-file-lines" style="font-size:48px;opacity:0.3"></i><p>Sélectionnez un employé</p></div>`;
+    document.getElementById('btn-download').style.display = 'none';
+    return;
+  }
+  preview.innerHTML = buildDoc(docType, e);
+  document.getElementById('btn-download').style.display = 'none';
+  document.getElementById('gen-status').innerHTML = '';
+}
+
+function buildDoc(type, e) {
+  const montant = () => { const el = document.getElementById('ex-montant'); return el ? parseInt(el.value)||0 : 0; };
+  const motif = () => { const el = document.getElementById('ex-motif'); return el ? el.value : 'Naissance'; };
+  const rib = () => { const el = document.getElementById('ex-rib'); return el ? el.value : ''; };
+  const banque = () => { const el = document.getElementById('ex-banque'); return el ? el.value : ''; };
+
+  const v = s => `<span class="doc-var">${s}</span>`;
+  const c = s => `<span class="doc-company">${s}</span>`;
+
+  const header = `<p class="doc-right">Tanger, le ${v(today)}</p>`;
+
+  if (type === 'attestation_travail') return `
+    ${header}
+    <h3>Attestation de travail</h3>
+    <p>Nous, soussignés Sté ${c('AMANAH REAL ESTATE S.A.S')}, attestons par la présente que Mr&nbsp;: ${c(v(e.nom))} Né le&nbsp;: ${v(e.naissance)}, N° C.I.N ${v(e.cin)}, immatriculé à la C.N.S.S sous le N° ${v(e.cnss)}, est employé au sein de notre établissement en qualité de «&nbsp;${c(v(e.fonction))}&nbsp;», et ce depuis le ${v(e.embauche)} jusqu'à nos jours.</p>
+    <p style="font-style:italic;margin-top:20px;">Cette attestation est délivrée à l'intéressé sur sa demande pour servir et valoir ce que de droit.</p>
+    <div style="text-align:right;margin-top:40px;"><p>Fait à Tanger le&nbsp;: ${v(today)}</p><p style="margin-top:8px;font-weight:600;">Responsable RH</p><div class="sign-line" style="margin:12px 0 0 auto;"></div></div>`;
+
+  if (type === 'attestation_salaire') return `
+    ${header}
+    <h3>Attestation de travail et salaire</h3>
+    <p>Nous, soussignés Sté ${c('AMANAH REAL ESTATE S.A.S')}, attestons par la présente que Mr&nbsp;: ${c(v(e.nom))} Né le&nbsp;: ${v(e.naissance)}, N° C.I.N ${v(e.cin)}, immatriculé à la C.N.S.S sous le N° ${v(e.cnss)}, est employé au sein de notre établissement en qualité de «&nbsp;${c(v(e.fonction))}&nbsp;», et ce depuis le ${v(e.embauche)} jusqu'à nos jours, percevant un salaire mensuel brut de ${v(e.salaire.toLocaleString('fr-MA') + ',00')}, _________ DH (${v('_____________')} Dirhams Et ____ Cts).</p>
+    <p style="font-style:italic;margin-top:20px;">Cette attestation est délivrée à l'intéressé sur sa demande pour servir et valoir ce que de droit.</p>
+    <div style="text-align:right;margin-top:40px;"><p>Fait à Tanger le&nbsp;: ${v(today)}</p><p style="margin-top:8px;font-weight:600;">Responsable RH</p><div class="sign-line" style="margin:12px 0 0 auto;"></div></div>
+    <p style="font-size:11px;text-align:right;margin-top:8px;color:#888;">RH/ATS/1/19</p>`;
+
+  if (type === 'certificat') return `
+    ${header}
+    <h3>Certificat de travail</h3>
+    <p>Nous, soussignés Sté ${c('AMANAH REAL ESTATE S.A.S')}, certifions par la présente que Mr&nbsp;: ${c(v(e.nom))} né le ${v(e.naissance)}, titulaire de la CIN N° ${v(e.cin)}, immatriculé à la C.N.S.S sous le N° ${v(e.cnss)} a été employé au sein de notre établissement en qualité de «&nbsp;${c(v(e.fonction))}&nbsp;», et ce depuis le ${v(e.embauche)}.</p>
+    <p>Mr.&nbsp;${c(v(e.nom))} nous a quitté le ${v(today)} libre de tout engagement.</p>
+    <p style="font-style:italic;margin-top:16px;">Ce certificat est délivré à l'intéressé sur sa demande pour servir et valoir ce que de droit.</p>
+    <div style="text-align:right;margin-top:40px;"><p>Fait à Tanger le ${v(today)}</p><p style="margin-top:8px;font-weight:600;">La Direction</p><div class="sign-line" style="margin:12px 0 0 auto;"></div></div>`;
+
+  if (type === 'avance') { const m = montant(); return `
+    ${header}
+    <h3>Demande d'avance sur salaire</h3>
+    <table style="width:100%;font-size:13px;margin-bottom:20px;">
+      <tr><td style="padding:7px 0;color:#555;width:180px;">Nom & Prénom</td><td>${v(e.nom)}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;">Fonction</td><td>${e.fonction}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;">Département</td><td>${e.dept||'—'}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;">Motif</td><td>avance sur salaire</td></tr>
+      <tr><td style="padding:7px 0;color:#555;">Montant demandé</td><td>${v(m.toLocaleString('fr-MA') + ',00 Dhs')}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;">Montant accordé</td><td>${v(m.toLocaleString('fr-MA') + ',00 Dhs')}</td></tr>
+    </table>
+    <div class="doc-sign">
+      <div class="sign-box"><p>Demandeur :</p><div class="sign-line"></div></div>
+      <div class="sign-box"><p>Responsables hiérarchiques :</p><div class="sign-line"></div></div>
+    </div>
+    <div class="doc-sign" style="margin-top:20px;">
+      <div class="sign-box"><p>Département RH :</p><div class="sign-line"></div></div>
+      <div class="sign-box"><p>Département Financier :</p><div class="sign-line"></div></div>
+    </div>
+    <p style="font-size:11px;text-align:right;margin-top:16px;color:#888;">RH/DA/1/19</p>`; }
+
+  if (type === 'prime') { const m = montant(); return `
+    ${header}
+    <h3>Demande de prime</h3>
+    <table style="width:100%;font-size:13px;margin-bottom:20px;">
+      <tr><td style="padding:7px 0;color:#555;width:180px;font-weight:600;text-decoration:underline;">Nom & Prénom</td><td>${v(e.nom)}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;font-weight:600;text-decoration:underline;">Fonction</td><td>${e.fonction}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;font-weight:600;text-decoration:underline;">Département</td><td>${e.dept||'—'}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;font-weight:600;text-decoration:underline;">Agence</td><td>—</td></tr>
+      <tr><td style="padding:7px 0;color:#555;font-weight:600;text-decoration:underline;">Motif</td><td>${v(motif())}</td></tr>
+      <tr><td style="padding:7px 0;color:#555;font-weight:600;text-decoration:underline;">Montant accordé</td><td>${v(m.toLocaleString('fr-MA') + ' DH')}</td></tr>
+    </table>
+    <div class="doc-sign">
+      <div class="sign-box"><p>Demandeur :</p><div class="sign-line"></div></div>
+      <div class="sign-box"><p>Responsables hiérarchiques :</p><div class="sign-line"></div></div>
+    </div>
+    <div class="doc-sign" style="margin-top:20px;">
+      <div class="sign-box"><p>Département RH :</p><div class="sign-line"></div></div>
+      <div class="sign-box"><p>Direction Générale :</p><div class="sign-line"></div></div>
+    </div>`; }
+
+  if (type === 'domiciliation') return `
+    <p style="text-align:right;font-size:12px;color:#888;margin-bottom:8px;">AMANAH</p>
+    <h3>Attestation de domiciliation irrevocable de salaire</h3>
+    <p>Nous, soussignés Sté ${c('AMANAH REAL ESTATE S.A.S')} au capital de ${v('9.000.000')} DHS Immatriculé au RC n° ${v('73161')}.</p>
+    <p>Attestons par la présente que le salaire mensuel de Mr ${c(v(e.nom))}</p>
+    <p>Est (ou sera à compter de ce jour) viré irrévocablement chaque mois sur son compte bancaire ${v(rib())}, N° ouvert auprès de «${v(banque())}».</p>
+    <p>Au cas où, celui-ci cesserait son activité au sein de notre établissement, nous nous engageons à en informer «${v(banque())}», et à virer son solde de tout compte au compte bancaire sus mentionné.</p>
+    <div class="doc-sign" style="margin-top:32px;">
+      <div class="sign-box"><p>Accord du Salarié</p><div class="sign-line"></div></div>
+      <div class="sign-box"><p>Cachet et Signature de l'Employeur</p><div class="sign-line"></div><p style="font-size:11px;margin-top:8px;">Date ${v(today)}</p></div>
+    </div>`;
+
+  return '<p>Modèle non disponible.</p>';
+}
+
+function generateDocument() {
+  const empId = document.getElementById('gen-emp').value;
+  if (!empId) { alert('Veuillez sélectionner un employé.'); return; }
+  const e = employes.find(x => x.id === parseInt(empId));
+  const docType = document.getElementById('gen-doc').value;
+  const labels = { attestation_travail:'Attestation de travail', attestation_salaire:'Attestation de travail et salaire', certificat:'Certificat de travail', avance:"Demande d'avance", prime:'Demande de prime', domiciliation:'Attestation de domiciliation' };
+  historique.push({ emp: e.nom, doc: labels[docType], date: today + ' ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}), par: 'Responsable RH', fmt: 'PDF' });
+  document.getElementById('gen-status').innerHTML = `<span class="pill pill-green"><i class="fa-solid fa-check"></i> Document généré avec succès</span>`;
+  document.getElementById('btn-download').style.display = 'flex';
+  ['sc3','sc4'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    el.className = 'step-circle done';
+    el.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px"></i>';
+  });
+  document.getElementById('sl4').className = 'step-line done';
+  renderDashboard();
+}
+
+function downloadDocument() {
+  const empId = document.getElementById('gen-emp').value;
+  const e = employes.find(x => x.id === parseInt(empId));
+  const docType = document.getElementById('gen-doc').value;
+  const fmt = document.getElementById('gen-fmt').value;
+  if (fmt === 'print') {
+    window.print();
+  } else {
+    // PDF via print dialog
+    const win = window.open('', '_blank');
+    const docContent = document.getElementById('doc-preview-content').innerHTML;
+    win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Document RH - ${e.nom}</title>
+    <style>body{font-family:'Times New Roman',serif;font-size:14px;line-height:1.9;color:#111;padding:60px 70px;max-width:740px;margin:0 auto}h3{text-align:center;text-decoration:underline;font-size:16px;margin-bottom:28px;text-transform:uppercase}p{text-align:justify;margin-bottom:14px}.doc-var{background:#fef9c3;padding:0 2px;font-weight:600}.doc-company{font-weight:700;font-style:italic}.sign-line{width:130px;height:65px;border:1px solid #bbb;display:inline-block;border-radius:4px}.doc-right,.doc-sign p{text-align:right}.doc-sign{display:flex;justify-content:space-between;margin-top:40px}.sign-box{text-align:center}@media print{.doc-var{background:transparent!important;border-bottom:1px solid #333}}</style>
+    </head><body>${docContent}</body></html>`);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 500);
+  }
+}
+
+// ===== HISTORIQUE =====
+function renderHistory(filter='') {
+  const tbody = document.getElementById('history-table');
+  const list = filter ? historique.filter(h => h.emp.toLowerCase().includes(filter) || h.doc.toLowerCase().includes(filter)) : historique;
+  tbody.innerHTML = [...list].reverse().map(h => `
+    <tr>
+      <td class="td-name">${h.emp}</td>
+      <td>${h.doc}</td>
+      <td><span style="color:var(--text-3);font-size:12px">${h.date}</span></td>
+      <td><span style="color:var(--text-2)">${h.par}</span></td>
+      <td><span class="pill pill-${h.fmt==='PDF'?'green':'amber'}">${h.fmt}</span></td>
+      <td><button class="btn btn-xs btn-icon" title="Télécharger"><i class="fa-solid fa-download"></i></button></td>
+    </tr>`).join('');
+}
+function filterHistory(v='') { renderHistory(v.toLowerCase()); }
+
+// ===== MODÈLES PREVIEW =====
+const modelLabels = { attestation_travail:'Attestation de travail', attestation_salaire:'Attestation de travail et salaire', certificat:'Certificat de travail', avance:"Demande d'avance sur salaire", prime:'Demande de prime', domiciliation:'Attestation de domiciliation irrevocable' };
+function previewModel(type) {
+  const dummy = { nom:'NOM PRÉNOM', cin:'XXXXXXX', cnss:'000000000', fonction:'FONCTION', naissance:'JJ/MM/AAAA', embauche:'JJ/MM/AAAA', salaire:0, dept:'Département' };
+  document.getElementById('modal-model-title').textContent = 'Aperçu — ' + (modelLabels[type]||type);
+  document.getElementById('modal-model-content').innerHTML = buildDoc(type, dummy);
+  openModal('modal-model');
+}
+
+// ===== INIT =====
+renderDashboard();
+renderEmployes();
+renderHistory();
+renderGenEmpSelect();
+</script>
+</body>
+</html>
