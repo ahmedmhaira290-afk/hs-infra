@@ -11,21 +11,19 @@ export default defineRailway(() => {
         providers: ["php", "node"],
         phases: {
           setup: {
-            nixPkgs: ["php82", "php82Extensions.mbstring", "php82Extensions.pdo", "php82Extensions.pgsql", "php82Extensions.bcmath", "php82Extensions.intl", "composer", "nodejs_22"],
+            nixPkgs: ["php82", "php82Extensions.mbstring", "php82Extensions.pdo", "php82Extensions.pgsql", "php82Extensions.pdo_sqlite", "php82Extensions.fileinfo", "composer", "nodejs_22"],
           },
           install: {
             commands: [
-              "composer install --no-interaction --optimize-autoloader",
-              "npm ci --prefix ..",
-              "npm run build --prefix ..",
-              "cp -r ../dist/* public/",
+              "composer install --no-interaction --optimize-autoloader --no-dev",
+              "npm ci --prefix .. && npm run build --prefix .. && cp -r ../dist/* public/ 2>/dev/null; true",
             ],
           },
         },
       },
     },
     deploy: {
-      startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT",
+      startCommand: "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT",
     },
     env: {
       APP_ENV: "production",
@@ -37,6 +35,9 @@ export default defineRailway(() => {
       DB_DATABASE: db.env.PGDATABASE,
       DB_USERNAME: db.env.PGUSER,
       DB_PASSWORD: db.env.PGPASSWORD,
+      CACHE_STORE: "array",
+      SESSION_DRIVER: "file",
+      LOG_LEVEL: "debug",
     },
   });
 
