@@ -11,10 +11,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::insertOrIgnore([
-            ['name' => 'Responsable RH', 'first_name' => 'BADR', 'email' => 'Qettaribadr@gmail.com', 'password' => bcrypt('0000'), 'role' => 'responsable', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Agent RH', 'first_name' => 'AHMED', 'email' => 'ahmed.mhaira@uit.ac.ma', 'password' => bcrypt('0000'), 'role' => 'agent', 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        User::updateOrCreate(['email' => 'Qettaribadr@gmail.com'], ['name' => 'Responsable RH', 'first_name' => 'BADR', 'password' => bcrypt('0000'), 'role' => 'responsable']);
+        User::updateOrCreate(['email' => 'ahmed.mhaira@uit.ac.ma'], ['name' => 'Agent RH', 'first_name' => 'AHMED', 'password' => bcrypt('0000'), 'role' => 'agent']);
 
         Employee::create(['first_name' => 'Ahmed', 'last_name' => 'Benali', 'civilite' => 'M.', 'email' => 'ahmed.benali@hs-infra.ma', 'phone' => '0612345678', 'genre' => 'Masculin', 'nationalite' => 'Marocaine', 'ville' => 'Tanger', 'position' => 'Développeur', 'department' => 'IT', 'agence' => 'Tanger', 'hire_date' => '2023-01-15', 'salary' => '15000', 'birth_date' => '1995-04-12', 'birth_place' => 'Tanger', 'cin' => 'GN258778', 'cnss' => '254878795', 'bank_type' => 'Banque Populaire', 'rib' => '007 000 010000000000000000', 'bank_type_pro' => 'Banque Populaire Pro', 'rib_pro' => '007 001 010000000000000000']);
         Employee::create(['first_name' => 'Fatima', 'last_name' => 'Zahra', 'civilite' => 'Mme', 'email' => 'fatima.zahra@hs-infra.ma', 'phone' => '0623456789', 'genre' => 'Féminin', 'nationalite' => 'Marocaine', 'ville' => 'Casablanca', 'position' => 'Comptable', 'department' => 'Finance', 'agence' => 'Casablanca', 'hire_date' => '2022-06-01', 'salary' => '12000', 'birth_date' => '1998-09-25', 'birth_place' => 'Casablanca', 'cin' => 'GN345678', 'cnss' => '345678901', 'bank_type' => 'CIH', 'rib' => '007 000 020000000000000000', 'bank_type_pro' => 'CIH Pro', 'rib_pro' => '007 001 020000000000000000']);

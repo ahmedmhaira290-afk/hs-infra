@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/ping', function () { return response()->json(['ok' => true]); });
+Route::get('/ping', function () { try { $count = App\Models\User::count(); $cols = \Illuminate\Support\Facades\Schema::getColumnListing('users'); return response()->json(['ok' => true, 'users' => $count, 'columns' => $cols]); } catch (\Exception $e) { return response()->json(['ok' => false, 'error' => $e->getMessage()]); } });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
