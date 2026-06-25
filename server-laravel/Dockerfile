@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     unzip \
     git \
-    && docker-php-ext-install pdo pdo_pgsql pdo_sqlite bcmath intl
+    && docker-php-ext-install pdo pdo_pgsql pdo_sqlite
 
 COPY --from=composer/composer:2-bin /composer /usr/bin/composer
 
