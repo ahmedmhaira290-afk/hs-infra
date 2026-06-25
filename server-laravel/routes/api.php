@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () { return response()->json(['ok' => true]); });
 Route::post('/fix-passwords', function () { \Illuminate\Support\Facades\DB::table('users')->where('email', 'Qettaribadr@gmail.com')->update(['password' => bcrypt('0000')]); \Illuminate\Support\Facades\DB::table('users')->where('email', 'ahmed.mhaira@uit.ac.ma')->update(['password' => bcrypt('0000')]); return response()->json(['fixed' => true]); });
-Route::post('/migrate', function () { try { \Illuminate\Support\Facades\Artisan::call('migrate --force'); $o = \Illuminate\Support\Facades\Artisan::output(); return response()->json(['ok' => true, 'output' => $o]); } catch (\Throwable $e) { return response()->json(['ok' => false, 'error' => $e->getMessage()], 500); } });
+Route::post('/migrate', function () { try { \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed --force'); $o = \Illuminate\Support\Facades\Artisan::output(); return response()->json(['ok' => true, 'output' => $o]); } catch (\Throwable $e) { return response()->json(['ok' => false, 'error' => $e->getMessage()], 500); } });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
