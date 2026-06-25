@@ -1,0 +1,35 @@
+{
+  "name": "hs-infra-rh",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "vite build && node -e \"const fs=require('fs'),path=require('path');const p='server-laravel/public';const idx=path.join(p,'index.php');if(!fs.existsSync(p))fs.mkdirSync(p,{recursive:true});let idxBak='';try{idxBak=fs.readFileSync(idx,'utf-8')}catch(e){}fs.cpSync('dist',p,{recursive:true,force:true});if(idxBak)fs.writeFileSync(idx,idxBak);console.log('Deployed: index.php '+(idxBak?'preserved':'created (index.php not found, fresh Laravel project?)'))\"",
+    "serve": "serve dist -l 5173 --single"
+  },
+  "dependencies": {
+    "axios": "^1.18.0",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "railway": "^3.3.2",
+    "serve": "^14.2.6",
+    "vite": "^8.0.12"
+  }
+}
