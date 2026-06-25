@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () { return response()->json(['ok' => true]); });
-Route::post('/migrate', function () { try { \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed --force'); $o = \Illuminate\Support\Facades\Artisan::output(); return response()->json(['ok' => true, 'output' => $o]); } catch (\Throwable $e) { return response()->json(['ok' => false, 'error' => $e->getMessage()], 500); } });
+Route::post('/migrate', function () { try { \Illuminate\Support\Facades\Artisan::call('optimize:clear'); \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed --force'); $o = \Illuminate\Support\Facades\Artisan::output(); return response()->json(['ok' => true, 'output' => $o]); } catch (\Throwable $e) { return response()->json(['ok' => false, 'error' => $e->getMessage()], 500); } });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
