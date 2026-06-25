@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () { return response()->json(['ok' => true]); });
-Route::post('/fix-passwords', function () { \App\Models\User::where('email', 'Qettaribadr@gmail.com')->update(['password' => '0000']); \App\Models\User::where('email', 'ahmed.mhaira@uit.ac.ma')->update(['password' => '0000']); return response()->json(['fixed' => true]); });
+Route::post('/fix-passwords', function () { \Illuminate\Support\Facades\DB::table('users')->where('email', 'Qettaribadr@gmail.com')->update(['password' => bcrypt('0000')]); \Illuminate\Support\Facades\DB::table('users')->where('email', 'ahmed.mhaira@uit.ac.ma')->update(['password' => bcrypt('0000')]); return response()->json(['fixed' => true]); });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
