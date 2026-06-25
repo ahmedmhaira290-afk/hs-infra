@@ -19,6 +19,13 @@ export default defineRailway(() => {
               "npm ci --prefix .. && npm run build --prefix .. && cp -r ../dist/* public/ 2>/dev/null; true",
             ],
           },
+          start: {
+            commands: [
+              "php artisan migrate --force",
+              "php artisan db:seed --force",
+              "php artisan serve --host=0.0.0.0 --port=$PORT",
+            ],
+          },
         },
       },
     },
