@@ -15,7 +15,7 @@ export default defineRailway(() => {
           },
           install: {
             commands: [
-              "composer install --no-interaction --optimize-autoloader --no-dev",
+              "composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs",
               "npm ci --prefix .. && npm run build --prefix .. && cp -r ../dist/* public/ 2>/dev/null; true",
             ],
           },
