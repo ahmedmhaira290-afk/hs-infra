@@ -5,6 +5,7 @@ import { employeeStore, templateStore, documentStore } from '../services/store'
 import { hasPermission, PERMISSIONS } from '../config/permissions'
 import { useNavigate } from 'react-router-dom'
 
+
 const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc']
 
 const statCards = [
@@ -24,9 +25,10 @@ const quickActions = [
 
 export default function Dashboard() {
   const { user } = useAuth()
-  const { t } = useSettings()
+  const { t, societe } = useSettings()
   const navigate = useNavigate()
   const [data, setData] = useState({ stats: {}, recent: [], deptData: [], trendData: [] })
+
 
   useEffect(() => {
     Promise.all([employeeStore.list(), templateStore.list(true), documentStore.list()])
@@ -71,7 +73,7 @@ export default function Dashboard() {
         </div>
         <div className="text-end d-none d-md-block">
           <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>{new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.9 }}>HS-INFRA</div>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, opacity: 0.9 }}>{societe?.raisonSociale || 'HS-INFRA'}</div>
         </div>
       </div>
 

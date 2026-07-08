@@ -1,6 +1,97 @@
 import { useState, useEffect, useRef } from 'react'
 import { employeeStore, templateStore, documentStore } from '../../services/store'
 
+const EMP_FIELDS = [
+  'civilite', 'first_name', 'last_name', 'email', 'phone', 'genre',
+  'nationalite', 'ville', 'birth_date', 'birth_place', 'cin', 'cnss',
+  'position', 'department', 'agence', 'hire_date', 'salary',
+  'bank_type', 'rib', 'bank_type_pro', 'rib_pro',
+  'cnss_remb', 'montant_accorde',
+]
+
+const EXTRA_VARS = ['motif', 'montant', 'total_charges', 'date', 'raison_sociale']
+
+function resolveVar(emp, varName) {
+  const key = varName.toLowerCase()
+  if (EXTRA_VARS.includes(key)) return null
+  if (EMP_FIELDS.includes(key)) return emp[key] ?? null
+  return null
+}
+
+function parseVars(html) {
+  if (!html) return []
+  const re = /\{\{(\w+)\}\}/g
+  const seen = new Set()
+  const vars = []
+  let m
+  while ((m = re.exec(html)) !== null) {
+    const name = m[1].toLowerCase()
+    if (!seen.has(name)) {
+      seen.add(name)
+      vars.push(name)
+    }
+  }
+  return vars
+}
+
+
+function DataPreview({ employee, template }) {
+  const [showAll, setShowAll] = useState(false)
+  const raw = template?.content || template?.html || ''
+  const vars = parseVars(raw)
+
+  if (!employee || !template) return null
+
+  const empVars = vars.filter((v) => EMP_FIELDS.includes(v))
+  const extraVarsUsed = vars.filter((v) => EXTRA_VARS.includes(v))
+  const unknownVars = vars.filter((v) => !EMP_FIELDS.includes(v) && !EXTRA_VARS.includes(v))
+
+  const rows = showAll ? vars : empVars
+
+  const renderValue = (varName) => {
+    const val = resolveVar(employee, varName)
+    if (val !== null) return String(val)
+    if (EXTRA_VARS.includes(varName)) return <em className="text-muted">Saisi lors de la génération</em>
+    return <em className="text-danger">Inconnu</em>
+  }
+
+  const count = vars.length
+  const found = vars.filter((v) => resolveVar(employee, v) !== null).length
+  const extraCount = extraVarsUsed.length
+  const unknownCount = unknownVars.length
+
+  return (
+    <div className="card mb-4">
+      <div className="card-header d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-database me-1"></i>Données injectées
+          <span className="badge bg-secondary ms-2">{found}/{count} de l'employé</span>
+          {extraCount > 0 && <span className="badge bg-info ms-1">{extraCount} saisie</span>}
+          {unknownCount > 0 && <span className="badge bg-warning ms-1">{unknownCount} inconnue(s)</span>}
+        </span>
+        <div className="form-check form-switch mb-0">
+          <input className="form-check-input" type="checkbox" id="showAllToggle" checked={showAll} onChange={() => setShowAll(!showAll)} />
+          <label className="form-check-label" htmlFor="showAllToggle">Tout</label>
+        </div>
+      </div>
+      <div className="card-body py-2 px-3">
+        {rows.length === 0 ? (
+          <p className="text-muted small mb-0">Aucune variable trouvée dans ce modèle.</p>
+        ) : (
+          <div className="row small">
+            {rows.map((v) => (
+              <div key={v} className="col-md-4 col-lg-3 mb-1">
+                <span className="text-muted">{v.replace(/_/g, ' ')} : </span>
+                <span className="fw-bold">{renderValue(v)}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Generate() {
   const [employees, setEmployees] = useState([])
   const [templates, setTemplates] = useState([])
@@ -9,6 +100,8 @@ export default function Generate() {
   const [motif, setMotif] = useState('')
   const [autreMotif, setAutreMotif] = useState('')
   const [montant, setMontant] = useState('')
+  const [totalCharges, setTotalCharges] = useState('')
+  const [numeroPiece, setNumeroPiece] = useState(null)
   const [preview, setPreview] = useState(null)
   const [generating, setGenerating] = useState(false)
   const iframeRef = useRef(null)
@@ -20,21 +113,36 @@ export default function Generate() {
 
   const selectedTpl = templates.find((t) => t.id === Number(selectedTemplate))
   const isPrime = selectedTpl?.type === 'Demande de prime'
+  const isAideSociale = selectedTpl?.type === "Demande d'aide sociale"
+  const isPieceDeCaisse = selectedTpl?.type === 'Pièce de caisse dépense'
+  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse
+
+  useEffect(() => {
+    if (isPieceDeCaisse) {
+      documentStore.nextPieceNumber().then(setNumeroPiece)
+    } else {
+      setNumeroPiece(null)
+    }
+  }, [selectedTemplate])
 
   const resetExtra = () => {
     setMotif('')
     setAutreMotif('')
     setMontant('')
+    setTotalCharges('')
   }
 
   const handleGenerate = async () => {
     if (!selectedEmployee || !selectedTemplate) return
     setGenerating(true)
     try {
-      const extra = isPrime ? {
-        motif: motif === 'Autres' ? autreMotif : motif,
-        montant,
-      } : {}
+      const emp = employees.find((e) => e.id === Number(selectedEmployee))
+      const finalMotif = motif === 'Autres' ? autreMotif : motif
+      const extra = {
+        motif: finalMotif || '',
+        montant: montant || '',
+        ...(isAideSociale ? { total_charges: totalCharges, cnss_remb: emp?.cnss_remb || '', montant_accorde: emp?.montant_accorde || '' } : {}),
+      }
       const data = await documentStore.generate(selectedEmployee, selectedTemplate, extra)
       setPreview(data)
     } catch (err) {
@@ -126,34 +234,83 @@ export default function Generate() {
               </select>
             </div>
 
-            {isPrime && (
+            {needsExtra && (
               <>
-                <div className="col-md-4">
+                <div className="col-md-3">
                   <label className="form-label"><i className="bi bi-question-circle me-1"></i>Motif</label>
                   <select className="form-select" value={motif} onChange={(e) => setMotif(e.target.value)}>
                     <option value="">Sélectionner...</option>
-                    <option value="Naissance">Naissance</option>
-                    <option value="Mariage">Mariage</option>
+                    {isPrime ? (
+                      <>
+                        <option value="Naissance">Naissance</option>
+                        <option value="Mariage">Mariage</option>
+                      </>
+                    ) : isPieceDeCaisse ? (
+                      <>
+                        <option value="Fournitures">Fournitures de bureau</option>
+                        <option value="Transport">Transport / Déplacement</option>
+                        <option value="Réparation">Réparation / Maintenance</option>
+                        <option value="Avance">Avance sur salaire</option>
+                        <option value="Remboursement">Remboursement frais</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Maladie">Maladie</option>
+                        <option value="Hospitalisation">Hospitalisation</option>
+                        <option value="Décès">Décès (famille)</option>
+                        <option value="Scolarité">Scolarité des enfants</option>
+                        <option value="Logement">Logement</option>
+                        <option value="Urgence">Situation d'urgence</option>
+                      </>
+                    )}
                     <option value="Autres">Autres</option>
                   </select>
                 </div>
                 {motif === 'Autres' && (
-                  <div className="col-md-4">
+                  <div className="col-md-3">
                     <label className="form-label">Précisez le motif</label>
                     <input type="text" className="form-control" value={autreMotif} onChange={(e) => setAutreMotif(e.target.value)} placeholder="Autre motif..." />
                   </div>
                 )}
-                <div className="col-md-4">
-                  <label className="form-label"><i className="bi bi-currency-exchange me-1"></i>Montant (DH)</label>
+                <div className="col-md-3">
+                  <label className="form-label"><i className="bi bi-currency-exchange me-1"></i>Montant <small className="text-muted">(opt.)</small></label>
                   <input type="number" className="form-control" value={montant} onChange={(e) => setMontant(e.target.value)} placeholder="0" />
                 </div>
+                {isAideSociale && (
+                  <>
+                    <div className="col-md-3">
+                      <label className="form-label">Total charges <small className="text-muted">(opt.)</small></label>
+                      <input type="number" className="form-control" value={totalCharges} onChange={(e) => setTotalCharges(e.target.value)} placeholder="0" />
+                    </div>
+                    <div className="col-md-3">
+                      <label className="form-label">Remb. CNSS <small className="text-muted">(de l'employé)</small></label>
+                      <div className="form-control-plaintext fw-bold">
+                        {employees.find((e) => e.id === Number(selectedEmployee))?.cnss_remb || '—'} DH
+                      </div>
+                    </div>
+                    <div className="col-md-3">
+                      <label className="form-label">Aide accordée <small className="text-muted">(de l'employé)</small></label>
+                      <div className="form-control-plaintext fw-bold">
+                        {employees.find((e) => e.id === Number(selectedEmployee))?.montant_accorde || '—'} DH
+                      </div>
+                    </div>
+                  </>
+                )}
+                {isPieceDeCaisse && (
+                  <div className="col-md-3">
+                    <label className="form-label"><i className="bi bi-hash me-1"></i>N° de la pièce</label>
+                    <div className="form-control-plaintext fw-bold" style={{ fontSize: '1.2rem' }}>
+                      {numeroPiece !== null ? `N° ${numeroPiece}` : '...'}
+                    </div>
+                  </div>
+                )}
               </>
             )}
 
             <div className="col-12">
               <button className="btn btn-primary"
                 onClick={handleGenerate}
-                disabled={!selectedEmployee || !selectedTemplate || generating || (isPrime && (!motif || !montant))}>
+                disabled={!selectedEmployee || !selectedTemplate || generating}>
                 <i className={`bi ${generating ? 'bi-arrow-repeat spin' : 'bi-lightning'} me-1`}></i>
                 {generating ? 'Génération...' : 'Générer'}
               </button>
@@ -161,6 +318,10 @@ export default function Generate() {
           </div>
         </div>
       </div>
+
+      {selectedEmployee && selectedTemplate && !preview && (
+        <DataPreview employee={employees.find((e) => e.id === Number(selectedEmployee))} template={selectedTpl} />
+      )}
 
       {preview && (
         <div className="card">

@@ -193,6 +193,15 @@ export function SettingsProvider({ children }) {
     }
   }, [settings.lang])
 
+  useEffect(() => {
+    document.documentElement.style.setProperty('--app-font', settings.document.police)
+    document.documentElement.style.setProperty('--app-font-size', settings.document.taillePolice + 'px')
+  }, [settings.document.police, settings.document.taillePolice])
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--primary-color', settings.document.couleurPrincipale)
+  }, [settings.document.couleurPrincipale])
+
   const t = (section, key) => labels[settings.lang]?.[section]?.[key] || key
 
   return (

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActionLog;
 use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Template;
-use App\Models\AppNotification;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -19,61 +18,81 @@ class DocumentController extends Controller
 
     public function generate(Request $request)
     {
-        $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'template_id' => 'required|exists:templates,id',
-        ]);
+        try {
+            $request->validate([
+                'employee_id' => 'required|exists:employees,id',
+                'template_id' => 'required|exists:templates,id',
+            ]);
 
-        $emp = Employee::findOrFail($request->employee_id);
-        $tpl = Template::findOrFail($request->template_id);
+            $emp = Employee::findOrFail($request->employee_id);
+            $tpl = Template::findOrFail($request->template_id);
 
-        $now = now();
-        $count = Document::count();
-        $ref = sprintf('DOC-%s-%03d', $now->format('Ymd'), $count + 1);
+            $now = now();
+            $count = Document::count();
+            $ref = sprintf('DOC-%s-%03d', $now->format('Ymd'), $count + 1);
+            $pieceCount = Document::where('document_type', 'Pièce de caisse dépense')->count();
+            $numeroPiece = $pieceCount + 1;
 
-        $civilite = $emp->genre && $emp->genre[0] === 'F' ? 'Madame' : 'Monsieur';
-        $extraData = $request->except(['employee_id', 'template_id']);
+            $civilite = $emp->genre && $emp->genre[0] === 'F' ? 'Madame' : 'Monsieur';
+            $extraData = $request->except(['employee_id', 'template_id']);
 
-        $ctx = array_merge($emp->toArray(), ['civilite' => $civilite], $extraData, [
-            'date' => $now->locale('fr_FR')->translatedFormat('l j F Y'),
-        ]);
+            $ctx = array_merge($emp->toArray(), ['civilite' => $civilite], $extraData, [
+                'date' => $now->locale('fr_FR')->translatedFormat('l j F Y'),
+                'raison_sociale' => 'HS-INFRA',
+                'reference' => $ref,
+                'numero_piece' => $numeroPiece,
+            ]);
 
-        $content = $tpl->content;
-        $content = preg_replace_callback('/\{\{(\w+)\}\}/', function ($m) use ($ctx) {
-            return $ctx[$m[1]] ?? '{{' . $m[1] . '}}';
-        }, $content ?? '');
+            $content = $tpl->content;
+            $content = preg_replace_callback('/\{\{(\w+)\}\}/', function ($m) use ($ctx) {
+                return $ctx[$m[1]] ?? '{{' . $m[1] . '}}';
+            }, $content ?? '');
 
-        $htmlContent = $this->toHtml($ref, $content);
+            $isFullHtml = str_starts_with(trim($content), '<!DOCTYPE') || str_starts_with(trim($content), '<html');
+            $htmlContent = $isFullHtml ? $content : $this->toHtml($ref, $content);
+            $htmlContent = str_replace('/images/', $request->getSchemeAndHttpHost() . '/images/', $htmlContent);
 
-        $doc = Document::create([
-            'reference' => $ref,
-            'employee_id' => $emp->id,
-            'template_id' => $tpl->id,
-            'content' => $content,
-            'html_content' => $htmlContent,
-            'employee_name' => $emp->first_name . ' ' . $emp->last_name,
-            'document_type' => $tpl->title,
-        ]);
+            $doc = Document::create([
+                'reference' => $ref,
+                'employee_id' => $emp->id,
+                'template_id' => $tpl->id,
+                'content' => $content,
+                'html_content' => $htmlContent,
+                'employee_name' => $emp->first_name . ' ' . $emp->last_name,
+                'document_type' => $tpl->title,
+            ]);
 
-        // Notify responsables when an agent generates a document
-        if ($request->user() && $request->user()->role === 'agent') {
-            $agent = $request->user();
-            User::where('role', 'responsable')->each(function ($responsable) use ($doc, $agent) {
-                AppNotification::create([
-                    'user_id' => $responsable->id,
-                    'type' => 'document_generated',
-                    'message' => "L'agent {$agent->first_name} {$agent->name} a généré une attestation : {$doc->document_type} pour {$doc->employee_name}",
-                    'document_id' => $doc->id,
-                ]);
-            });
+            ActionLog::create([
+                'user_id' => $request->user()->id,
+                'action' => 'document_generated',
+                'target_type' => 'document',
+                'target_id' => $doc->id,
+                'details' => "{$tpl->title} pour {$emp->first_name} {$emp->last_name} (Réf: {$ref})",
+            ]);
+
+            return response()->json($doc, 201);
+        } catch (\Throwable $e) {
+            return response()->json(['error' => $e->getMessage(), 'line' => $e->getLine(), 'file' => $e->getFile()], 500);
         }
-
-        return response()->json($doc, 201);
     }
 
-    public function destroy($id)
+    public function nextPieceNumber()
     {
-        Document::findOrFail($id)->delete();
+        $count = Document::where('document_type', 'Pièce de caisse dépense')->count();
+        return response()->json(['numero_piece' => $count + 1]);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $doc = Document::findOrFail($id);
+        ActionLog::create([
+            'user_id' => $request->user()->id,
+            'action' => 'document_deleted',
+            'target_type' => 'document',
+            'target_id' => $doc->id,
+            'details' => "{$doc->document_type} - {$doc->employee_name} (Réf: {$doc->reference})",
+        ]);
+        $doc->delete();
         return response()->json(['success' => true]);
     }
 
@@ -116,7 +135,7 @@ class DocumentController extends Controller
 <body>
 <div class="doc">
   <div class="header">
-    <img src="/images/hs-infra-logo.svg" alt="HS-INFRA" onerror="this.style.display=\'none\'">
+    <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
     <h1>HS-INFRA</h1>
   </div>
   <div class="ref">N° RÉF : ' . htmlspecialchars($title) . ' — Date : ' . now()->locale('fr_FR')->translatedFormat('l j F Y') . '</div>

@@ -6,7 +6,7 @@ $urls = [
 ];
 foreach ($urls as $url) {
     $c = curl_init($url);
-    $body = ($url == 'http://127.0.0.1:9000/api/login') ? '{"email":"Qettaribadr@gmail.com","password":"0000"}' : null;
+    $body = ($url == 'http://127.0.0.1:9000/api/login') ? '{"email":"Qettaribadr@hs-infra.com","password":"0000"}' : null;
     $opts = [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15];
     if ($body) { $opts[CURLOPT_POST] = true; $opts[CURLOPT_POSTFIELDS] = $body; $opts[CURLOPT_HTTPHEADER] = ['Content-Type: application/json']; }
     curl_setopt_array($c, $opts);

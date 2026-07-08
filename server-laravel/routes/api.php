@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\TemplateController;
 use App\Http\Controllers\Api\DocumentController;
-use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () { return response()->json(['ok' => true]); });
@@ -33,9 +32,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/documents', [DocumentController::class, 'index']);
     Route::post('/documents/generate', [DocumentController::class, 'generate']);
+    Route::get('/documents/next-piece-number', [DocumentController::class, 'nextPieceNumber']);
     Route::delete('/documents/{id}', [DocumentController::class, 'destroy']);
 
-    Route::get('/notifications', [NotificationController::class, 'index']);
-    Route::put('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
-    Route::put('/notifications/read-all', [NotificationController::class, 'markAllAsRead']);
+    Route::get('/action-logs', function () {
+        return response()->json(\App\Models\ActionLog::with('user')->orderBy('created_at', 'desc')->limit(50)->get());
+    });
 });

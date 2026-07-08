@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActionLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -54,6 +55,8 @@ class AuthController extends Controller
             'phone' => $request->phone ?? '',
         ]);
 
+        ActionLog::create(['user_id' => $user->id, 'action' => 'user_registered', 'target_type' => 'user', 'target_id' => $user->id, 'details' => "{$user->name} ({$user->email})"]);
+
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
@@ -91,13 +94,17 @@ class AuthController extends Controller
         if ($request->filled('password')) {
             $data['password'] = $request->password;
         }
+        $old = $user->name;
         $user->update($data);
+        ActionLog::create(['user_id' => $request->user()->id, 'action' => 'user_updated', 'target_type' => 'user', 'target_id' => $user->id, 'details' => $old]);
         return response()->json($user);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+        ActionLog::create(['user_id' => $request->user()->id, 'action' => 'user_deleted', 'target_type' => 'user', 'target_id' => $user->id, 'details' => "{$user->name} ({$user->email})"]);
+        $user->delete();
         return response()->json(['success' => true]);
     }
 }

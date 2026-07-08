@@ -3,7 +3,6 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useSettings } from '../context/SettingsContext'
 import { hasPermission, PERMISSIONS } from '../config/permissions'
-import NotificationBell from './NotificationBell'
 import api from '../services/api'
 
 const allNavItems = [
@@ -17,7 +16,7 @@ const allNavItems = [
 
 export default function Layout() {
   const { user, logout } = useAuth()
-  const { t } = useSettings()
+  const { t, societe } = useSettings()
   const [dbLoading, setDbLoading] = useState(false)
 
   const navItems = allNavItems.filter(
@@ -35,7 +34,7 @@ export default function Layout() {
       <nav className="sidebar">
         <div className="sidebar-brand">
           <div className="brand-logo"><i className="bi bi-buildings"></i></div>
-          <h5>HS-INFRA RH</h5>
+          <h5>{societe?.raisonSociale || 'HS-INFRA'} RH</h5>
           <small>Gestion des documents</small>
         </div>
         <ul className="nav flex-column">
@@ -73,7 +72,6 @@ export default function Layout() {
               <i className="bi bi-person-circle me-1"></i>
               {user?.name} · {user?.role === 'responsable' ? 'Responsable RH' : 'Agent RH'}
             </small>
-            <NotificationBell />
           </div>
           <button className="btn btn-outline-light btn-sm w-100" onClick={logout}>
             <i className="bi bi-box-arrow-left me-1"></i> Déconnexion

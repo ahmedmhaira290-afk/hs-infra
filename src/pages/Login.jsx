@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const { login } = useAuth()
 
   const handleSubmit = async (e) => {
@@ -45,8 +46,12 @@ export default function Login() {
               <label className="form-label">Mot de passe</label>
               <div className="input-group">
                 <i className="bi bi-lock input-icon"></i>
-                <input type="password" className="form-control" placeholder="••••••••"
+                <input type={showPassword ? 'text' : 'password'} className="form-control" placeholder="••••••••"
                   value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
+                <button type="button" className="btn btn-outline-secondary border" onClick={() => setShowPassword(!showPassword)}
+                  style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>
+                  <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                </button>
               </div>
             </div>
             <button type="submit" className="btn btn-primary w-100">

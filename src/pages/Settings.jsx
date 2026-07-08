@@ -1,22 +1,26 @@
 import { useState } from 'react'
 import { useSettings } from '../context/SettingsContext'
+import { useAuth } from '../context/AuthContext'
 
 const tabs = [
   { key: 'societe', icon: 'bi-building', labelKey: 'societe' },
   { key: 'rhManager', icon: 'bi-person-badge', labelKey: 'rhManager' },
   { key: 'document', icon: 'bi-file-earmark-text', labelKey: 'document' },
   { key: 'employe', icon: 'bi-people', labelKey: 'employe' },
-  { key: 'notification', icon: 'bi-bell', labelKey: 'notification' },
   { key: 'appearance', icon: 'bi-palette', labelKey: 'appearance' },
 ]
 
 export default function Settings() {
+  const { user } = useAuth()
   const {
-    societe, rhManager, document: doc, employe, notification, theme, lang,
+    societe, rhManager, document: doc, employe, theme, lang,
     update, updateNested, reset, t, THEMES, LANGUAGES,
   } = useSettings()
 
-  const [activeTab, setActiveTab] = useState('societe')
+  const isAgent = user?.role === 'agent'
+  const filteredTabs = isAgent ? tabs.filter((t) => t.key === 'appearance') : tabs
+
+  const [activeTab, setActiveTab] = useState(isAgent ? 'appearance' : 'societe')
   const [saved, setSaved] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
 
@@ -176,23 +180,6 @@ export default function Settings() {
             </div>
           </div>
         )
-      case 'notification':
-        return (
-          <div>
-            <div className="d-flex align-items-center gap-2 mb-3">
-              <i className="bi bi-bell" style={{ fontSize: '1.3rem', color: 'var(--accent)' }}></i>
-              <div>
-                <h6 className="mb-0" style={{ fontWeight: 700 }}>{t('settings', 'notification')}</h6>
-                <small className="text-muted">{t('settings', 'infoNotification')}</small>
-              </div>
-            </div>
-            <div className="row g-3">
-              {renderField(t('settings', 'emailConfirmation'), notification.emailConfirmation, (e) => updateNested('notification', 'emailConfirmation', e.target.checked), { type: 'checkbox' })}
-              {renderField(t('settings', 'emailRelance'), notification.emailRelance, (e) => updateNested('notification', 'emailRelance', e.target.checked), { type: 'checkbox' })}
-              {renderField(t('settings', 'delaiRelance'), notification.delaiRelance, (e) => updateNested('notification', 'delaiRelance', Number(e.target.value)), { type: 'number', small: true })}
-            </div>
-          </div>
-        )
       case 'appearance':
         return (
           <div>
@@ -267,7 +254,7 @@ export default function Settings() {
         <div className="col-md-3">
           <div className="card border-0" style={{ borderRadius: 14, overflow: 'hidden' }}>
             <div className="list-group list-group-flush">
-              {tabs.map(({ key, icon, labelKey }) => (
+              {filteredTabs.map(({ key, icon, labelKey }) => (
                 <button key={key}
                   className={`list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 ${activeTab === key ? 'active' : ''}`}
                   style={{

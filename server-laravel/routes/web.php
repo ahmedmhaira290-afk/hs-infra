@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/index.html');
+Route::get('/', function () {
+    return file_get_contents(public_path('index.html'));
+});
 
 Route::fallback(function () {
     if (str_starts_with(request()->path(), 'api/')) {

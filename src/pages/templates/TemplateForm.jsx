@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { templateStore } from '../../services/store'
+import HtmlEditor from '../../components/HtmlEditor'
 
 export default function TemplateForm() {
   const { id } = useParams()
@@ -99,10 +100,8 @@ export default function TemplateForm() {
                 </datalist>
               </div>
               <div className="col-12">
-                <label className="form-label">
-                  Contenu <small className="text-muted">(utilisez {'{{variable}}'} pour les champs dynamiques)</small>
-                </label>
-                <textarea name="content" className="form-control" rows="10" value={form.content} onChange={handleChange} required></textarea>
+                <label className="form-label">Contenu <small className="text-muted">(éditeur HTML avec variables dynamiques)</small></label>
+                <HtmlEditor value={form.content} onChange={(html) => setForm({ ...form, content: html })} keyId={id || 'new'} />
               </div>
               <div className="col-12">
                 <div className="form-check">

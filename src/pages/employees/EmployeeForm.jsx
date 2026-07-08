@@ -50,6 +50,8 @@ export default function EmployeeForm() {
     { name: 'phone', label: 'Téléphone', type: 'text' },
     { name: 'bank_type', label: 'Type de banque', type: 'text' },
     { name: 'rib', label: 'RIB', type: 'text' },
+    { name: 'cnss_remb', label: 'Remboursement CNSS (DH)', type: 'number' },
+    { name: 'montant_accorde', label: "Montant d'aide accordé (DH)", type: 'number' },
   ]
   const professionalFields = [
     { name: 'position', label: 'Poste', type: 'text' },

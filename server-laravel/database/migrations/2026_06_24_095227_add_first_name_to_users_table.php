@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('first_name')->nullable()->after('name');
         });
 
-        DB::table('users')->where('email', 'Qettaribadr@gmail.com')->update(['first_name' => 'BADR']);
+        DB::table('users')->where('email', 'Qettaribadr@hs-infra.com')->update(['first_name' => 'BADR']);
         DB::table('users')->where('email', 'ahmed.mhaira@uit.ac.ma')->update(['first_name' => 'AHMED']);
     }
 
