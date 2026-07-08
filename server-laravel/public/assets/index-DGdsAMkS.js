@@ -123,30 +123,157 @@ Fait à {{ville}}, le {{date}}
 
 Signature et cachet : M. BADR Qettari
 Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de prime`,is_active:!0,content:`DEMANDE DE PRIME
+Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de prime`,is_active:!0,content:`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Demande de Prime</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  .page {
+    background: #fff;
+    width: 800px;
+    padding: 60px 70px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #1a1a2e;
+  }
+  .date {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+  }
+  .field {
+    margin-bottom: 22px;
+    font-size: 17px;
+  }
+  .field label {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .highlight {
+    background: #ff3fa4;
+    padding: 2px 6px;
+    color: #1a1a2e;
+    font-weight: bold;
+  }
+  .motif-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 15px 0 30px 30px;
+    font-size: 17px;
+  }
+  .box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #1a1a2e;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    margin: 0 4px;
+  }
+  .circled {
+    border: 3px solid #ff3fa4;
+    border-radius: 50%;
+    padding: 2px 5px;
+  }
+  .crossed {
+    background: #ff3fa4;
+    color: #ff3fa4;
+  }
+  .checked {
+    background: #ff3fa4;
+    color: #1a1a2e;
+    font-weight: bold;
+  }
+  .dots {
+    color: #ff3fa4;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .montant-label {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  .montant-box {
+    display: inline-block;
+    border: 1px solid #1a1a2e;
+    width: 220px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    margin-left: 20px;
+    vertical-align: middle;
+  }
+  .montant-box span {
+    background: #ff3fa4;
+    padding: 3px 10px;
+    font-weight: bold;
+  }
+  .signature {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 60px 0 60px 0;
+  }
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 90px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="date">{{ville}}, le : {{date}}</div>
+    <h1>DEMANDE DE PRIME</h1>
 
-Informations du demandeur :
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="highlight">{{first_name}} {{last_name}}</span></div>
+    <div class="field"><label>Fonction :</label> <span class="highlight">{{position}}</span></div>
+    <div class="field"><label>D&eacute;partement :</label> {{department}}</div>
+    <div class="field"><label>Agence:</label> {{agence}}</div>
+    <div class="field"><label>Motif :</label> {{motif}}</div>
 
-Nom & Prénom : {{first_name}} {{last_name}}
-Fonction : {{position}}
-Département : {{department}}
-Agence : {{agence}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Type agence : {{bank_type}} — RIB : {{rib}}
+    <div class="motif-row">
+      <span><span class="box circled">X</span> Naissance</span>
+      <span><span class="box crossed">X</span> Mariage</span>
+      <span><span class="box checked">&#10003;</span> Autres (&agrave; pr&eacute;ciser) <span class="dots">................</span></span>
+    </div>
 
-Motif :
-{{motif}}
+    <div class="montant-label">
+      Montant accord&eacute; :
+      <span class="montant-box"><span>{{montant}}</span></span>
+    </div>
 
-Montant accordé :
-{{montant}} DH
+    <div class="signature">SIGNATURE</div>
 
-SIGNATURE
-
-Demandeur : ______________________
-Responsable hiérarchique : ______________________
-Département RH : ______________________
-Direction Générale : ______________________`},{id:4,title:`Certificat médical`,type:`Certificat médical`,is_active:!0,content:`CERTIFICAT MÉDICAL
+    <div class="sign-row">
+      <div>Demandeur :</div>
+      <div>Responsables hi&eacute;rarchiques :</div>
+    </div>
+    <div class="sign-row">
+      <div>D&eacute;partement RH :</div>
+      <div>Direction G&eacute;n&eacute;rale :</div>
+    </div>
+  </div>
+</body>
+</html>`},{id:4,title:`Certificat médical`,type:`Certificat médical`,is_active:!0,content:`CERTIFICAT MÉDICAL
 
 Je soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.
 Né(e) le {{birth_date}} à {{birth_place}}
@@ -724,7 +851,7 @@ Fait à {{ville}}, le {{date}}
 
 Signature et cachet : M. BADR Qettari
 Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=12,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
+Né le 12/02/1990 à Tanger`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=13,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
 `).map(e=>{let t=e.trim();return t?t===t.toUpperCase()&&t.length>3?`<h2 style="text-align:center;color:${s};margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">${t}</h2>`:`<div style="${e.includes(`:`)&&!e.startsWith(` `)?`line-height:${u};color:#000;font-weight:600`:`line-height:${u};color:#111`}">${e}</div>`:`<div style="height:0.4rem"></div>`}).join(``);return`<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><style>

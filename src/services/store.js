@@ -110,7 +110,157 @@ const seedTpls = [
 </body>
 </html>` },
   { id: 2, title: "Attestation de salaire", type: "Attestation de salaire", is_active: true, content: "ATTESTATION DE SALAIRE\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nAtteste que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nPerçoit un salaire mensuel brut de : {{salary}} DH\n\nLa présente attestation est délivrée à l'intéressé(e) pour tous usages légaux.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
-  { id: 3, title: "Demande de prime", type: "Demande de prime", is_active: true, content: "DEMANDE DE PRIME\n\nInformations du demandeur :\n\nNom & Prénom : {{first_name}} {{last_name}}\nFonction : {{position}}\nDépartement : {{department}}\nAgence : {{agence}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMotif :\n{{motif}}\n\nMontant accordé :\n{{montant}} DH\n\nSIGNATURE\n\nDemandeur : ______________________\nResponsable hiérarchique : ______________________\nDépartement RH : ______________________\nDirection Générale : ______________________" },
+  { id: 3, title: "Demande de prime", type: "Demande de prime", is_active: true, content: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Demande de Prime</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  .page {
+    background: #fff;
+    width: 800px;
+    padding: 60px 70px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #1a1a2e;
+  }
+  .date {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+  }
+  .field {
+    margin-bottom: 22px;
+    font-size: 17px;
+  }
+  .field label {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .highlight {
+    background: #ff3fa4;
+    padding: 2px 6px;
+    color: #1a1a2e;
+    font-weight: bold;
+  }
+  .motif-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 15px 0 30px 30px;
+    font-size: 17px;
+  }
+  .box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #1a1a2e;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    margin: 0 4px;
+  }
+  .circled {
+    border: 3px solid #ff3fa4;
+    border-radius: 50%;
+    padding: 2px 5px;
+  }
+  .crossed {
+    background: #ff3fa4;
+    color: #ff3fa4;
+  }
+  .checked {
+    background: #ff3fa4;
+    color: #1a1a2e;
+    font-weight: bold;
+  }
+  .dots {
+    color: #ff3fa4;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .montant-label {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  .montant-box {
+    display: inline-block;
+    border: 1px solid #1a1a2e;
+    width: 220px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    margin-left: 20px;
+    vertical-align: middle;
+  }
+  .montant-box span {
+    background: #ff3fa4;
+    padding: 3px 10px;
+    font-weight: bold;
+  }
+  .signature {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 60px 0 60px 0;
+  }
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 90px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="date">{{ville}}, le : {{date}}</div>
+    <h1>DEMANDE DE PRIME</h1>
+
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="highlight">{{first_name}} {{last_name}}</span></div>
+    <div class="field"><label>Fonction :</label> <span class="highlight">{{position}}</span></div>
+    <div class="field"><label>D&eacute;partement :</label> {{department}}</div>
+    <div class="field"><label>Agence:</label> {{agence}}</div>
+    <div class="field"><label>Motif :</label> {{motif}}</div>
+
+    <div class="motif-row">
+      <span><span class="box circled">X</span> Naissance</span>
+      <span><span class="box crossed">X</span> Mariage</span>
+      <span><span class="box checked">&#10003;</span> Autres (&agrave; pr&eacute;ciser) <span class="dots">................</span></span>
+    </div>
+
+    <div class="montant-label">
+      Montant accord&eacute; :
+      <span class="montant-box"><span>{{montant}}</span></span>
+    </div>
+
+    <div class="signature">SIGNATURE</div>
+
+    <div class="sign-row">
+      <div>Demandeur :</div>
+      <div>Responsables hi&eacute;rarchiques :</div>
+    </div>
+    <div class="sign-row">
+      <div>D&eacute;partement RH :</div>
+      <div>Direction G&eacute;n&eacute;rale :</div>
+    </div>
+  </div>
+</body>
+</html>` },
   { id: 4, title: "Certificat médical", type: "Certificat médical", is_active: true, content: "CERTIFICAT MÉDICAL\n\nJe soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\n\nRésultat :\n\n\n\nArrêt de travail du ______________ au ______________\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet du médecin : ______________________" },
   { id: 5, title: "Demande d'avance", type: "Demande d'avance", is_active: true, content: `<!DOCTYPE html>
 <html lang="fr">
@@ -592,7 +742,7 @@ if (existingEmps.length < seedEmps.length || savedEmpVersion < EMP_VERSION) {
   localStorage.setItem('emp_version', String(EMP_VERSION))
 }
 
-const TPL_VERSION = 12
+const TPL_VERSION = 13
 const savedVersion = Number(localStorage.getItem('tpl_version') || 0)
 const existingTpls = tplStore.getAll()
 if (existingTpls.length < seedTpls.length || savedVersion < TPL_VERSION) {
