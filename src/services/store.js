@@ -112,7 +112,148 @@ const seedTpls = [
   { id: 2, title: "Attestation de salaire", type: "Attestation de salaire", is_active: true, content: "ATTESTATION DE SALAIRE\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nAtteste que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nPerçoit un salaire mensuel brut de : {{salary}} DH\n\nLa présente attestation est délivrée à l'intéressé(e) pour tous usages légaux.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
   { id: 3, title: "Demande de prime", type: "Demande de prime", is_active: true, content: "DEMANDE DE PRIME\n\nInformations du demandeur :\n\nNom & Prénom : {{first_name}} {{last_name}}\nFonction : {{position}}\nDépartement : {{department}}\nAgence : {{agence}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMotif :\n{{motif}}\n\nMontant accordé :\n{{montant}} DH\n\nSIGNATURE\n\nDemandeur : ______________________\nResponsable hiérarchique : ______________________\nDépartement RH : ______________________\nDirection Générale : ______________________" },
   { id: 4, title: "Certificat médical", type: "Certificat médical", is_active: true, content: "CERTIFICAT MÉDICAL\n\nJe soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\n\nRésultat :\n\n\n\nArrêt de travail du ______________ au ______________\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet du médecin : ______________________" },
-  { id: 5, title: "Demande d'avance", type: "Demande d'avance", is_active: true, content: "DEMANDE D'AVANCE\n\nMadame/Monsieur le Responsable RH,\n\nJe soussigné(e) {{first_name}} {{last_name}}, exerçant la fonction de {{position}} au sein du département {{department}} (Agence : {{agence}}) — CIN : {{cin}} — CNSS : {{cnss}} — Type agence : {{bank_type}} — RIB : {{rib}}, sollicite une avance sur salaire d'un montant de {{montant}} DH.\n\nMotif : {{motif}}\n\nJe m'engage à rembourser cette avance selon les modalités convenues avec l'administration.\n\nSignature du demandeur : ______________________\nAvis du responsable hiérarchique : ______________________\nDécision RH : ______________________" },
+  { id: 5, title: "Demande d'avance", type: "Demande d'avance", is_active: true, content: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Demande d'Avance</title>
+<style>
+  :root{ --ink:#1c2430; --paper:#ffffff; --muted:#6b7280; }
+  *{box-sizing:border-box;}
+  body{
+    background:#dfe3e8; font-family:'Georgia','Times New Roman',serif;
+    display:flex; justify-content:center; padding:40px 20px; margin:0;
+  }
+  .sheet{
+    background:var(--paper); width:820px; max-width:100%;
+    padding:50px 60px; box-shadow:0 4px 20px rgba(0,0,0,.15);
+  }
+  .header-top{ text-align:right; font-style:italic; font-size:15px; margin-bottom:20px; color:var(--ink); }
+  .logo-row{
+    display:flex; align-items:center; gap:16px; margin-bottom:30px;
+  }
+  .logo img{ height:38px; }
+  .titre-banner{
+    flex:1; border:1.5px solid var(--ink); border-radius:4px;
+    text-align:center; padding:14px; font-size:24px; font-weight:bold; font-style:italic;
+  }
+  .cadre{
+    border:1.5px solid var(--ink); padding:25px 30px; margin-bottom:25px;
+  }
+  .field-row{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:10px; font-size:16px;
+  }
+  .field-row label{ min-width:140px; color:var(--ink); }
+  .field-row .val{
+    border-bottom:1px dotted #999; font-family:inherit; font-weight:bold;
+    font-size:16px; padding:2px 4px; min-width:200px; display:inline-block;
+  }
+  .motif-box{
+    border:1.5px solid var(--ink); padding:15px 20px; margin-bottom:25px;
+  }
+  .motif-box label{ font-weight:bold; text-decoration:underline; }
+  .motif-box .val{
+    display:block; font-size:16px; margin-top:8px; min-height:40px;
+  }
+  .montants-cadre{
+    border:1.5px solid var(--ink); padding:20px 30px; margin-bottom:25px;
+  }
+  .montant-row{
+    display:flex; align-items:center; gap:16px; margin-bottom:16px; font-size:16px;
+  }
+  .montant-row label{ min-width:160px; }
+  .montant-row .box{
+    border:1.5px solid var(--ink); display:flex; align-items:center;
+    padding:8px 12px; min-width:120px; font-weight:bold; font-size:16px;
+  }
+  .date-prelevement{
+    display:flex; align-items:baseline; gap:10px; font-size:16px;
+    color:var(--ink);
+  }
+  .date-prelevement .val{
+    border-bottom:1px dotted #999; font-weight:bold; padding:2px 4px; min-width:120px;
+    display:inline-block;
+  }
+  .signature{ margin-top:50px; }
+  .signature h2{
+    text-align:center; text-decoration:underline; font-size:18px; margin-bottom:40px;
+  }
+  .sign-grid{
+    display:grid; grid-template-columns:1fr 1fr; row-gap:60px; font-size:15px; font-weight:bold;
+  }
+  .footer-code{ text-align:right; font-size:12px; color:var(--muted); margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="header-top">
+    {{ville}}, le : {{date}}
+  </div>
+
+  <div class="logo-row">
+    <div class="logo">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+    </div>
+    <div class="titre-banner">DEMANDE D'AVANCE</div>
+  </div>
+
+  <div class="cadre">
+    <div class="field-row">
+      <label>- Nom &amp; Pr&eacute;nom :</label>
+      <span class="val">{{first_name}} {{last_name}}</span>
+    </div>
+    <div class="field-row">
+      <label>- Fonction :</label>
+      <span class="val">{{position}}</span>
+    </div>
+    <div class="field-row">
+      <label>- D&eacute;partement :</label>
+      <span class="val">{{department}}</span>
+    </div>
+    <div class="field-row">
+      <label>- Agence :</label>
+      <span class="val">{{agence}}</span>
+    </div>
+  </div>
+
+  <div class="motif-box">
+    <label>Motif :</label>
+    <div class="val">{{motif}}</div>
+  </div>
+
+  <div class="montants-cadre">
+    <div class="montant-row">
+      <label>Montant demand&eacute; :</label>
+      <div class="box">{{montant}}</div>
+      <span>Dhs</span>
+    </div>
+    <div class="montant-row">
+      <label>Montant accord&eacute; :</label>
+      <div class="box">{{montant_accorde}}</div>
+      <span>Dhs</span>
+    </div>
+    <div class="date-prelevement">
+      <span>&#10132; Date de pr&eacute;l&egrave;vement :</span>
+      <span class="val">{{date}}</span>
+    </div>
+  </div>
+
+  <div class="signature">
+    <h2>SIGNATURE</h2>
+    <div class="sign-grid">
+      <div>Demandeur :</div>
+      <div>Responsables hi&eacute;rarchiques :</div>
+      <div>D&eacute;partement RH :</div>
+      <div>D&eacute;partement Financier :</div>
+    </div>
+  </div>
+
+  <div class="footer-code">RH/DA/1/19</div>
+
+</div>
+</body>
+</html>` },
   { id: 6, title: "Certificat de travail", type: "Certificat de travail", is_active: true, content: "CERTIFICAT DE TRAVAIL\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nCertifie que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nA été employé(e) dans notre société du ______________ au ______________\nDurée totale : ______________\nDernier salaire perçu : {{salary}} DH\n\nCe certificat est délivré à l'intéressé(e) pour servir et valoir ce que de droit.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
   { id: 7, title: "Attestation de domiciliation irrévocable de salaire", type: "Attestation de domiciliation irrévocable de salaire", is_active: true, content: "ATTESTATION DE DOMICILIATION IRRÉVOCABLE DE SALAIRE\n\nJe soussigné(e) {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nExerçant la fonction de {{position}} — Agence : {{agence}}\n\nDéclare par la présente domicilier mon salaire de façon irrévocable auprès de la banque :\n\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMontant mensuel domicilié : {{salary}} DH\n\nJe reconnais que cette domiciliation reste irrévocable pendant toute la durée de mon contrat de travail.\n\nFait à Tanger, le {{date}}\n\nSignature de l'employé(e) : ______________________\nCachet de la banque : ______________________" },
   { id: 8, title: "Demande d'aide sociale", type: "Demande d'aide sociale", is_active: true, content: `<!DOCTYPE html>
@@ -393,7 +534,7 @@ const seedTpls = [
     <div class="droite">
       <div class="droite-row">
         <label>N° :</label>
-        <span class="val">{{numero_piece}}</span>
+        <span class="val">{{reference}}</span>
       </div>
       <div class="droite-row">
         <label>DH :</label>
@@ -495,13 +636,7 @@ function apiCrud(resource, localStore) {
         return all[idx]
       })
     },
-  async nextPieceNumber() {
-    return tryApi(() => api.get('/documents/next-piece-number').then((r) => r.data.numero_piece), () => {
-      const count = docStore.getAll().filter((d) => d.document_type === 'Pièce de caisse dépense').length
-      return count + 1
-    })
-  },
-  async remove(id) {
+    async remove(id) {
       return tryApi(() => api.delete(`/${resource}/${id}`), () => {
         localStore.saveAll(localStore.getAll().filter((x) => x.id !== Number(id)))
       })
@@ -630,8 +765,7 @@ export const documentStore = {
       const ref = `DOC-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(docStore.getAll().length + 1).padStart(3, '0')}`
       const civilite = emp?.genre && emp.genre[0] === 'F' ? 'Madame' : 'Monsieur'
       const { societe } = loadDocSettings()
-      const pieceCount = docStore.getAll().filter((d) => d.document_type === 'Pièce de caisse dépense').length
-      const ctx = { ...emp, civilite, ...extraData, raison_sociale: societe.raisonSociale || 'HS-INFRA', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }), numero_piece: pieceCount + 1 }
+      const ctx = { ...emp, civilite, ...extraData, raison_sociale: societe.raisonSociale || 'HS-INFRA', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }
       const content = (tpl?.content || '').replace(/\{\{(\w+)\}\}/g, (_, key) => ctx?.[key] !== undefined ? ctx[key] : `{{${key}}}`)
       const isFullHtml = content.trim().startsWith('<!DOCTYPE') || content.trim().startsWith('<html')
       const htmlContent = isFullHtml ? content : toHtml(ref, content)

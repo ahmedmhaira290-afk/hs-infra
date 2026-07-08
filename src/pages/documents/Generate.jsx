@@ -101,7 +101,6 @@ export default function Generate() {
   const [autreMotif, setAutreMotif] = useState('')
   const [montant, setMontant] = useState('')
   const [totalCharges, setTotalCharges] = useState('')
-  const [numeroPiece, setNumeroPiece] = useState(null)
   const [preview, setPreview] = useState(null)
   const [generating, setGenerating] = useState(false)
   const iframeRef = useRef(null)
@@ -114,16 +113,9 @@ export default function Generate() {
   const selectedTpl = templates.find((t) => t.id === Number(selectedTemplate))
   const isPrime = selectedTpl?.type === 'Demande de prime'
   const isAideSociale = selectedTpl?.type === "Demande d'aide sociale"
-  const isPieceDeCaisse = selectedTpl?.type === 'Pièce de caisse dépense'
-  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse
-
-  useEffect(() => {
-    if (isPieceDeCaisse) {
-      documentStore.nextPieceNumber().then(setNumeroPiece)
-    } else {
-      setNumeroPiece(null)
-    }
-  }, [selectedTemplate])
+  const isPieceDeCaisse = selectedTpl?.type === "Pièce de caisse dépense"
+  const isDemandeAvance = selectedTpl?.type === "Demande d'avance"
+  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse || isDemandeAvance
 
   const resetExtra = () => {
     setMotif('')
@@ -141,7 +133,9 @@ export default function Generate() {
       const extra = {
         motif: finalMotif || '',
         montant: montant || '',
-        ...(isAideSociale ? { total_charges: totalCharges, cnss_remb: emp?.cnss_remb || '', montant_accorde: emp?.montant_accorde || '' } : {}),
+        ...(isAideSociale ? { total_charges: totalCharges } : {}),
+        cnss_remb: emp?.cnss_remb || '',
+        montant_accorde: emp?.montant_accorde || '',
       }
       const data = await documentStore.generate(selectedEmployee, selectedTemplate, extra)
       setPreview(data)
@@ -247,11 +241,20 @@ export default function Generate() {
                       </>
                     ) : isPieceDeCaisse ? (
                       <>
-                        <option value="Fournitures">Fournitures de bureau</option>
-                        <option value="Transport">Transport / Déplacement</option>
-                        <option value="Réparation">Réparation / Maintenance</option>
-                        <option value="Avance">Avance sur salaire</option>
-                        <option value="Remboursement">Remboursement frais</option>
+                        <option value="Fournitures bureau">Fournitures de bureau</option>
+                        <option value="Déplacement">Déplacement / Transport</option>
+                        <option value="Réparation">Frais de réparation</option>
+                        <option value="Achats divers">Achats divers</option>
+                        <option value="Avance s/salaire">Avance sur salaire</option>
+                        <option value="Remboursement">Remboursement</option>
+                      </>
+                    ) : isDemandeAvance ? (
+                      <>
+                        <option value="Frais médicaux">Frais médicaux</option>
+                        <option value="Scolarité">Scolarité</option>
+                        <option value="Voyage">Voyage</option>
+                        <option value="Projet personnel">Projet personnel</option>
+                        <option value="Urgence">Urgence</option>
                       </>
                     ) : (
                       <>
@@ -295,14 +298,6 @@ export default function Generate() {
                       </div>
                     </div>
                   </>
-                )}
-                {isPieceDeCaisse && (
-                  <div className="col-md-3">
-                    <label className="form-label"><i className="bi bi-hash me-1"></i>N° de la pièce</label>
-                    <div className="form-control-plaintext fw-bold" style={{ fontSize: '1.2rem' }}>
-                      {numeroPiece !== null ? `N° ${numeroPiece}` : '...'}
-                    </div>
-                  </div>
                 )}
               </>
             )}

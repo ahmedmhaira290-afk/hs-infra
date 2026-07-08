@@ -32,7 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/documents', [DocumentController::class, 'index']);
     Route::post('/documents/generate', [DocumentController::class, 'generate']);
-    Route::get('/documents/next-piece-number', [DocumentController::class, 'nextPieceNumber']);
     Route::delete('/documents/{id}', [DocumentController::class, 'destroy']);
 
     Route::get('/action-logs', function () {

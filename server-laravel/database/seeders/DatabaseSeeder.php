@@ -107,7 +107,148 @@ class DatabaseSeeder extends Seeder
             [2, 'Attestation de salaire', 'Attestation de salaire', true, "ATTESTATION DE SALAIRE\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nAtteste que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nPerçoit un salaire mensuel brut de : {{salary}} DH\n\nLa présente attestation est délivrée à l'intéressé(e) pour tous usages légaux.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger"],
             [3, 'Demande de prime', 'Demande de prime', true, "DEMANDE DE PRIME\n\nInformations du demandeur :\n\nNom & Prénom : {{first_name}} {{last_name}}\nFonction : {{position}}\nDépartement : {{department}}\nAgence : {{agence}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMotif :\n{{motif}}\n\nMontant accordé :\n{{montant}} DH\n\nSIGNATURE\n\nDemandeur : ______________________\nResponsable hiérarchique : ______________________\nDépartement RH : ______________________\nDirection Générale : ______________________"],
             [4, 'Certificat médical', 'Certificat médical', true, "CERTIFICAT MÉDICAL\n\nJe soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\n\nRésultat :\n\n\n\nArrêt de travail du ______________ au ______________\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet du médecin : ______________________"],
-            [5, 'Demande d\'avance', 'Demande d\'avance', true, "DEMANDE D'AVANCE\n\nMadame/Monsieur le Responsable RH,\n\nJe soussigné(e) {{first_name}} {{last_name}}, exerçant la fonction de {{position}} au sein du département {{department}} (Agence : {{agence}}) — CIN : {{cin}} — CNSS : {{cnss}} — Type agence : {{bank_type}} — RIB : {{rib}}, sollicite une avance sur salaire d'un montant de {{montant}} DH.\n\nMotif : {{motif}}\n\nJe m'engage à rembourser cette avance selon les modalités convenues avec l'administration.\n\nSignature du demandeur : ______________________\nAvis du responsable hiérarchique : ______________________\nDécision RH : ______________________"],
+            [5, 'Demande d\'avance', 'Demande d\'avance', true, "<!DOCTYPE html>
+<html lang=\"fr\">
+<head>
+<meta charset=\"UTF-8\">
+<title>Demande d'Avance</title>
+<style>
+  :root{ --ink:#1c2430; --paper:#ffffff; --muted:#6b7280; }
+  *{box-sizing:border-box;}
+  body{
+    background:#dfe3e8; font-family:'Georgia','Times New Roman',serif;
+    display:flex; justify-content:center; padding:40px 20px; margin:0;
+  }
+  .sheet{
+    background:var(--paper); width:820px; max-width:100%;
+    padding:50px 60px; box-shadow:0 4px 20px rgba(0,0,0,.15);
+  }
+  .header-top{ text-align:right; font-style:italic; font-size:15px; margin-bottom:20px; color:var(--ink); }
+  .logo-row{
+    display:flex; align-items:center; gap:16px; margin-bottom:30px;
+  }
+  .logo img{ height:38px; }
+  .titre-banner{
+    flex:1; border:1.5px solid var(--ink); border-radius:4px;
+    text-align:center; padding:14px; font-size:24px; font-weight:bold; font-style:italic;
+  }
+  .cadre{
+    border:1.5px solid var(--ink); padding:25px 30px; margin-bottom:25px;
+  }
+  .field-row{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:10px; font-size:16px;
+  }
+  .field-row label{ min-width:140px; color:var(--ink); }
+  .field-row .val{
+    border-bottom:1px dotted #999; font-family:inherit; font-weight:bold;
+    font-size:16px; padding:2px 4px; min-width:200px; display:inline-block;
+  }
+  .motif-box{
+    border:1.5px solid var(--ink); padding:15px 20px; margin-bottom:25px;
+  }
+  .motif-box label{ font-weight:bold; text-decoration:underline; }
+  .motif-box .val{
+    display:block; font-size:16px; margin-top:8px; min-height:40px;
+  }
+  .montants-cadre{
+    border:1.5px solid var(--ink); padding:20px 30px; margin-bottom:25px;
+  }
+  .montant-row{
+    display:flex; align-items:center; gap:16px; margin-bottom:16px; font-size:16px;
+  }
+  .montant-row label{ min-width:160px; }
+  .montant-row .box{
+    border:1.5px solid var(--ink); display:flex; align-items:center;
+    padding:8px 12px; min-width:120px; font-weight:bold; font-size:16px;
+  }
+  .date-prelevement{
+    display:flex; align-items:baseline; gap:10px; font-size:16px;
+    color:var(--ink);
+  }
+  .date-prelevement .val{
+    border-bottom:1px dotted #999; font-weight:bold; padding:2px 4px; min-width:120px;
+    display:inline-block;
+  }
+  .signature{ margin-top:50px; }
+  .signature h2{
+    text-align:center; text-decoration:underline; font-size:18px; margin-bottom:40px;
+  }
+  .sign-grid{
+    display:grid; grid-template-columns:1fr 1fr; row-gap:60px; font-size:15px; font-weight:bold;
+  }
+  .footer-code{ text-align:right; font-size:12px; color:var(--muted); margin-top:40px; }
+</style>
+</head>
+<body>
+<div class=\"sheet\">
+
+  <div class=\"header-top\">
+    {{ville}}, le : {{date}}
+  </div>
+
+  <div class=\"logo-row\">
+    <div class=\"logo\">
+      <img src=\"/images/hs-infra-logo.png\" alt=\"HS-INFRA\" onerror=\"this.style.display='none'\">
+    </div>
+    <div class=\"titre-banner\">DEMANDE D'AVANCE</div>
+  </div>
+
+  <div class=\"cadre\">
+    <div class=\"field-row\">
+      <label>- Nom &amp; Prénom :</label>
+      <span class=\"val\">{{first_name}} {{last_name}}</span>
+    </div>
+    <div class=\"field-row\">
+      <label>- Fonction :</label>
+      <span class=\"val\">{{position}}</span>
+    </div>
+    <div class=\"field-row\">
+      <label>- Département :</label>
+      <span class=\"val\">{{department}}</span>
+    </div>
+    <div class=\"field-row\">
+      <label>- Agence :</label>
+      <span class=\"val\">{{agence}}</span>
+    </div>
+  </div>
+
+  <div class=\"motif-box\">
+    <label>Motif :</label>
+    <div class=\"val\">{{motif}}</div>
+  </div>
+
+  <div class=\"montants-cadre\">
+    <div class=\"montant-row\">
+      <label>Montant demandé :</label>
+      <div class=\"box\">{{montant}}</div>
+      <span>Dhs</span>
+    </div>
+    <div class=\"montant-row\">
+      <label>Montant accordé :</label>
+      <div class=\"box\">{{montant_accorde}}</div>
+      <span>Dhs</span>
+    </div>
+    <div class=\"date-prelevement\">
+      <span>➤ Date de prélèvement :</span>
+      <span class=\"val\">{{date}}</span>
+    </div>
+  </div>
+
+  <div class=\"signature\">
+    <h2>SIGNATURE</h2>
+    <div class=\"sign-grid\">
+      <div>Demandeur :</div>
+      <div>Responsables hiérarchiques :</div>
+      <div>Département RH :</div>
+      <div>Département Financier :</div>
+    </div>
+  </div>
+
+  <div class=\"footer-code\">RH/DA/1/19</div>
+
+</div>
+</body>
+</html>"],
             [6, 'Certificat de travail', 'Certificat de travail', true, "CERTIFICAT DE TRAVAIL\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nCertifie que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nA été employé(e) dans notre société du ______________ au ______________\nDurée totale : ______________\nDernier salaire perçu : {{salary}} DH\n\nCe certificat est délivré à l'intéressé(e) pour servir et valoir ce que de droit.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger"],
             [7, 'Attestation de domiciliation irrévocable de salaire', 'Attestation de domiciliation irrévocable de salaire', true, "ATTESTATION DE DOMICILIATION IRRÉVOCABLE DE SALAIRE\n\nJe soussigné(e) {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nExerçant la fonction de {{position}} — Agence : {{agence}}\n\nDéclare par la présente domicilier mon salaire de façon irrévocable auprès de la banque :\n\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMontant mensuel domicilié : {{salary}} DH\n\nJe reconnais que cette domiciliation reste irrévocable pendant toute la durée de mon contrat de travail.\n\nFait à Tanger, le {{date}}\n\nSignature de l'employé(e) : ______________________\nCachet de la banque : ______________________"],
             [8, 'Demande d\'aide sociale', 'Demande d\'aide sociale', true, <<<'HTML'
@@ -392,7 +533,7 @@ HTML
     <div class=\"droite\">
       <div class=\"droite-row\">
         <label>N&deg; :</label>
-        <span class=\"val\">{{numero_piece}}</span>
+        <span class=\"val\">{{reference}}</span>
       </div>
       <div class=\"droite-row\">
         <label>DH :</label>
