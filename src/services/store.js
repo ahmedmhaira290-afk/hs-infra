@@ -37,9 +37,8 @@ const seedTpls = [
     display:flex; justify-content:center; padding:40px 20px; margin:0;
   }
   .sheet{
-    background:var(--paper); width:820px; max-width:100%;
-    padding:60px 70px; box-shadow:0 4px 20px rgba(0,0,0,.15);
-    min-height:1100px;
+    background:var(--paper); width:21cm; min-height:29.7cm;
+    padding:2.5cm 2.5cm; box-shadow:0 4px 20px rgba(0,0,0,.15);
   }
   .header{
     display:flex; justify-content:space-between; align-items:center;
@@ -69,6 +68,11 @@ const seedTpls = [
   }
   .footer-code{
     text-align:right; font-size:12px; color:var(--muted); margin-top:80px;
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
   }
 </style>
 </head>
@@ -109,7 +113,103 @@ const seedTpls = [
 </div>
 </body>
 </html>` },
-  { id: 2, title: "Attestation de salaire", type: "Attestation de salaire", is_active: true, content: "ATTESTATION DE SALAIRE\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nAtteste que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nPerçoit un salaire mensuel brut de : {{salary}} DH\n\nLa présente attestation est délivrée à l'intéressé(e) pour tous usages légaux.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
+  { id: 2, title: "Attestation de salaire", type: "Attestation de salaire", is_active: true, content: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Attestation de Travail et Salaire</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.9;
+    box-sizing: border-box;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 21cm; min-height: 29.7cm; }
+    @page { size: A4; margin: 0; }
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 0 50px 0;
+  }
+  p {
+    margin: 0 0 24px 0;
+    text-align: justify;
+  }
+  .hl {
+    font-weight: bold;
+    font-style: italic;
+    color: #1a3d8f;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 90px;
+    border-bottom: 1px solid #000;
+  }
+  .fait {
+    margin-top: 60px;
+    text-align: right;
+  }
+  .responsable {
+    margin-top: 30px;
+    text-align: right;
+  }
+  .footer {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>ATTESTATION DE TRAVAIL ET SALAIRE</h1>
+
+    <p>Nous, soussign&eacute;s St&eacute; <span class="hl">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> N&eacute; le : <span class="hl">{{birth_date}}</span>, N&deg; C.I.N <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span> jusqu'&agrave; nos jours, percevant un salaire mensuel brut de <span class="blank">{{salary}}</span> DH ( <span class="blank"></span> Dirhams Et <span class="blank" style="min-width:40px;"></span> Cts ) .</p>
+
+    <p>Cette attestation est d&eacute;livr&eacute;e &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
+
+    <div class="fait">Fait &agrave; {{ville}} le : {{date}}</div>
+
+    <div class="responsable">Responsable RH</div>
+
+    <div class="footer">RH/ATS/1/19</div>
+  </div>
+</body>
+</html>` },
   { id: 3, title: "Demande de prime", type: "Demande de prime", is_active: true, content: `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -118,134 +218,106 @@ const seedTpls = [
 <style>
   body {
     background: #d9d9d9;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     display: flex;
     justify-content: center;
     padding: 40px 0;
   }
   .page {
     background: #fff;
-    width: 800px;
-    padding: 60px 70px;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    color: #1a1a2e;
+    color: #000;
   }
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .logo-row img { height: 50px; }
   .date {
     text-align: right;
     font-weight: bold;
-    margin-bottom: 40px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 28px;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
+    font-size: 17px;
   }
   .field {
-    margin-bottom: 22px;
-    font-size: 17px;
+    margin-bottom: 24px;
+    font-size: 19px;
   }
   .field label {
     font-weight: bold;
     text-decoration: underline;
   }
-  .highlight {
-    background: #ff3fa4;
-    padding: 2px 6px;
-    color: #1a1a2e;
-    font-weight: bold;
-  }
   .motif-row {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin: 15px 0 30px 30px;
-    font-size: 17px;
+    font-size: 19px;
+    margin: 10px 0 40px 0;
   }
   .box {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #1a1a2e;
-    text-align: center;
-    line-height: 16px;
-    font-size: 12px;
-    margin: 0 4px;
-  }
-  .circled {
-    border: 3px solid #ff3fa4;
-    border-radius: 50%;
-    padding: 2px 5px;
-  }
-  .crossed {
-    background: #ff3fa4;
-    color: #ff3fa4;
-  }
-  .checked {
-    background: #ff3fa4;
-    color: #1a1a2e;
-    font-weight: bold;
-  }
-  .dots {
-    color: #ff3fa4;
-    font-weight: bold;
-    font-size: 20px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    margin: 0 6px;
+    vertical-align: middle;
   }
   .montant-label {
     font-weight: bold;
     text-decoration: underline;
-    font-size: 17px;
-    margin-top: 20px;
+    font-size: 19px;
   }
   .montant-box {
     display: inline-block;
-    border: 1px solid #1a1a2e;
+    border: 1px solid #000;
     width: 220px;
     height: 45px;
-    text-align: center;
-    line-height: 45px;
     margin-left: 20px;
     vertical-align: middle;
-  }
-  .montant-box span {
-    background: #ff3fa4;
-    padding: 3px 10px;
-    font-weight: bold;
   }
   .signature {
     text-align: center;
     font-weight: bold;
     text-decoration: underline;
-    margin: 60px 0 60px 0;
+    margin: 70px 0 60px 0;
+    font-size: 19px;
   }
   .sign-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 90px;
     font-weight: bold;
+    font-size: 19px;
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
   }
 </style>
 </head>
 <body>
   <div class="page">
-    <div class="date">{{ville}}, le : {{date}}</div>
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'" style="height:50px">
+      <div class="date">{{ville}}, le : {{date}}</div>
+    </div>
     <h1>DEMANDE DE PRIME</h1>
 
-    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="highlight">{{first_name}} {{last_name}}</span></div>
-    <div class="field"><label>Fonction :</label> <span class="highlight">{{position}}</span></div>
-    <div class="field"><label>D&eacute;partement :</label> {{department}}</div>
-    <div class="field"><label>Agence:</label> {{agence}}</div>
-    <div class="field"><label>Motif :</label> {{motif}}</div>
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <strong>{{first_name}} {{last_name}}</strong></div>
+    <div class="field"><label>Fonction :</label> <strong>{{position}}</strong></div>
+    <div class="field"><label>D&eacute;partement :</label> <strong>{{department}}</strong></div>
+    <div class="field"><label>Agence:</label> <strong>{{agence}}</strong></div>
+    <div class="field"><label>Motif :</label> <strong>{{motif}}</strong></div>
 
     <div class="motif-row">
-      <span><span class="box circled">X</span> Naissance</span>
-      <span><span class="box crossed">X</span> Mariage</span>
-      <span><span class="box checked">&#10003;</span> Autres (&agrave; pr&eacute;ciser) <span class="dots">................</span></span>
+      Naissance <span class="box"></span> &nbsp;&nbsp;&nbsp; Mariage <span class="box"></span> &nbsp;&nbsp;&nbsp; Autres (&agrave; pr&eacute;ciser) <span class="box"></span> .........
     </div>
 
     <div class="montant-label">
       Montant accord&eacute; :
-      <span class="montant-box"><span>{{montant}}</span></span>
+      <span class="montant-box">{{montant}}</span>
     </div>
 
     <div class="signature">SIGNATURE</div>
@@ -261,7 +333,6 @@ const seedTpls = [
   </div>
 </body>
 </html>` },
-  { id: 4, title: "Certificat médical", type: "Certificat médical", is_active: true, content: "CERTIFICAT MÉDICAL\n\nJe soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\n\nRésultat :\n\n\n\nArrêt de travail du ______________ au ______________\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet du médecin : ______________________" },
   { id: 5, title: "Demande d'avance", type: "Demande d'avance", is_active: true, content: `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -332,6 +403,11 @@ const seedTpls = [
     display:grid; grid-template-columns:1fr 1fr; row-gap:60px; font-size:15px; font-weight:bold;
   }
   .footer-code{ text-align:right; font-size:12px; color:var(--muted); margin-top:40px; }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
 </style>
 </head>
 <body>
@@ -404,218 +480,373 @@ const seedTpls = [
 </div>
 </body>
 </html>` },
-  { id: 6, title: "Certificat de travail", type: "Certificat de travail", is_active: true, content: "CERTIFICAT DE TRAVAIL\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nCertifie que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nA été employé(e) dans notre société du ______________ au ______________\nDurée totale : ______________\nDernier salaire perçu : {{salary}} DH\n\nCe certificat est délivré à l'intéressé(e) pour servir et valoir ce que de droit.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
-  { id: 7, title: "Attestation de domiciliation irrévocable de salaire", type: "Attestation de domiciliation irrévocable de salaire", is_active: true, content: "ATTESTATION DE DOMICILIATION IRRÉVOCABLE DE SALAIRE\n\nJe soussigné(e) {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nExerçant la fonction de {{position}} — Agence : {{agence}}\n\nDéclare par la présente domicilier mon salaire de façon irrévocable auprès de la banque :\n\nType agence : {{bank_type}} — RIB : {{rib}}\n\nMontant mensuel domicilié : {{salary}} DH\n\nJe reconnais que cette domiciliation reste irrévocable pendant toute la durée de mon contrat de travail.\n\nFait à Tanger, le {{date}}\n\nSignature de l'employé(e) : ______________________\nCachet de la banque : ______________________" },
+  { id: 6, title: "Certificat de travail", type: "Certificat de travail", is_active: true, content: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Certificat de Travail</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.9;
+    box-sizing: border-box;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 21cm; min-height: 29.7cm; }
+    @page { size: A4; margin: 0; }
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 0 50px 0;
+    letter-spacing: 1px;
+  }
+  p {
+    margin: 0 0 24px 0;
+    text-align: justify;
+  }
+  .hl {
+    font-weight: bold;
+  }
+  .fait {
+    text-align: right;
+    margin-top: 50px;
+  }
+  .direction {
+    text-align: right;
+    margin-top: 90px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>CERTIFICAT DE TRAVAIL</h1>
+
+    <p>Nous, soussign&eacute;s Ste <span class="hl">{{raison_sociale}}</span> certifions par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> n&eacute; le <span class="hl">{{birth_date}}</span>, titulaire de la <span class="hl">CIN N&deg;</span> <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg; {{cnss}}</span> a &eacute;t&eacute; employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span>.</p>
+
+    <p>{{civilite}} <span class="hl">{{first_name}} {{last_name}}</span> nous a quitt&eacute; le <span class="hl">{{date}}</span> libre de tout engagement.</p>
+
+    <p>Ce certificat est d&eacute;livr&eacute; &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
+
+    <div class="fait">Fait &agrave; {{ville}} le, <span class="hl">{{date}}</span></div>
+
+    <div class="direction">La Direction</div>
+  </div>
+</body>
+</html>` },
+  { id: 7, title: "Attestation de domiciliation irrévocable de salaire", type: "Attestation de domiciliation irrévocable de salaire", is_active: true, content: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Attestation de Domiciliation Irrévocable de Salaire</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 50px 0;
+  }
+  p {
+    margin: 0 0 22px 0;
+    text-align: justify;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 90px;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+  }
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 60px;
+  }
+  .sign-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 15px;
+  }
+  .sign-box {
+    border: 1px solid #000;
+    width: 320px;
+    height: 130px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+  }
+  .date-in-box {
+    font-weight: normal;
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>ATTESTATION DE DOMICILIATION IRREVOCABLE</h1>
+    <h2>DE SALAIRE</h2>
+
+    <p>Nous, soussign&eacute;s Ste <i><span class="blank">{{raison_sociale}}</span></i> au capital de <span class="blank">{{capital}}</span> Immatricul&eacute; au RC n&deg; <span class="blank">{{immatricule}}</span>.</p>
+
+    <p>Attestons par la pr&eacute;sente que le salaire mensuel de {{civilite}} <i><span class="blank">{{first_name}} {{last_name}}</span></i></p>
+
+    <p>Est (ou sera &agrave; compter de ce jour) vir&eacute; irr&eacute;vocablement chaque mois sur son compte bancaire</p>
+
+    <p>N&deg; <span class="blank">{{rib}}</span> ouvert aupr&egrave;s de &laquo;<span class="blank">{{bank_type}}</span>&raquo;.</p>
+
+    <p>Au cas o&ugrave;, celui-ci cesserait son activit&eacute; au sein de notre &eacute;tablissement, nous nous</p>
+
+    <p>Engageons &agrave; en informer &laquo;<span class="blank">{{bank_type}}</span>&raquo;, et &agrave; virer son solde de tout compte au compte bancaire sus mentionn&eacute;.</p>
+
+    <div class="sign-row">
+      <div>Accord du Salari&eacute;</div>
+      <div>Cachet et Signature de l'Employeur</div>
+    </div>
+    <div class="sign-boxes">
+      <div class="sign-box"></div>
+      <div class="sign-box">
+        <span class="date-in-box">Date {{date}}.</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>` },
   { id: 8, title: "Demande d'aide sociale", type: "Demande d'aide sociale", is_active: true, content: `<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <title>Demande d'Aide Sociale</title>
 <style>
-  :root{
-    --ink:#1c2430;
-    --line:#2b3442;
-    --accent:#e91e63;
-    --paper:#ffffff;
-    --muted:#6b7280;
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
   }
-  *{box-sizing:border-box;}
-  body{
-    background:#dfe3e8;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    display:flex;
-    justify-content:center;
-    padding:40px 20px;
-    margin:0;
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
   }
-  .sheet{
-    background:var(--paper);
-    width:820px;
-    max-width:100%;
-    padding:50px 60px;
-    box-shadow:0 4px 20px rgba(0,0,0,.15);
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
   }
-  .header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:30px;
+  .logo-row img { height: 50px; }
+  .date {
+    text-align: right;
+    font-weight: bold;
+    font-size: 17px;
   }
-  .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight:bold;
-    font-size:20px;
-    color:var(--ink);
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
   }
-  .logo img{ height:46px; }
-  .date{
-    font-size:15px;
-    color:var(--ink);
-    margin-top:6px;
+  .field {
+    margin-bottom: 22px;
+    font-size: 19px;
   }
-  h1{
-    text-align:center;
-    font-size:26px;
-    letter-spacing:1px;
-    margin:10px 0 35px;
-    color:var(--ink);
+  .field label {
+    font-weight: bold;
+    text-decoration: underline;
   }
-  .field-row{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:18px;
-    font-size:16px;
+  .value {
+    font-weight: bold;
   }
-  .field-row label{
-    font-weight:bold;
-    text-decoration:underline;
-    white-space:nowrap;
-    color:var(--ink);
+  .motif-value {
+    font-weight: bold;
   }
-  .field-row .fill{
-    flex:1;
-    border-bottom:1px dotted #999;
-    min-height:20px;
+  .dots {
+    font-size: 19px;
+    margin: 4px 0;
+    letter-spacing: 1px;
   }
-  .dotted-line{
-    border-bottom:1px dotted #999;
-    height:24px;
-    margin-bottom:4px;
+  .charges {
+    margin-top: 30px;
   }
-  .amount-section{
-    margin-top:30px;
+  .charges .field {
+    font-size: 19px;
   }
-  .amount-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:16px;
-    font-size:16px;
+  .cnss-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .amount-row label{
-    font-weight:bold;
-    text-decoration:underline;
-    min-width:230px;
-    color:var(--ink);
+  .precise-box {
+    border: 1px solid #000;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 6px 10px;
+    width: 140px;
+    line-height: 1.3;
   }
-  .box{
-    border:1.5px solid var(--ink);
-    min-width:150px;
-    min-height:34px;
-    padding:6px 12px;
-    font-weight:bold;
+  .montant-row {
+    display: flex;
+    align-items: center;
   }
-  .radio-box{
-    border:1px solid var(--ink);
-    font-size:12px;
-    padding:8px 10px;
-    text-align:center;
-    margin-left:10px;
-    max-width:110px;
+  .montant-box {
+    display: inline-block;
+    border: 1px solid #000;
+    min-width: 120px;
+    padding: 6px 14px;
+    margin-left: 20px;
+    text-align: center;
   }
-  .oui-si{
-    font-size:14px;
-    margin-left:8px;
-    color:var(--ink);
+  .footer {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 40px;
   }
-  .signature{
-    margin-top:60px;
+  .signature {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 60px 0 60px 0;
+    font-size: 19px;
   }
-  .signature h2{
-    text-decoration:underline;
-    font-size:18px;
-    margin-bottom:40px;
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 90px;
+    font-weight: bold;
+    font-size: 19px;
   }
-  .sign-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    row-gap:70px;
-    font-size:15px;
-    font-weight:bold;
-  }
-  .footer-code{
-    text-align:right;
-    font-size:12px;
-    color:var(--muted);
-    margin-top:40px;
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
   }
 </style>
 </head>
 <body>
-
-<div class="sheet">
-
-  <div class="header">
-    <div class="logo">
-      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'" style="height:50px">
+      <div class="date">{{ville}}, le : {{date}}</div>
     </div>
-    <div class="date">{{ville}}, le : {{date}}</div>
-  </div>
+    <h1>DEMANDE D'AIDE SOCIALE</h1>
 
-  <h1>DEMANDE D'AIDE SOCIALE</h1>
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="value">{{first_name}} {{last_name}}</span></div>
+    <div class="field"><label>Fonction :</label> <span class="value">{{position}}</span></div>
+    <div class="field"><label>D&eacute;partement :</label> <span class="value">{{department}}</span></div>
+    <div class="field"><label>Agence:</label> <span class="value">{{agence}}</span></div>
+    <div class="field"><label>Motif :</label> <span class="motif-value">{{motif}}</span></div>
 
-  <div class="field-row">
-    <label>Nom &amp; Prénom :</label>
-    <div class="fill">{{first_name}} {{last_name}}</div>
-  </div>
-  <div class="field-row">
-    <label>Fonction :</label>
-    <div class="fill">{{position}}</div>
-  </div>
-  <div class="field-row">
-    <label>Département :</label>
-    <div class="fill">{{department}}</div>
-  </div>
-  <div class="field-row">
-    <label>Agence :</label>
-    <div class="fill">{{agence}}</div>
-  </div>
-  <div class="field-row">
-    <label>Motif :</label>
-    <div class="fill">{{motif}}</div>
-  </div>
+    <div class="dots">..........................................................................................................</div>
+    <div class="dots">..........................................................................................................</div>
 
-  <div class="dotted-line"></div>
-  <div class="dotted-line"></div>
-
-  <div class="amount-section">
-    <div class="amount-row">
-      <label>Total des charges :</label>
-      <div class="box" style="min-width:120px">{{total_charges}}</div>
+    <div class="charges">
+      <div class="field"><label>Total des charges :</label> <span class="value">{{total_charges}}</span></div>
+      <div class="field cnss-row">
+        <span><label>Remboursement CNSS :</label> <span class="value">{{cnss_remb}}</span>..., si oui</span>
+        <span class="precise-box">A pr&eacute;ciser le montant</span>
+      </div>
+      <div class="field montant-row">
+        <label>Montant d'aide accord&eacute;e :</label>
+        <span class="montant-box"><span class="value">{{montant_accorde}}</span></span>
+      </div>
     </div>
-    <div class="amount-row">
-      <label>Remboursement CNSS :</label>
-      <div class="box" style="min-width:120px">{{cnss_remb}}</div>
-      <span class="oui-si">si oui</span>
-      <div class="radio-box">À préciser le montant</div>
-    </div>
-    <div class="amount-row">
-      <label>Montant d'aide demandé :</label>
-      <div class="box">{{montant}}</div>
-    </div>
-    <div class="amount-row">
-      <label>Montant d'aide accordé :</label>
-      <div class="box" style="border-style:dashed;">{{montant_accorde}}</div>
-    </div>
-  </div>
 
-  <div class="signature">
-    <h2>SIGNATURE</h2>
-    <div class="sign-grid">
+    <div class="signature">SIGNATURE</div>
+
+    <div class="sign-row">
       <div>Demandeur :</div>
-      <div>Responsables hiérarchiques :</div>
-      <div>Département RH :</div>
-      <div>Direction Générale :</div>
+      <div>Responsables hi&eacute;rarchiques :</div>
     </div>
+    <div class="sign-row">
+      <div>D&eacute;partement RH:</div>
+      <div>Direction G&eacute;n&eacute;rale:</div>
+    </div>
+
+    <div class="footer">RH/AS/1/19</div>
   </div>
-
-  <div class="footer-code">RH/AS/1/19</div>
-
-</div>
-
 </body>
 </html>` },
   { id: 9, title: "Pièce de caisse dépense", type: "Pièce de caisse dépense", is_active: true, content: `<!DOCTYPE html>
@@ -631,8 +862,8 @@ const seedTpls = [
     display:flex; justify-content:center; padding:40px 20px; margin:0;
   }
   .sheet{
-    background:var(--paper); width:900px; max-width:100%;
-    padding:50px 60px; box-shadow:0 4px 20px rgba(0,0,0,.15);
+    background:var(--paper); width:21cm; min-height:29.7cm;
+    padding:2.5cm 2.5cm; box-shadow:0 4px 20px rgba(0,0,0,.15);
   }
   .top-row{
     display:flex; justify-content:space-between; align-items:flex-start;
@@ -667,6 +898,11 @@ const seedTpls = [
   }
   .header{ margin-bottom:20px; }
   .header img{ height:50px; }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
 </style>
 </head>
 <body>
@@ -725,9 +961,6 @@ const seedTpls = [
 </div>
 </body>
 </html>` },
-  { id: 10, title: "Demande prime", type: "Demande prime", is_active: true, content: "DEMANDE DE PRIME\n\nMadame/Monsieur le Responsable,\n\nJe soussigné(e) {{first_name}} {{last_name}}, {{position}} — CIN : {{cin}} — CNSS : {{cnss}} — Type agence : {{bank_type}} — RIB : {{rib}}, ai l'honneur de solliciter l'octroi d'une prime pour le motif suivant :\n\n{{motif}}\n\nMontant sollicité : {{montant}} DH\n\nSignature du demandeur : ______________________\nAvis du supérieur hiérarchique : ______________________\nDécision de la direction : ______________________" },
-  { id: 11, title: "Attestation de travail et salaire", type: "Attestation de travail et salaire", is_active: true, content: "ATTESTATION DE TRAVAIL ET SALAIRE\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,\n\nAtteste que {{civilite}} {{first_name}} {{last_name}}\nNé(e) le {{birth_date}} à {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nEst employé(e) à notre société depuis le {{hire_date}}\nSalaire mensuel actuel : {{salary}} DH\n\nCette attestation est délivrée à l'intéressé(e) pour tous usages légaux.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
-  { id: 12, title: "Attestation de travail en bonne et due forme", type: "Attestation de travail en bonne et due forme", is_active: true, content: "ATTESTATION DE TRAVAIL EN BONNE ET DUE FORME\n\nJe soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000, ayant son siège social à Tanger (Maroc),\n\nAtteste par la présente que {{civilite}} {{first_name}} {{last_name}}\n\nNé(e) le : {{birth_date}}\nLieu de naissance : {{birth_place}}\nCIN : {{cin}}\nCNSS : {{cnss}}\nGenre : {{genre}}\nNationalité : {{nationalite}}\nVille : {{ville}}\nExerçant la fonction de : {{position}}\nDépartement : {{department}} — Agence : {{agence}}\nType agence : {{bank_type}} — RIB : {{rib}}\n\nEmployé(e) sous le matricule : ______________\n\nLa présente attestation est délivrée à l'intéressé(e) sur sa demande pour servir et valoir ce que de droit.\n\nFait à {{ville}}, le {{date}}\n\nSignature et cachet : M. BADR Qettari\nResponsable des Ressources Humaines\nNé le 12/02/1990 à Tanger" },
 ]
 
 const existingEmps = empStore.getAll()
@@ -742,7 +975,7 @@ if (existingEmps.length < seedEmps.length || savedEmpVersion < EMP_VERSION) {
   localStorage.setItem('emp_version', String(EMP_VERSION))
 }
 
-const TPL_VERSION = 13
+const TPL_VERSION = 19
 const savedVersion = Number(localStorage.getItem('tpl_version') || 0)
 const existingTpls = tplStore.getAll()
 if (existingTpls.length < seedTpls.length || savedVersion < TPL_VERSION) {
@@ -839,7 +1072,7 @@ export function toHtml(title, content) {
       return `<h2 style="text-align:center;color:${primaryColor};margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">${t}</h2>`
     }
     const isLabel = line.includes(':') && !line.startsWith(' ')
-    const style = isLabel ? `line-height:${lineHeight};color:#000;font-weight:600` : `line-height:${lineHeight};color:#111`
+    const style = isLabel ? `line-height:${lineHeight};color:#000;font-weight:700` : `line-height:${lineHeight};color:#000;font-weight:700`
     return `<div style="${style}">${line}</div>`
   }).join('')
 
@@ -915,7 +1148,7 @@ export const documentStore = {
       const ref = `DOC-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(docStore.getAll().length + 1).padStart(3, '0')}`
       const civilite = emp?.genre && emp.genre[0] === 'F' ? 'Madame' : 'Monsieur'
       const { societe } = loadDocSettings()
-      const ctx = { ...emp, civilite, ...extraData, raison_sociale: societe.raisonSociale || 'HS-INFRA', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }
+      const ctx = { ...emp, civilite, ...extraData, raison_sociale: societe.raisonSociale || 'HS-INFRA', capital: societe.capital || '', immatricule: societe.immatricule || '', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }
       const content = (tpl?.content || '').replace(/\{\{(\w+)\}\}/g, (_, key) => ctx?.[key] !== undefined ? ctx[key] : `{{${key}}}`)
       const isFullHtml = content.trim().startsWith('<!DOCTYPE') || content.trim().startsWith('<html')
       const htmlContent = isFullHtml ? content : toHtml(ref, content)

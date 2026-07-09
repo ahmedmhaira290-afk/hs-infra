@@ -62,6 +62,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   .footer-code{
     text-align:right; font-size:12px; color:var(--muted); margin-top:80px;
   }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
 </style>
 </head>
 <body>
@@ -100,30 +105,103 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   <div class="footer-code">RH/AT/1/19</div>
 </div>
 </body>
-</html>`},{id:2,title:`Attestation de salaire`,type:`Attestation de salaire`,is_active:!0,content:`ATTESTATION DE SALAIRE
+</html>`},{id:2,title:`Attestation de salaire`,type:`Attestation de salaire`,is_active:!0,content:`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Attestation de Travail et Salaire</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.9;
+    box-sizing: border-box;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 21cm; min-height: 29.7cm; }
+    @page { size: A4; margin: 0; }
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 0 50px 0;
+  }
+  p {
+    margin: 0 0 24px 0;
+    text-align: justify;
+  }
+  .hl {
+    font-weight: bold;
+    font-style: italic;
+    color: #1a3d8f;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 90px;
+    border-bottom: 1px solid #000;
+  }
+  .fait {
+    margin-top: 60px;
+    text-align: right;
+  }
+  .responsable {
+    margin-top: 30px;
+    text-align: right;
+  }
+  .footer {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>ATTESTATION DE TRAVAIL ET SALAIRE</h1>
 
-Je soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,
+    <p>Nous, soussign&eacute;s St&eacute; <span class="hl">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> N&eacute; le : <span class="hl">{{birth_date}}</span>, N&deg; C.I.N <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span> jusqu'&agrave; nos jours, percevant un salaire mensuel brut de <span class="blank">{{salary}}</span> DH ( <span class="blank"></span> Dirhams Et <span class="blank" style="min-width:40px;"></span> Cts ) .</p>
 
-Atteste que {{civilite}} {{first_name}} {{last_name}}
-Né(e) le {{birth_date}} à {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Genre : {{genre}}
-Nationalité : {{nationalite}}
-Ville : {{ville}}
-Exerçant la fonction de {{position}}
-Département : {{department}} — Agence : {{agence}}
-Type agence : {{bank_type}} — RIB : {{rib}}
+    <p>Cette attestation est d&eacute;livr&eacute;e &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
 
-Perçoit un salaire mensuel brut de : {{salary}} DH
+    <div class="fait">Fait &agrave; {{ville}} le : {{date}}</div>
 
-La présente attestation est délivrée à l'intéressé(e) pour tous usages légaux.
+    <div class="responsable">Responsable RH</div>
 
-Fait à {{ville}}, le {{date}}
-
-Signature et cachet : M. BADR Qettari
-Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de prime`,is_active:!0,content:`<!DOCTYPE html>
+    <div class="footer">RH/ATS/1/19</div>
+  </div>
+</body>
+</html>`},{id:3,title:`Demande de prime`,type:`Demande de prime`,is_active:!0,content:`<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -131,7 +209,7 @@ Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de pr
 <style>
   body {
     background: #d9d9d9;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     display: flex;
     justify-content: center;
     padding: 40px 0;
@@ -141,124 +219,95 @@ Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de pr
     width: 800px;
     padding: 60px 70px;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    color: #1a1a2e;
+    color: #000;
   }
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .logo-row img { height: 50px; }
   .date {
     text-align: right;
     font-weight: bold;
-    margin-bottom: 40px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 28px;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
+    font-size: 17px;
   }
   .field {
-    margin-bottom: 22px;
-    font-size: 17px;
+    margin-bottom: 24px;
+    font-size: 19px;
   }
   .field label {
     font-weight: bold;
     text-decoration: underline;
   }
-  .highlight {
-    background: #ff3fa4;
-    padding: 2px 6px;
-    color: #1a1a2e;
-    font-weight: bold;
-  }
   .motif-row {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin: 15px 0 30px 30px;
-    font-size: 17px;
+    font-size: 19px;
+    margin: 10px 0 40px 0;
   }
   .box {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #1a1a2e;
-    text-align: center;
-    line-height: 16px;
-    font-size: 12px;
-    margin: 0 4px;
-  }
-  .circled {
-    border: 3px solid #ff3fa4;
-    border-radius: 50%;
-    padding: 2px 5px;
-  }
-  .crossed {
-    background: #ff3fa4;
-    color: #ff3fa4;
-  }
-  .checked {
-    background: #ff3fa4;
-    color: #1a1a2e;
-    font-weight: bold;
-  }
-  .dots {
-    color: #ff3fa4;
-    font-weight: bold;
-    font-size: 20px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    margin: 0 6px;
+    vertical-align: middle;
   }
   .montant-label {
     font-weight: bold;
     text-decoration: underline;
-    font-size: 17px;
-    margin-top: 20px;
+    font-size: 19px;
   }
   .montant-box {
     display: inline-block;
-    border: 1px solid #1a1a2e;
+    border: 1px solid #000;
     width: 220px;
     height: 45px;
-    text-align: center;
-    line-height: 45px;
     margin-left: 20px;
     vertical-align: middle;
-  }
-  .montant-box span {
-    background: #ff3fa4;
-    padding: 3px 10px;
-    font-weight: bold;
   }
   .signature {
     text-align: center;
     font-weight: bold;
     text-decoration: underline;
-    margin: 60px 0 60px 0;
+    margin: 70px 0 60px 0;
+    font-size: 19px;
   }
   .sign-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 90px;
     font-weight: bold;
+    font-size: 19px;
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
   }
 </style>
 </head>
 <body>
   <div class="page">
-    <div class="date">{{ville}}, le : {{date}}</div>
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'" style="height:50px">
+      <div class="date">{{ville}}, le : {{date}}</div>
+    </div>
     <h1>DEMANDE DE PRIME</h1>
 
-    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="highlight">{{first_name}} {{last_name}}</span></div>
-    <div class="field"><label>Fonction :</label> <span class="highlight">{{position}}</span></div>
-    <div class="field"><label>D&eacute;partement :</label> {{department}}</div>
-    <div class="field"><label>Agence:</label> {{agence}}</div>
-    <div class="field"><label>Motif :</label> {{motif}}</div>
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <strong>{{first_name}} {{last_name}}</strong></div>
+    <div class="field"><label>Fonction :</label> <strong>{{position}}</strong></div>
+    <div class="field"><label>D&eacute;partement :</label> <strong>{{department}}</strong></div>
+    <div class="field"><label>Agence:</label> <strong>{{agence}}</strong></div>
+    <div class="field"><label>Motif :</label> <strong>{{motif}}</strong></div>
 
     <div class="motif-row">
-      <span><span class="box circled">X</span> Naissance</span>
-      <span><span class="box crossed">X</span> Mariage</span>
-      <span><span class="box checked">&#10003;</span> Autres (&agrave; pr&eacute;ciser) <span class="dots">................</span></span>
+      Naissance <span class="box"></span> &nbsp;&nbsp;&nbsp; Mariage <span class="box"></span> &nbsp;&nbsp;&nbsp; Autres (&agrave; pr&eacute;ciser) <span class="box"></span> .........
     </div>
 
     <div class="montant-label">
       Montant accord&eacute; :
-      <span class="montant-box"><span>{{montant}}</span></span>
+      <span class="montant-box">{{montant}}</span>
     </div>
 
     <div class="signature">SIGNATURE</div>
@@ -273,22 +322,7 @@ Né le 12/02/1990 à Tanger`},{id:3,title:`Demande de prime`,type:`Demande de pr
     </div>
   </div>
 </body>
-</html>`},{id:4,title:`Certificat médical`,type:`Certificat médical`,is_active:!0,content:`CERTIFICAT MÉDICAL
-
-Je soussigné, Docteur ______________________, certifie avoir examiné {{civilite}} {{first_name}} {{last_name}}.
-Né(e) le {{birth_date}} à {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-
-Résultat :
-
-
-
-Arrêt de travail du ______________ au ______________
-
-Fait à {{ville}}, le {{date}}
-
-Signature et cachet du médecin : ______________________`},{id:5,title:`Demande d'avance`,type:`Demande d'avance`,is_active:!0,content:`<!DOCTYPE html>
+</html>`},{id:5,title:`Demande d'avance`,type:`Demande d'avance`,is_active:!0,content:`<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -358,6 +392,11 @@ Signature et cachet du médecin : ______________________`},{id:5,title:`Demande 
     display:grid; grid-template-columns:1fr 1fr; row-gap:60px; font-size:15px; font-weight:bold;
   }
   .footer-code{ text-align:right; font-size:12px; color:var(--muted); margin-top:40px; }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
 </style>
 </head>
 <body>
@@ -429,260 +468,369 @@ Signature et cachet du médecin : ______________________`},{id:5,title:`Demande 
 
 </div>
 </body>
-</html>`},{id:6,title:`Certificat de travail`,type:`Certificat de travail`,is_active:!0,content:`CERTIFICAT DE TRAVAIL
+</html>`},{id:6,title:`Certificat de travail`,type:`Certificat de travail`,is_active:!0,content:`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Certificat de Travail</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .page {
+    background: #fff;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.9;
+    box-sizing: border-box;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 21cm; min-height: 29.7cm; }
+    @page { size: A4; margin: 0; }
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 0 50px 0;
+    letter-spacing: 1px;
+  }
+  p {
+    margin: 0 0 24px 0;
+    text-align: justify;
+  }
+  .hl {
+    font-weight: bold;
+  }
+  .fait {
+    text-align: right;
+    margin-top: 50px;
+  }
+  .direction {
+    text-align: right;
+    margin-top: 90px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>CERTIFICAT DE TRAVAIL</h1>
 
-Je soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,
+    <p>Nous, soussign&eacute;s Ste <span class="hl">{{raison_sociale}}</span> certifions par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> n&eacute; le <span class="hl">{{birth_date}}</span>, titulaire de la <span class="hl">CIN N&deg;</span> <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg; {{cnss}}</span> a &eacute;t&eacute; employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span>.</p>
 
-Certifie que {{civilite}} {{first_name}} {{last_name}}
-Né(e) le {{birth_date}} à {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Genre : {{genre}}
-Nationalité : {{nationalite}}
-Ville : {{ville}}
-Exerçant la fonction de {{position}}
-Département : {{department}} — Agence : {{agence}}
-Type agence : {{bank_type}} — RIB : {{rib}}
+    <p>{{civilite}} <span class="hl">{{first_name}} {{last_name}}</span> nous a quitt&eacute; le <span class="hl">{{date}}</span> libre de tout engagement.</p>
 
-A été employé(e) dans notre société du ______________ au ______________
-Durée totale : ______________
-Dernier salaire perçu : {{salary}} DH
+    <p>Ce certificat est d&eacute;livr&eacute; &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
 
-Ce certificat est délivré à l'intéressé(e) pour servir et valoir ce que de droit.
+    <div class="fait">Fait &agrave; {{ville}} le, <span class="hl">{{date}}</span></div>
 
-Fait à {{ville}}, le {{date}}
+    <div class="direction">La Direction</div>
+  </div>
+</body>
+</html>`},{id:7,title:`Attestation de domiciliation irrévocable de salaire`,type:`Attestation de domiciliation irrévocable de salaire`,is_active:!0,content:`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Attestation de Domiciliation Irrévocable de Salaire</title>
+<style>
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  .page {
+    background: #fff;
+    width: 800px;
+    padding: 60px 70px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .logo-row img { height: 46px; }
+  .logo-row .titre {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 50px 0;
+  }
+  p {
+    margin: 0 0 22px 0;
+    text-align: justify;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 90px;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+  }
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 60px;
+  }
+  .sign-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 15px;
+  }
+  .sign-box {
+    border: 1px solid #000;
+    width: 320px;
+    height: 130px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+  }
+  .date-in-box {
+    font-weight: normal;
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+      <span class="titre">HS-INFRA</span>
+    </div>
+    <h1>ATTESTATION DE DOMICILIATION IRREVOCABLE</h1>
+    <h2>DE SALAIRE</h2>
 
-Signature et cachet : M. BADR Qettari
-Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`},{id:7,title:`Attestation de domiciliation irrévocable de salaire`,type:`Attestation de domiciliation irrévocable de salaire`,is_active:!0,content:`ATTESTATION DE DOMICILIATION IRRÉVOCABLE DE SALAIRE
+    <p>Nous, soussign&eacute;s Ste <i><span class="blank">{{raison_sociale}}</span></i> au capital de <span class="blank">{{capital}}</span> Immatricul&eacute; au RC n&deg; <span class="blank">{{immatricule}}</span>.</p>
 
-Je soussigné(e) {{first_name}} {{last_name}}
-Né(e) le {{birth_date}} à {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Exerçant la fonction de {{position}} — Agence : {{agence}}
+    <p>Attestons par la pr&eacute;sente que le salaire mensuel de {{civilite}} <i><span class="blank">{{first_name}} {{last_name}}</span></i></p>
 
-Déclare par la présente domicilier mon salaire de façon irrévocable auprès de la banque :
+    <p>Est (ou sera &agrave; compter de ce jour) vir&eacute; irr&eacute;vocablement chaque mois sur son compte bancaire</p>
 
-Type agence : {{bank_type}} — RIB : {{rib}}
+    <p>N&deg; <span class="blank">{{rib}}</span> ouvert aupr&egrave;s de &laquo;<span class="blank">{{bank_type}}</span>&raquo;.</p>
 
-Montant mensuel domicilié : {{salary}} DH
+    <p>Au cas o&ugrave;, celui-ci cesserait son activit&eacute; au sein de notre &eacute;tablissement, nous nous</p>
 
-Je reconnais que cette domiciliation reste irrévocable pendant toute la durée de mon contrat de travail.
+    <p>Engageons &agrave; en informer &laquo;<span class="blank">{{bank_type}}</span>&raquo;, et &agrave; virer son solde de tout compte au compte bancaire sus mentionn&eacute;.</p>
 
-Fait à Tanger, le {{date}}
-
-Signature de l'employé(e) : ______________________
-Cachet de la banque : ______________________`},{id:8,title:`Demande d'aide sociale`,type:`Demande d'aide sociale`,is_active:!0,content:`<!DOCTYPE html>
+    <div class="sign-row">
+      <div>Accord du Salari&eacute;</div>
+      <div>Cachet et Signature de l'Employeur</div>
+    </div>
+    <div class="sign-boxes">
+      <div class="sign-box"></div>
+      <div class="sign-box">
+        <span class="date-in-box">Date {{date}}.</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`},{id:8,title:`Demande d'aide sociale`,type:`Demande d'aide sociale`,is_active:!0,content:`<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <title>Demande d'Aide Sociale</title>
 <style>
-  :root{
-    --ink:#1c2430;
-    --line:#2b3442;
-    --accent:#e91e63;
-    --paper:#ffffff;
-    --muted:#6b7280;
+  body {
+    background: #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
   }
-  *{box-sizing:border-box;}
-  body{
-    background:#dfe3e8;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    display:flex;
-    justify-content:center;
-    padding:40px 20px;
-    margin:0;
+  .page {
+    background: #fff;
+    width: 800px;
+    padding: 60px 70px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #000;
   }
-  .sheet{
-    background:var(--paper);
-    width:820px;
-    max-width:100%;
-    padding:50px 60px;
-    box-shadow:0 4px 20px rgba(0,0,0,.15);
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
   }
-  .header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:30px;
+  .logo-row img { height: 50px; }
+  .date {
+    text-align: right;
+    font-weight: bold;
+    font-size: 17px;
   }
-  .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight:bold;
-    font-size:20px;
-    color:var(--ink);
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
   }
-  .logo img{ height:46px; }
-  .date{
-    font-size:15px;
-    color:var(--ink);
-    margin-top:6px;
+  .field {
+    margin-bottom: 22px;
+    font-size: 19px;
   }
-  h1{
-    text-align:center;
-    font-size:26px;
-    letter-spacing:1px;
-    margin:10px 0 35px;
-    color:var(--ink);
+  .field label {
+    font-weight: bold;
+    text-decoration: underline;
   }
-  .field-row{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:18px;
-    font-size:16px;
+  .value {
+    font-weight: bold;
   }
-  .field-row label{
-    font-weight:bold;
-    text-decoration:underline;
-    white-space:nowrap;
-    color:var(--ink);
+  .motif-value {
+    font-weight: bold;
   }
-  .field-row .fill{
-    flex:1;
-    border-bottom:1px dotted #999;
-    min-height:20px;
+  .dots {
+    font-size: 19px;
+    margin: 4px 0;
+    letter-spacing: 1px;
   }
-  .dotted-line{
-    border-bottom:1px dotted #999;
-    height:24px;
-    margin-bottom:4px;
+  .charges {
+    margin-top: 30px;
   }
-  .amount-section{
-    margin-top:30px;
+  .charges .field {
+    font-size: 19px;
   }
-  .amount-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:16px;
-    font-size:16px;
+  .cnss-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .amount-row label{
-    font-weight:bold;
-    text-decoration:underline;
-    min-width:230px;
-    color:var(--ink);
+  .precise-box {
+    border: 1px solid #000;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 6px 10px;
+    width: 140px;
+    line-height: 1.3;
   }
-  .box{
-    border:1.5px solid var(--ink);
-    min-width:150px;
-    min-height:34px;
-    padding:6px 12px;
-    font-weight:bold;
+  .montant-row {
+    display: flex;
+    align-items: center;
   }
-  .radio-box{
-    border:1px solid var(--ink);
-    font-size:12px;
-    padding:8px 10px;
-    text-align:center;
-    margin-left:10px;
-    max-width:110px;
+  .montant-box {
+    display: inline-block;
+    border: 1px solid #000;
+    min-width: 120px;
+    padding: 6px 14px;
+    margin-left: 20px;
+    text-align: center;
   }
-  .oui-si{
-    font-size:14px;
-    margin-left:8px;
-    color:var(--ink);
+  .footer {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 40px;
   }
-  .signature{
-    margin-top:60px;
+  .signature {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 60px 0 60px 0;
+    font-size: 19px;
   }
-  .signature h2{
-    text-decoration:underline;
-    font-size:18px;
-    margin-bottom:40px;
+  .sign-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 90px;
+    font-weight: bold;
+    font-size: 19px;
   }
-  .sign-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    row-gap:70px;
-    font-size:15px;
-    font-weight:bold;
-  }
-  .footer-code{
-    text-align:right;
-    font-size:12px;
-    color:var(--muted);
-    margin-top:40px;
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; }
+    @page { size:A4; margin:0; }
   }
 </style>
 </head>
 <body>
-
-<div class="sheet">
-
-  <div class="header">
-    <div class="logo">
-      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'">
+  <div class="page">
+    <div class="logo-row">
+      <img src="/images/hs-infra-logo.png" alt="HS-INFRA" onerror="this.style.display='none'" style="height:50px">
+      <div class="date">{{ville}}, le : {{date}}</div>
     </div>
-    <div class="date">{{ville}}, le : {{date}}</div>
-  </div>
+    <h1>DEMANDE D'AIDE SOCIALE</h1>
 
-  <h1>DEMANDE D'AIDE SOCIALE</h1>
+    <div class="field"><label>Nom &amp; Pr&eacute;nom:</label> <span class="value">{{first_name}} {{last_name}}</span></div>
+    <div class="field"><label>Fonction :</label> <span class="value">{{position}}</span></div>
+    <div class="field"><label>D&eacute;partement :</label> <span class="value">{{department}}</span></div>
+    <div class="field"><label>Agence:</label> <span class="value">{{agence}}</span></div>
+    <div class="field"><label>Motif :</label> <span class="motif-value">{{motif}}</span></div>
 
-  <div class="field-row">
-    <label>Nom &amp; Prénom :</label>
-    <div class="fill">{{first_name}} {{last_name}}</div>
-  </div>
-  <div class="field-row">
-    <label>Fonction :</label>
-    <div class="fill">{{position}}</div>
-  </div>
-  <div class="field-row">
-    <label>Département :</label>
-    <div class="fill">{{department}}</div>
-  </div>
-  <div class="field-row">
-    <label>Agence :</label>
-    <div class="fill">{{agence}}</div>
-  </div>
-  <div class="field-row">
-    <label>Motif :</label>
-    <div class="fill">{{motif}}</div>
-  </div>
+    <div class="dots">..........................................................................................................</div>
+    <div class="dots">..........................................................................................................</div>
 
-  <div class="dotted-line"></div>
-  <div class="dotted-line"></div>
-
-  <div class="amount-section">
-    <div class="amount-row">
-      <label>Total des charges :</label>
-      <div class="box" style="min-width:120px">{{total_charges}}</div>
+    <div class="charges">
+      <div class="field"><label>Total des charges :</label> <span class="value">{{total_charges}}</span></div>
+      <div class="field cnss-row">
+        <span><label>Remboursement CNSS :</label> <span class="value">{{cnss_remb}}</span>..., si oui</span>
+        <span class="precise-box">A pr&eacute;ciser le montant</span>
+      </div>
+      <div class="field montant-row">
+        <label>Montant d'aide accord&eacute;e :</label>
+        <span class="montant-box"><span class="value">{{montant_accorde}}</span></span>
+      </div>
     </div>
-    <div class="amount-row">
-      <label>Remboursement CNSS :</label>
-      <div class="box" style="min-width:120px">{{cnss_remb}}</div>
-      <span class="oui-si">si oui</span>
-      <div class="radio-box">À préciser le montant</div>
-    </div>
-    <div class="amount-row">
-      <label>Montant d'aide demandé :</label>
-      <div class="box">{{montant}}</div>
-    </div>
-    <div class="amount-row">
-      <label>Montant d'aide accordé :</label>
-      <div class="box" style="border-style:dashed;">{{montant_accorde}}</div>
-    </div>
-  </div>
 
-  <div class="signature">
-    <h2>SIGNATURE</h2>
-    <div class="sign-grid">
+    <div class="signature">SIGNATURE</div>
+
+    <div class="sign-row">
       <div>Demandeur :</div>
-      <div>Responsables hiérarchiques :</div>
-      <div>Département RH :</div>
-      <div>Direction Générale :</div>
+      <div>Responsables hi&eacute;rarchiques :</div>
     </div>
+    <div class="sign-row">
+      <div>D&eacute;partement RH:</div>
+      <div>Direction G&eacute;n&eacute;rale:</div>
+    </div>
+
+    <div class="footer">RH/AS/1/19</div>
   </div>
-
-  <div class="footer-code">RH/AS/1/19</div>
-
-</div>
-
 </body>
 </html>`},{id:9,title:`Pièce de caisse dépense`,type:`Pièce de caisse dépense`,is_active:!0,content:`<!DOCTYPE html>
 <html lang="fr">
@@ -733,6 +881,11 @@ Cachet de la banque : ______________________`},{id:8,title:`Demande d'aide socia
   }
   .header{ margin-bottom:20px; }
   .header img{ height:50px; }
+  @media print {
+    body { background:#fff; padding:0; }
+    .sheet { box-shadow:none; }
+    @page { size:A4; margin:0; }
+  }
 </style>
 </head>
 <body>
@@ -790,69 +943,8 @@ Cachet de la banque : ______________________`},{id:8,title:`Demande d'aide socia
 
 </div>
 </body>
-</html>`},{id:10,title:`Demande prime`,type:`Demande prime`,is_active:!0,content:`DEMANDE DE PRIME
-
-Madame/Monsieur le Responsable,
-
-Je soussigné(e) {{first_name}} {{last_name}}, {{position}} — CIN : {{cin}} — CNSS : {{cnss}} — Type agence : {{bank_type}} — RIB : {{rib}}, ai l'honneur de solliciter l'octroi d'une prime pour le motif suivant :
-
-{{motif}}
-
-Montant sollicité : {{montant}} DH
-
-Signature du demandeur : ______________________
-Avis du supérieur hiérarchique : ______________________
-Décision de la direction : ______________________`},{id:11,title:`Attestation de travail et salaire`,type:`Attestation de travail et salaire`,is_active:!0,content:`ATTESTATION DE TRAVAIL ET SALAIRE
-
-Je soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000,
-
-Atteste que {{civilite}} {{first_name}} {{last_name}}
-Né(e) le {{birth_date}} à {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Genre : {{genre}}
-Nationalité : {{nationalite}}
-Ville : {{ville}}
-Exerçant la fonction de {{position}}
-Département : {{department}} — Agence : {{agence}}
-Type agence : {{bank_type}} — RIB : {{rib}}
-
-Est employé(e) à notre société depuis le {{hire_date}}
-Salaire mensuel actuel : {{salary}} DH
-
-Cette attestation est délivrée à l'intéressé(e) pour tous usages légaux.
-
-Fait à {{ville}}, le {{date}}
-
-Signature et cachet : M. BADR Qettari
-Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`},{id:12,title:`Attestation de travail en bonne et due forme`,type:`Attestation de travail en bonne et due forme`,is_active:!0,content:`ATTESTATION DE TRAVAIL EN BONNE ET DUE FORME
-
-Je soussigné, M. BADR Qettari, né le 12/02/1990, Responsable des Ressources Humaines de la société HS-INFRA — Agence Barid Bank — RIB : 007 000 000000000000000000, ayant son siège social à Tanger (Maroc),
-
-Atteste par la présente que {{civilite}} {{first_name}} {{last_name}}
-
-Né(e) le : {{birth_date}}
-Lieu de naissance : {{birth_place}}
-CIN : {{cin}}
-CNSS : {{cnss}}
-Genre : {{genre}}
-Nationalité : {{nationalite}}
-Ville : {{ville}}
-Exerçant la fonction de : {{position}}
-Département : {{department}} — Agence : {{agence}}
-Type agence : {{bank_type}} — RIB : {{rib}}
-
-Employé(e) sous le matricule : ______________
-
-La présente attestation est délivrée à l'intéressé(e) sur sa demande pour servir et valoir ce que de droit.
-
-Fait à {{ville}}, le {{date}}
-
-Signature et cachet : M. BADR Qettari
-Responsable des Ressources Humaines
-Né le 12/02/1990 à Tanger`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=13,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
-`).map(e=>{let t=e.trim();return t?t===t.toUpperCase()&&t.length>3?`<h2 style="text-align:center;color:${s};margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">${t}</h2>`:`<div style="${e.includes(`:`)&&!e.startsWith(` `)?`line-height:${u};color:#000;font-weight:600`:`line-height:${u};color:#111`}">${e}</div>`:`<div style="height:0.4rem"></div>`}).join(``);return`<!DOCTYPE html>
+</html>`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=18,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
+`).map(e=>{let t=e.trim();return t?t===t.toUpperCase()&&t.length>3?`<h2 style="text-align:center;color:${s};margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">${t}</h2>`:`<div style="${e.includes(`:`)&&e.startsWith(` `),`line-height:${u};color:#000;font-weight:700`}">${e}</div>`:`<div style="height:0.4rem"></div>`}).join(``);return`<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><style>
   @page { margin: ${d}mm ${m}mm ${f}mm ${p}mm }
@@ -893,4 +985,4 @@ Né le 12/02/1990 à Tanger`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let
   </div>
   ${_?`<div class="footer">${v}</div>`:``}
 </div>
-</body></html>`}var is={async list(){return Qo(()=>To.get(`/documents`).then(e=>{let t=e.data.map(e=>({...e,htmlContent:e.html_content})),n=Ho.getAll(),r=new Set(t.map(e=>e.reference)),i=[...t,...n.filter(e=>!r.has(e.reference))];return i.sort((e,t)=>new Date(t.created_at?.replace(` `,`T`))-new Date(e.created_at?.replace(` `,`T`))),i}),()=>Ho.getAll())},async generate(e,t,n={}){return Qo(()=>To.post(`/documents/generate`,{employee_id:Number(e),template_id:Number(t),...n}).then(e=>{let t=e.data;return{...t,htmlContent:t.html_content}}),()=>{let r=Bo.getAll().find(t=>t.id===Number(e)),i=Vo.getAll().find(e=>e.id===Number(t)),a=new Date,o=`DOC-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,`0`)}${String(a.getDate()).padStart(2,`0`)}-${String(Ho.getAll().length+1).padStart(3,`0`)}`,s=r?.genre&&r.genre[0]===`F`?`Madame`:`Monsieur`,{societe:c}=ns(),l={...r,civilite:s,...n,raison_sociale:c.raisonSociale||`HS-INFRA`,date:a.toLocaleDateString(`fr-FR`,{weekday:`long`,year:`numeric`,month:`long`,day:`numeric`})},u=(i?.content||``).replace(/\{\{(\w+)\}\}/g,(e,t)=>l?.[t]===void 0?`{{${t}}}`:l[t]),d=u.trim().startsWith(`<!DOCTYPE`)||u.trim().startsWith(`<html`)?u:rs(o,u),f={id:Date.now(),reference:o,employee_id:Number(e),template_id:Number(t),content:u,htmlContent:d,employee_name:r?`${r.first_name} ${r.last_name}`:`Inconnu`,document_type:i?.title||`Document`,created_at:a.toISOString()},p=Ho.getAll();return p.push(f),Ho.saveAll(p),f})},async remove(e){return Qo(()=>To.delete(`/documents/${e}`),()=>{Ho.saveAll(Ho.getAll().filter(t=>t.id!==Number(e)))})}},as=[`Jan`,`Fév`,`Mar`,`Avr`,`Mai`,`Juin`,`Juil`,`Aoû`,`Sep`,`Oct`,`Nov`,`Déc`],os=[{key:`employees`,label:`Employés`,icon:`bi-people-fill`,gradient:`linear-gradient(135deg, #0f2b4a, #1a4a7a)`},{key:`templates`,label:`Modèles actifs`,icon:`bi-file-earmark-richtext-fill`,gradient:`linear-gradient(135deg, #0f973d, #1ab85a)`},{key:`documents`,label:`Documents générés`,icon:`bi-file-earmark-check-fill`,gradient:`linear-gradient(135deg, #0b6bcb, #2d8bf0)`},{key:`month`,label:`Ce mois-ci`,icon:`bi-calendar-check-fill`,gradient:`linear-gradient(135deg, #b76e00, #e68a00)`}],ss=[{label:`Nouvel employé`,icon:`bi-person-plus-fill`,route:`/employees/new`,color:`#0f2b4a`,perm:q.MANAGE_USERS},{label:`Gérer les agents`,icon:`bi-person-badge-fill`,route:`/agents`,color:`#6f42c1`,perm:q.MANAGE_USERS},{label:`Générer attestation`,icon:`bi-file-earmark-plus-fill`,route:`/documents/generate`,color:`#0f973d`,perm:q.GENERATE_DOCUMENTS},{label:`Voir les employés`,icon:`bi-people-fill`,route:`/employees`,color:`#0b6bcb`,perm:q.VIEW_EMPLOYEES},{label:`Historique`,icon:`bi-clock-history`,route:`/documents/history`,color:`#b76e00`,perm:q.VIEW_HISTORY}];function cs(){let{user:e}=Ao(),{t,societe:n}=ar(),r=ut(),[i,a]=(0,S.useState)({stats:{},recent:[],deptData:[],trendData:[]});(0,S.useEffect)(()=>{Promise.all([es.list(),ts.list(!0),is.list()]).then(([e,t,n])=>{let r=new Date,i={employees:e.length,templates:t.length,documents:n.length,month:n.filter(e=>{let t=new Date(e.created_at);return t.getMonth()===r.getMonth()&&t.getFullYear()===r.getFullYear()}).length},o={};e.forEach(e=>{let t=e.department||`Non défini`;o[t]=(o[t]||0)+1});let s=Object.entries(o).sort((e,t)=>t[1]-e[1]),c=s.length?Math.max(...s.map(e=>e[1])):1,l=[];for(let e=5;e>=0;e--){let t=new Date(r.getFullYear(),r.getMonth()-e,1),i=n.filter(e=>{let n=new Date(e.created_at);return n.getMonth()===t.getMonth()&&n.getFullYear()===t.getFullYear()}).length;l.push({label:`${as[t.getMonth()]} ${t.getFullYear()}`,count:i})}let u=l.length?Math.max(...l.map(e=>e.count),1):1;a({stats:i,recent:n.slice(-5).reverse(),deptData:s,trendData:l,maxDept:c,maxTrend:u})})},[]);let{stats:o,recent:s,deptData:c,trendData:l,maxDept:u,maxTrend:d}=i;return(0,R.jsxs)(`div`,{className:`dashboard`,children:[(0,R.jsxs)(`div`,{className:`welcome-banner d-flex align-items-center justify-content-between`,children:[(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`h5`,{children:[(0,R.jsx)(`i`,{className:`bi bi-hand-wave me-2`}),`Bienvenue M. `,e?.first_name]}),(0,R.jsxs)(`small`,{children:[`Vous êtes connecté en tant que `,(0,R.jsx)(`strong`,{children:e?.role===`responsable`?`Responsable RH`:`Agent`})]})]}),(0,R.jsxs)(`div`,{className:`text-end d-none d-md-block`,children:[(0,R.jsx)(`div`,{style:{fontSize:`0.75rem`,opacity:.7},children:new Date().toLocaleDateString(`fr-FR`,{weekday:`long`,year:`numeric`,month:`long`,day:`numeric`})}),(0,R.jsx)(`div`,{style:{fontSize:`1.1rem`,fontWeight:700,opacity:.9},children:n?.raisonSociale||`HS-INFRA`})]})]}),(0,R.jsx)(`div`,{className:`row g-3 mb-4`,children:os.map(({key:e,label:t,icon:n,gradient:r})=>(0,R.jsx)(`div`,{className:`col-sm-6 col-xl-3`,children:(0,R.jsx)(`div`,{className:`card stat-card h-100 border-0`,style:{background:r,color:`#fff`},children:(0,R.jsxs)(`div`,{className:`card-body d-flex align-items-center gap-3`,children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:52,height:52,borderRadius:14,background:`rgba(255,255,255,0.2)`,fontSize:`1.5rem`},children:(0,R.jsx)(`i`,{className:`bi ${n}`})}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`div`,{className:`fw-bold`,style:{fontSize:`1.6rem`,lineHeight:1.1},children:o[e]}),(0,R.jsx)(`div`,{style:{fontSize:`0.8rem`,opacity:.85,fontWeight:500},children:t})]})]})})},e))}),(0,R.jsxs)(`div`,{className:`row g-3 mb-4`,children:[(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-diagram-3-fill`,style:{color:`var(--accent)`}}),`Répartition par département`]}),(0,R.jsx)(`div`,{className:`card-body`,children:c.length>0?c.map(([e,t])=>(0,R.jsxs)(`div`,{className:`mb-3`,children:[(0,R.jsxs)(`div`,{className:`d-flex justify-content-between mb-1`,style:{fontSize:`0.82rem`},children:[(0,R.jsx)(`span`,{className:`fw-medium`,children:e}),(0,R.jsx)(`span`,{className:`text-muted`,children:t})]}),(0,R.jsx)(`div`,{className:`progress`,style:{height:8,borderRadius:4,background:`var(--border-color)`},children:(0,R.jsx)(`div`,{className:`progress-bar`,style:{width:`${t/u*100}%`,background:`linear-gradient(90deg, #2d7dd2, #4a9eff)`,borderRadius:4}})})]},e)):(0,R.jsx)(`div`,{className:`text-center text-muted py-4 small`,children:`Aucun employé`})})]})}),(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-graph-up-arrow`,style:{color:`var(--accent)`}}),`Documents générés (6 mois)`]}),(0,R.jsx)(`div`,{className:`card-body d-flex align-items-end gap-2`,style:{minHeight:200},children:l.map(({label:e,count:t})=>(0,R.jsxs)(`div`,{className:`flex-fill d-flex flex-column align-items-center`,style:{height:`100%`},children:[(0,R.jsx)(`div`,{className:`flex-grow-1 d-flex align-items-end`,style:{width:`100%`},children:(0,R.jsx)(`div`,{className:`w-100`,style:{height:`${t/d*100}%`,minHeight:t>0?16:0,background:`linear-gradient(180deg, #2d7dd2, #4a9eff)`,borderRadius:`6px 6px 0 0`,transition:`height 0.5s ease`}})}),(0,R.jsxs)(`div`,{style:{width:`100%`,textAlign:`center`,fontSize:`0.65rem`,color:`var(--text-muted)`,marginTop:4,whiteSpace:`nowrap`},children:[t>0&&(0,R.jsx)(`div`,{className:`fw-bold`,style:{fontSize:`0.75rem`,color:`var(--text-primary)`},children:t}),e]})]},e))})]})}),(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-lightning-fill`,style:{color:`var(--accent)`}}),`Actions rapides`]}),(0,R.jsx)(`div`,{className:`card-body d-flex flex-column gap-2`,children:ss.filter(t=>!t.perm||No(e?.role,t.perm)).map(({label:e,icon:t,route:n,color:i})=>(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-3 w-100 text-start`,style:{borderRadius:10,padding:`0.7rem 1rem`,border:`1.5px solid var(--border-color)`,background:`var(--card-bg)`},onClick:()=>r(n),children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:38,height:38,borderRadius:10,background:`${i}15`,color:i,fontSize:`1.15rem`},children:(0,R.jsx)(`i`,{className:`bi ${t}`})}),(0,R.jsx)(`span`,{className:`fw-medium`,style:{fontSize:`0.88rem`},children:e}),(0,R.jsx)(`i`,{className:`bi bi-chevron-right ms-auto`,style:{color:`var(--text-muted)`,fontSize:`0.8rem`}})]},n))})]})})]}),(0,R.jsxs)(`div`,{className:`card`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-clock-history`,style:{color:`var(--accent)`}}),`Documents récents`]}),(0,R.jsx)(`div`,{className:`card-body p-0`,children:s.length>0?(0,R.jsx)(`div`,{className:`list-group list-group-flush`,children:s.map((e,t)=>(0,R.jsxs)(`div`,{className:`list-group-item d-flex align-items-center gap-3`,style:{borderLeft:`3px solid ${[`#2d7dd2`,`#0f973d`,`#b76e00`,`#dc3545`,`#6f42c1`][t%5]}`,background:`var(--card-bg)`},children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:40,height:40,borderRadius:10,background:`var(--body-bg)`,fontSize:`1.1rem`},children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`,style:{color:`var(--accent)`}})}),(0,R.jsxs)(`div`,{className:`flex-grow-1`,children:[(0,R.jsx)(`div`,{className:`fw-medium`,style:{fontSize:`0.88rem`},children:e.reference}),(0,R.jsxs)(`div`,{className:`d-flex gap-3`,style:{fontSize:`0.78rem`,color:`var(--text-muted)`},children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-person me-1`}),e.employee_name]}),(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark me-1`}),e.document_type]})]})]}),(0,R.jsxs)(`div`,{className:`text-end`,children:[(0,R.jsx)(`div`,{className:`fw-medium`,style:{fontSize:`0.78rem`},children:new Date(e.created_at).toLocaleDateString(`fr-FR`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:new Date(e.created_at).toLocaleTimeString(`fr-FR`,{hour:`2-digit`,minute:`2-digit`})})]})]},e.id))}):(0,R.jsx)(`div`,{className:`text-center text-muted py-4 small`,children:`Aucun document généré récemment`})})]})]})}function ls(){let{user:e}=Ao(),t=No(e?.role,q.MANAGE_EMPLOYEES),[n,r]=(0,S.useState)([]),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(!1),c=()=>es.list().then(r);(0,S.useEffect)(()=>{c()},[]);let l=async e=>{confirm(`Supprimer cet employé ?`)&&(await es.remove(e),await c())},u=n.filter(e=>`${e.first_name} ${e.last_name} ${e.nationalite||``} ${e.ville||``} ${e.genre||``} ${e.position||``} ${e.department||``}`.toLowerCase().includes(i.toLowerCase()));return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-people`}),(0,R.jsx)(`span`,{children:`Employés`}),t&&(0,R.jsxs)(Mn,{to:`/employees/new`,className:`btn btn-primary btn-sm ms-auto`,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Ajouter`]})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`search-box`,children:[(0,R.jsx)(`i`,{className:`bi bi-search`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,placeholder:`Rechercher un employé...`,value:i,onChange:e=>a(e.target.value)})]})})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`#`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Nom`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Prénom`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Genre`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Nationalité`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Ville`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Email`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Téléphone`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Poste`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Département`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Agence`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Date embauche`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Salaire`}),t&&(0,R.jsx)(`th`,{style:{width:160,color:`#1a1a1a`,fontWeight:700},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[u.map((e,n)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{style:{color:`#1a1a1a`,fontWeight:600},children:n+1}),(0,R.jsx)(`td`,{style:{fontWeight:700,color:`#1a1a1a`},children:e.last_name}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.first_name}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.genre||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.nationalite||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.ville||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.email}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.phone||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-primary-subtle`,style:{color:`#1a1a1a`,fontWeight:600},children:e.position})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.department||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.agence||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.hire_date||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`,fontWeight:600},children:e.salary?`${e.salary} DH`:(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),t&&(0,R.jsxs)(`td`,{children:[(0,R.jsx)(Mn,{to:`/employees/${e.id}/edit`,className:`btn btn-sm btn-outline-warning me-1`,children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>l(e.id),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),u.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:t?15:14,className:`text-center text-muted py-4`,children:`Aucun employé trouvé`})})]})]})})})]})}function us(){let{id:e}=mt(),t=!!e,n=ut(),[r,i]=(0,S.useState)({first_name:``,last_name:``,civilite:`M.`,email:``,phone:``,genre:``,nationalite:`Marocaine`,ville:``,birth_date:``,birth_place:``,position:``,department:``,agence:``,hire_date:``,salary:``});(0,S.useEffect)(()=>{t&&es.get(e).then(e=>{e?i(e):n(`/employees`)})},[e]);let a=e=>i({...r,[e.target.name]:e.target.value}),o=async i=>{i.preventDefault();try{t?await es.update(e,r):await es.create(r),n(`/employees`)}catch(e){alert(`Erreur : `+(e.message||`Inconnue`))}},s=[{name:`last_name`,label:`Nom`,type:`text`},{name:`first_name`,label:`Prénom`,type:`text`},{name:`civilite`,label:`Civilité`,type:`select`,options:[`M.`,`Mme`]},{name:`genre`,label:`Genre`,type:`select`,options:[`Masculin`,`Féminin`]},{name:`nationalite`,label:`Nationalité`,type:`text`},{name:`ville`,label:`Ville`,type:`text`},{name:`birth_date`,label:`Date de naissance`,type:`date`},{name:`birth_place`,label:`Lieu de naissance`,type:`text`},{name:`cin`,label:`CIN`,type:`text`},{name:`cnss`,label:`CNSS`,type:`text`},{name:`email`,label:`Email`,type:`email`},{name:`phone`,label:`Téléphone`,type:`text`},{name:`bank_type`,label:`Type de banque`,type:`text`},{name:`rib`,label:`RIB`,type:`text`},{name:`cnss_remb`,label:`Remboursement CNSS (DH)`,type:`number`},{name:`montant_accorde`,label:`Montant d'aide accordé (DH)`,type:`number`}],c=[{name:`position`,label:`Poste`,type:`text`},{name:`department`,label:`Département`,type:`text`},{name:`agence`,label:`Agence`,type:`text`},{name:`hire_date`,label:`Date d'embauche`,type:`date`},{name:`salary`,label:`Salaire (DH)`,type:`number`},{name:`bank_type_pro`,label:`Type de banque (Pro)`,type:`text`},{name:`rib_pro`,label:`RIB (Pro)`,type:`text`}],l={color:`#1a1a1a`,fontWeight:600,fontSize:`0.9rem`};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-pencil-square`:`bi-person-plus`}`}),(0,R.jsxs)(`span`,{children:[t?`Modifier`:`Ajouter`,` un employé`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`form`,{onSubmit:o,children:[(0,R.jsxs)(`h6`,{className:`mb-3`,style:{color:`#1a1a1a`,fontWeight:700,borderBottom:`2px solid #1a1a1a`,paddingBottom:6},children:[(0,R.jsx)(`i`,{className:`bi bi-person me-2`}),`Informations personnelles`]}),(0,R.jsx)(`div`,{className:`row g-3 mb-4`,children:s.map(({name:e,label:t,type:n,options:i})=>(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,style:l,children:t}),n===`select`?(0,R.jsxs)(`select`,{name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0,style:{paddingLeft:`0.75rem`},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),i.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))]}):(0,R.jsx)(`input`,{type:n,name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0})]},e))}),(0,R.jsxs)(`h6`,{className:`mb-3`,style:{color:`#1a1a1a`,fontWeight:700,borderBottom:`2px solid #1a1a1a`,paddingBottom:6},children:[(0,R.jsx)(`i`,{className:`bi bi-briefcase me-2`}),`Informations professionnelles`]}),(0,R.jsx)(`div`,{className:`row g-3`,children:c.map(({name:e,label:t,type:n})=>(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,style:l,children:t}),(0,R.jsx)(`input`,{type:n,name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0})]},e))}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-4 pt-2 border-top`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-check-lg`:`bi-plus-lg`} me-1`}),t?`Enregistrer`:`Ajouter`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>n(`/employees`),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})})})]})}function ds(){let{listUsers:e,createUser:t,updateUser:n,deleteUser:r}=Ao(),[i,a]=(0,S.useState)([]),[o,s]=(0,S.useState)(!1),[c,l]=(0,S.useState)(null),[u,d]=(0,S.useState)({name:``,email:``,phone:``,password:``,role:`agent`}),[f,p]=(0,S.useState)(``),m=async()=>{a((await e()).filter(e=>e.role===`agent`))};(0,S.useEffect)(()=>{m()},[]);let h=()=>{l(null),d({name:``,email:``,phone:``,password:``,role:`agent`}),p(``),s(!0)},g=e=>{l(e),d({name:e.name,email:e.email,phone:e.phone||``,password:``,role:e.role}),p(``),s(!0)},_=async e=>{e.preventDefault(),p(``);try{if(c){let e={name:u.name,email:u.email,phone:u.phone,role:u.role};u.password&&(e.password=u.password),await n(c.id,e)}else{if(!u.password){p(`Mot de passe requis`);return}await t(u)}s(!1),m()}catch(e){p(e.message)}},v=async e=>{if(confirm(`Supprimer l'agent ${e.name} ?`))try{await r(e.id),m()}catch(e){alert(e.message)}};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-person-badge`}),(0,R.jsx)(`span`,{children:`Gestion des agents`}),(0,R.jsxs)(`button`,{className:`btn btn-primary btn-sm ms-auto`,onClick:h,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Nouvel agent`]})]}),o&&(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsxs)(`h6`,{className:`mb-3`,children:[c?`Modifier`:`Ajouter`,` un agent`]}),f&&(0,R.jsxs)(`div`,{className:`alert alert-danger d-flex align-items-center gap-2 py-2 small`,children:[(0,R.jsx)(`i`,{className:`bi bi-exclamation-circle`}),(0,R.jsx)(`span`,{children:f})]}),(0,R.jsxs)(`form`,{onSubmit:_,children:[(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Nom complet`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u.name,onChange:e=>d({...u,name:e.target.value}),required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Email`}),(0,R.jsx)(`input`,{type:`email`,className:`form-control`,value:u.email,onChange:e=>d({...u,email:e.target.value}),required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Téléphone`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u.phone,onChange:e=>d({...u,phone:e.target.value}),placeholder:`06XXXXXXXX`})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:c?`Nouveau mot de passe (laisser vide)`:`Mot de passe`}),(0,R.jsx)(`input`,{type:`password`,className:`form-control`,value:u.password,onChange:e=>d({...u,password:e.target.value}),required:!c})]})]}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-3`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${c?`bi-check-lg`:`bi-plus-lg`} me-1`}),c?`Enregistrer`:`Créer`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>s(!1),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})]})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`#`}),(0,R.jsx)(`th`,{children:`Nom`}),(0,R.jsx)(`th`,{children:`Email`}),(0,R.jsx)(`th`,{children:`Téléphone`}),(0,R.jsx)(`th`,{children:`Rôle`}),(0,R.jsx)(`th`,{style:{width:160},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[i.map((e,t)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`text-muted`,children:t+1}),(0,R.jsx)(`td`,{className:`fw-medium`,children:e.name}),(0,R.jsx)(`td`,{children:e.email}),(0,R.jsx)(`td`,{children:e.phone||`-`}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-secondary-subtle text-secondary`,children:`Agent RH`})}),(0,R.jsxs)(`td`,{children:[(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-warning me-1`,onClick:()=>g(e),children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>v(e),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),i.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:`6`,className:`text-center text-muted py-4`,children:`Aucun agent trouvé`})})]})]})})})]})}function fs(){let{user:e}=Ao(),t=No(e?.role,q.MANAGE_TEMPLATES),[n,r]=(0,S.useState)([]);(0,S.useEffect)(()=>{ts.list().then(r)},[]);let i=async(e,t)=>{await ts.update(e,{is_active:!t}),r(await ts.list())},a=async e=>{confirm(`Supprimer ce modèle ?`)&&(await ts.remove(e),r(await ts.list()))};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`}),(0,R.jsx)(`span`,{children:`Modèles de documents`}),t&&(0,R.jsxs)(Mn,{to:`/templates/new`,className:`btn btn-primary btn-sm ms-auto`,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Nouveau modèle`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`#`}),(0,R.jsx)(`th`,{children:`Titre`}),(0,R.jsx)(`th`,{children:`Type`}),(0,R.jsx)(`th`,{children:`Statut`}),t&&(0,R.jsx)(`th`,{style:{width:240},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[n.map((e,n)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`text-muted`,children:n+1}),(0,R.jsx)(`td`,{className:`fw-medium`,children:e.title}),(0,R.jsx)(`td`,{children:e.type}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge ${e.is_active?`bg-success-subtle text-success`:`bg-secondary-subtle text-secondary`}`,children:e.is_active?`Actif`:`Inactif`})}),t&&(0,R.jsxs)(`td`,{children:[(0,R.jsx)(Mn,{to:`/templates/${e.id}/edit`,className:`btn btn-sm btn-outline-warning me-1`,children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-info me-1`,onClick:()=>i(e.id,e.is_active),title:e.is_active?`Désactiver`:`Activer`,children:(0,R.jsx)(`i`,{className:`bi ${e.is_active?`bi-pause`:`bi-play`}`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>a(e.id),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),n.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:t?5:4,className:`text-center text-muted py-4`,children:`Aucun modèle trouvé`})})]})]})})})]})}var ps=[`Arial`,`Calibri`,`Times New Roman`,`Courier New`,`Georgia`,`Verdana`],ms=[8,9,10,11,12,14,16,18,20,22,24,28,36,48,72],hs=[{label:`Nom`,value:`last_name`},{label:`Prénom`,value:`first_name`},{label:`Civilité`,value:`civilite`},{label:`Email`,value:`email`},{label:`Téléphone`,value:`phone`},{label:`CIN`,value:`cin`},{label:`CNSS`,value:`cnss`},{label:`Poste`,value:`position`},{label:`Département`,value:`department`},{label:`Agence`,value:`agence`},{label:`Date embauche`,value:`hire_date`},{label:`Salaire`,value:`salary`},{label:`Banque`,value:`bank_type`},{label:`RIB`,value:`rib`},{label:`Date naissance`,value:`birth_date`},{label:`Lieu naissance`,value:`birth_place`},{label:`Ville`,value:`ville`},{label:`Nationalité`,value:`nationalite`},{label:`Genre`,value:`genre`}];function gs({value:e=``,onChange:t,keyId:n}){let r=(0,S.useRef)(null),[i,a]=(0,S.useState)(`source`),[o,s]=(0,S.useState)(!1),c=e?.trim().startsWith(`<!DOCTYPE`)||e?.trim().startsWith(`<html`);(0,S.useEffect)(()=>{c&&a(`source`)},[c]),(0,S.useEffect)(()=>{i===`visual`&&r.current&&(r.current.innerHTML=e)},[i,n,e]);let l=(0,S.useCallback)(()=>{r.current&&t(r.current.innerHTML)},[t]),u=(0,S.useCallback)((e,t=null)=>{document.execCommand(e,!1,t),r.current?.focus(),l()},[l]),d=e=>{u(`fontName`,e.target.value),e.target.value=``},f=e=>{u(`fontSize`,e.target.value),e.target.value=``},p=e=>{u(`foreColor`,e.target.value)},m=e=>{u(`hiliteColor`,e.target.value)},h=n=>{if(i===`visual`){if(r.current){let e=window.getSelection();if(e?.rangeCount&&r.current.contains(e.getRangeAt(0).commonAncestorContainer)){let t=e.getRangeAt(0);t.deleteContents(),t.insertNode(document.createTextNode(`{{${n}}}`)),t.collapse(!1),e.removeAllRanges(),e.addRange(t)}else r.current.innerHTML+=`{{${n}}}`;l()}}else t(e+`{{${n}}}`);s(!1)},g=()=>{let e=prompt(`URL du lien :`,`https://`);e&&u(`createLink`,e)},_=()=>{let e=prompt(`URL de l'image :`,`https://`);e&&u(`insertImage`,e)},v=()=>{u(`insertHTML`,`<table border="1" cellpadding="5" cellspacing="0" style="width:100%;border-collapse:collapse"><tr><td>Cellule</td><td>Cellule</td></tr><tr><td>Cellule</td><td>Cellule</td></tr></table>`)},y=({cmd:e,val:t,title:n,children:r})=>(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:()=>u(e,t),title:n,children:r});return(0,R.jsxs)(`div`,{className:`html-editor`,children:[(0,R.jsxs)(`div`,{className:`html-editor-toolbar`,children:[(0,R.jsx)(y,{cmd:`bold`,title:`Gras (Ctrl+B)`,children:(0,R.jsx)(`b`,{children:`B`})}),(0,R.jsx)(y,{cmd:`italic`,title:`Italique (Ctrl+I)`,children:(0,R.jsx)(`i`,{children:`I`})}),(0,R.jsx)(y,{cmd:`underline`,title:`Souligné (Ctrl+U)`,children:(0,R.jsx)(`u`,{children:`U`})}),(0,R.jsx)(y,{cmd:`strikeThrough`,title:`Barré`,children:(0,R.jsx)(`s`,{children:`S`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h1>`,title:`Titre 1`,children:`H1`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h2>`,title:`Titre 2`,children:`H2`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h3>`,title:`Titre 3`,children:`H3`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<p>`,title:`Paragraphe`,children:`P`}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`justifyLeft`,title:`Aligné gauche`,children:(0,R.jsx)(`i`,{className:`bi bi-text-left`})}),(0,R.jsx)(y,{cmd:`justifyCenter`,title:`Centré`,children:(0,R.jsx)(`i`,{className:`bi bi-text-center`})}),(0,R.jsx)(y,{cmd:`justifyRight`,title:`Aligné droite`,children:(0,R.jsx)(`i`,{className:`bi bi-text-right`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`insertUnorderedList`,title:`Liste à puces`,children:(0,R.jsx)(`i`,{className:`bi bi-list-ul`})}),(0,R.jsx)(y,{cmd:`insertOrderedList`,title:`Liste numérotée`,children:(0,R.jsx)(`i`,{className:`bi bi-list-ol`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`outdent`,title:`Réduire le retrait`,children:(0,R.jsx)(`i`,{className:`bi bi-indent-decrease`})}),(0,R.jsx)(y,{cmd:`indent`,title:`Augmenter le retrait`,children:(0,R.jsx)(`i`,{className:`bi bi-indent-increase`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsxs)(`select`,{className:`html-editor-select`,onChange:d,defaultValue:``,children:[(0,R.jsx)(`option`,{value:``,disabled:!0,children:`Police`}),ps.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))]}),(0,R.jsxs)(`select`,{className:`html-editor-select`,onChange:f,defaultValue:``,children:[(0,R.jsx)(`option`,{value:``,disabled:!0,children:`Taille`}),ms.map(e=>(0,R.jsxs)(`option`,{value:e,children:[e,`px`]},e))]}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`input`,{type:`color`,className:`html-editor-color`,onChange:p,title:`Couleur du texte`}),(0,R.jsx)(`input`,{type:`color`,className:`html-editor-color`,onChange:m,title:`Couleur de fond`}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:g,title:`Insérer un lien`,children:(0,R.jsx)(`i`,{className:`bi bi-link-45deg`})}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:_,title:`Insérer une image`,children:(0,R.jsx)(`i`,{className:`bi bi-image`})}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:v,title:`Insérer un tableau`,children:(0,R.jsx)(`i`,{className:`bi bi-table`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsxs)(`div`,{className:`html-editor-var-wrap`,children:[(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn html-editor-var-btn`,onClick:()=>s(!o),title:`Insérer une variable`,children:(0,R.jsx)(`i`,{className:`bi bi-code-slash`})}),o&&(0,R.jsx)(`div`,{className:`html-editor-var-picker`,children:hs.map(e=>(0,R.jsx)(`button`,{type:`button`,className:`html-editor-var-item`,onClick:()=>h(e.value),children:`{{${e.label}}}`},e.value))})]}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn ${i===`source`?`active`:``}`,onClick:()=>a(i===`visual`?`source`:`visual`),title:`Code source`,children:(0,R.jsx)(`i`,{className:`bi bi-braces`})})]}),c&&i===`source`&&(0,R.jsxs)(`div`,{className:`html-editor-info`,children:[(0,R.jsx)(`i`,{className:`bi bi-info-circle`}),` Ce modèle utilise un document HTML/CSS complet (`,`{`,`variable`,`}`,` injectées). Passez en mode Visual pour voir l'aperçu.`]}),i===`visual`?(0,R.jsx)(`div`,{ref:r,className:`html-editor-content`,contentEditable:!0,suppressContentEditableWarning:!0,onInput:l}):(0,R.jsx)(`textarea`,{className:`html-editor-source form-control`,value:e,onChange:e=>t(e.target.value),rows:`20`,spellCheck:!1})]})}function _s(){let{id:e}=mt(),t=!!e,n=ut(),[r,i]=(0,S.useState)({title:``,type:``,content:``,is_active:!0}),[a,o]=(0,S.useState)([]),[s,c]=(0,S.useState)(!1);(0,S.useEffect)(()=>{ts.list().then(e=>{o([...new Set(e.map(e=>e.type).filter(Boolean))])}),t&&ts.get(e).then(e=>{e?(i(e),[`Attestation de travail`,`Attestation de salaire`,`Certificat de travail`,`Demande d'avance sur salaire`,`Demande de prime`,`Attestation de domiciliation irrévocable de salaire`].includes(e.type)||c(!0)):n(`/templates`)})},[e]);let l=[`Attestation de travail`,`Attestation de salaire`,`Certificat de travail`,`Demande d'avance sur salaire`,`Demande de prime`,`Attestation de domiciliation irrévocable de salaire`],u=e=>{let t=e.target.type===`checkbox`?e.target.checked:e.target.value;i({...r,[e.target.name]:t})};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-pencil-square`:`bi-file-earmark-plus`}`}),(0,R.jsxs)(`span`,{children:[t?`Modifier`:`Nouveau`,` modèle`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`form`,{onSubmit:async i=>{i.preventDefault();try{t?await ts.update(e,r):await ts.create(r),n(`/templates`)}catch(e){alert(`Erreur : `+(e.message||`Inconnue`))}},children:[(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Titre`}),(0,R.jsx)(`input`,{type:`text`,name:`title`,className:`form-control`,value:r.title,onChange:u,required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Type`}),s?(0,R.jsx)(`input`,{type:`text`,name:`type`,className:`form-control`,value:r.type,onChange:u,list:`typeSuggestions`,required:!0,placeholder:`Saisir un type...`}):(0,R.jsxs)(`select`,{name:`type`,className:`form-select`,value:r.type,onChange:e=>{e.target.value===`__custom__`?(c(!0),i({...r,type:``})):i({...r,type:e.target.value})},required:!0,children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),l.map(e=>(0,R.jsx)(`option`,{children:e},e)),(0,R.jsx)(`option`,{value:`__custom__`,children:`Autre (saisir libre)...`})]}),s&&(0,R.jsx)(`button`,{type:`button`,className:`btn btn-sm btn-link p-0 mt-1`,onClick:()=>{c(!1),i({...r,type:``})},children:`Retour à la liste`}),(0,R.jsx)(`datalist`,{id:`typeSuggestions`,children:a.map(e=>(0,R.jsx)(`option`,{value:e},e))})]}),(0,R.jsxs)(`div`,{className:`col-12`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Contenu `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(éditeur HTML avec variables dynamiques)`})]}),(0,R.jsx)(gs,{value:r.content,onChange:e=>i({...r,content:e}),keyId:e||`new`})]}),(0,R.jsx)(`div`,{className:`col-12`,children:(0,R.jsxs)(`div`,{className:`form-check`,children:[(0,R.jsx)(`input`,{type:`checkbox`,name:`is_active`,className:`form-check-input`,checked:r.is_active,onChange:u,id:`isActive`}),(0,R.jsx)(`label`,{className:`form-check-label small`,htmlFor:`isActive`,children:`Modèle actif`})]})})]}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-4 pt-2 border-top`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-check-lg`:`bi-plus-lg`} me-1`}),t?`Enregistrer`:`Créer`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>n(`/templates`),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})})})]})}var vs=[`civilite`,`first_name`,`last_name`,`email`,`phone`,`genre`,`nationalite`,`ville`,`birth_date`,`birth_place`,`cin`,`cnss`,`position`,`department`,`agence`,`hire_date`,`salary`,`bank_type`,`rib`,`bank_type_pro`,`rib_pro`,`cnss_remb`,`montant_accorde`],ys=[`motif`,`montant`,`total_charges`,`date`,`raison_sociale`];function bs(e,t){let n=t.toLowerCase();return ys.includes(n)?null:vs.includes(n)?e[n]??null:null}function xs(e){if(!e)return[];let t=/\{\{(\w+)\}\}/g,n=new Set,r=[],i;for(;(i=t.exec(e))!==null;){let e=i[1].toLowerCase();n.has(e)||(n.add(e),r.push(e))}return r}function Ss({employee:e,template:t}){let[n,r]=(0,S.useState)(!1),i=xs(t?.content||t?.html||``);if(!e||!t)return null;let a=i.filter(e=>vs.includes(e)),o=i.filter(e=>ys.includes(e)),s=i.filter(e=>!vs.includes(e)&&!ys.includes(e)),c=n?i:a,l=t=>{let n=bs(e,t);return n===null?ys.includes(t)?(0,R.jsx)(`em`,{className:`text-muted`,children:`Saisi lors de la génération`}):(0,R.jsx)(`em`,{className:`text-danger`,children:`Inconnu`}):String(n)},u=i.length,d=i.filter(t=>bs(e,t)!==null).length,f=o.length,p=s.length;return(0,R.jsxs)(`div`,{className:`card mb-4`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex justify-content-between align-items-center`,children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-database me-1`}),`Données injectées`,(0,R.jsxs)(`span`,{className:`badge bg-secondary ms-2`,children:[d,`/`,u,` de l'employé`]}),f>0&&(0,R.jsxs)(`span`,{className:`badge bg-info ms-1`,children:[f,` saisie`]}),p>0&&(0,R.jsxs)(`span`,{className:`badge bg-warning ms-1`,children:[p,` inconnue(s)`]})]}),(0,R.jsxs)(`div`,{className:`form-check form-switch mb-0`,children:[(0,R.jsx)(`input`,{className:`form-check-input`,type:`checkbox`,id:`showAllToggle`,checked:n,onChange:()=>r(!n)}),(0,R.jsx)(`label`,{className:`form-check-label`,htmlFor:`showAllToggle`,children:`Tout`})]})]}),(0,R.jsx)(`div`,{className:`card-body py-2 px-3`,children:c.length===0?(0,R.jsx)(`p`,{className:`text-muted small mb-0`,children:`Aucune variable trouvée dans ce modèle.`}):(0,R.jsx)(`div`,{className:`row small`,children:c.map(e=>(0,R.jsxs)(`div`,{className:`col-md-4 col-lg-3 mb-1`,children:[(0,R.jsxs)(`span`,{className:`text-muted`,children:[e.replace(/_/g,` `),` : `]}),(0,R.jsx)(`span`,{className:`fw-bold`,children:l(e)})]},e))})})]})}function Cs(){let[e,t]=(0,S.useState)([]),[n,r]=(0,S.useState)([]),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(``),[c,l]=(0,S.useState)(``),[u,d]=(0,S.useState)(``),[f,p]=(0,S.useState)(``),[m,h]=(0,S.useState)(``),[g,_]=(0,S.useState)(null),[v,y]=(0,S.useState)(!1),b=(0,S.useRef)(null);(0,S.useEffect)(()=>{es.list().then(t),ts.list(!0).then(r)},[]);let x=n.find(e=>e.id===Number(o)),C=x?.type===`Demande de prime`,w=x?.type===`Demande d'aide sociale`,T=x?.type===`Pièce de caisse dépense`,E=x?.type===`Demande d'avance`,ee=C||w||T||E,D=()=>{l(``),d(``),p(``),h(``)};return(0,S.useEffect)(()=>{if(g?.htmlContent&&b.current){let e=new Blob([g.htmlContent],{type:`text/html`}),t=URL.createObjectURL(e);return b.current.src=t,()=>URL.revokeObjectURL(t)}},[g]),(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-plus`}),(0,R.jsx)(`span`,{children:`Génération de document`})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-person me-1`}),`Employé`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:i,onChange:e=>{a(e.target.value),_(null)},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner un employé...`}),e.map(e=>(0,R.jsxs)(`option`,{value:e.id,children:[e.first_name,` `,e.last_name,` — `,e.position]},e.id))]})]}),(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-text me-1`}),`Type de document`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:o,onChange:e=>{s(e.target.value),_(null),D()},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner un modèle...`}),n.map(e=>(0,R.jsx)(`option`,{value:e.id,children:e.title},e.id))]})]}),ee&&(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-question-circle me-1`}),`Motif`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:c,onChange:e=>l(e.target.value),children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),C?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Naissance`,children:`Naissance`}),(0,R.jsx)(`option`,{value:`Mariage`,children:`Mariage`})]}):T?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Fournitures bureau`,children:`Fournitures de bureau`}),(0,R.jsx)(`option`,{value:`Déplacement`,children:`Déplacement / Transport`}),(0,R.jsx)(`option`,{value:`Réparation`,children:`Frais de réparation`}),(0,R.jsx)(`option`,{value:`Achats divers`,children:`Achats divers`}),(0,R.jsx)(`option`,{value:`Avance s/salaire`,children:`Avance sur salaire`}),(0,R.jsx)(`option`,{value:`Remboursement`,children:`Remboursement`})]}):E?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Frais médicaux`,children:`Frais médicaux`}),(0,R.jsx)(`option`,{value:`Scolarité`,children:`Scolarité`}),(0,R.jsx)(`option`,{value:`Voyage`,children:`Voyage`}),(0,R.jsx)(`option`,{value:`Projet personnel`,children:`Projet personnel`}),(0,R.jsx)(`option`,{value:`Urgence`,children:`Urgence`})]}):(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Maladie`,children:`Maladie`}),(0,R.jsx)(`option`,{value:`Hospitalisation`,children:`Hospitalisation`}),(0,R.jsx)(`option`,{value:`Décès`,children:`Décès (famille)`}),(0,R.jsx)(`option`,{value:`Scolarité`,children:`Scolarité des enfants`}),(0,R.jsx)(`option`,{value:`Logement`,children:`Logement`}),(0,R.jsx)(`option`,{value:`Urgence`,children:`Situation d'urgence`})]}),(0,R.jsx)(`option`,{value:`Autres`,children:`Autres`})]})]}),c===`Autres`&&(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Précisez le motif`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u,onChange:e=>d(e.target.value),placeholder:`Autre motif...`})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-currency-exchange me-1`}),`Montant `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`number`,className:`form-control`,value:f,onChange:e=>p(e.target.value),placeholder:`0`})]}),w&&(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Total charges `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`number`,className:`form-control`,value:m,onChange:e=>h(e.target.value),placeholder:`0`})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Remb. CNSS `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(de l'employé)`})]}),(0,R.jsxs)(`div`,{className:`form-control-plaintext fw-bold`,children:[e.find(e=>e.id===Number(i))?.cnss_remb||`—`,` DH`]})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Aide accordée `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(de l'employé)`})]}),(0,R.jsxs)(`div`,{className:`form-control-plaintext fw-bold`,children:[e.find(e=>e.id===Number(i))?.montant_accorde||`—`,` DH`]})]})]})]}),(0,R.jsx)(`div`,{className:`col-12`,children:(0,R.jsxs)(`button`,{className:`btn btn-primary`,onClick:async()=>{if(!(!i||!o)){y(!0);try{let t=e.find(e=>e.id===Number(i)),n={motif:(c===`Autres`?u:c)||``,montant:f||``,...w?{total_charges:m}:{},cnss_remb:t?.cnss_remb||``,montant_accorde:t?.montant_accorde||``};_(await is.generate(i,o,n))}catch(e){alert(e.message||`Erreur lors de la génération`)}finally{y(!1)}}},disabled:!i||!o||v,children:[(0,R.jsx)(`i`,{className:`bi ${v?`bi-arrow-repeat spin`:`bi-lightning`} me-1`}),v?`Génération...`:`Générer`]})})]})})}),i&&o&&!g&&(0,R.jsx)(Ss,{employee:e.find(e=>e.id===Number(i)),template:x}),g&&(0,R.jsxs)(`div`,{className:`card`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex justify-content-between align-items-center`,children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-eye me-1`}),`Aperçu — `,g.reference]}),(0,R.jsxs)(`div`,{className:`d-flex gap-1`,children:[(0,R.jsxs)(`button`,{className:`btn btn-sm btn-danger`,onClick:()=>{if(!g?.htmlContent)return;let e=document.createElement(`iframe`);e.style.position=`fixed`,e.style.top=`-9999px`,e.style.width=`0`,e.style.height=`0`,document.body.appendChild(e);let t=e.contentWindow;t.document.write(g.htmlContent),t.document.close(),setTimeout(()=>{t.focus(),t.print(),setTimeout(()=>document.body.removeChild(e),1e3)},300)},children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-pdf me-1`}),`PDF`]}),(0,R.jsxs)(`button`,{className:`btn btn-sm btn-primary`,onClick:()=>{if(!g?.htmlContent)return;let e=new Blob([g.htmlContent],{type:`application/msword`}),t=window.URL.createObjectURL(e),n=document.createElement(`a`);n.href=t,n.setAttribute(`download`,`${g.reference}.doc`),document.body.appendChild(n),n.click(),n.remove()},children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-word me-1`}),`Word`]}),(0,R.jsxs)(`button`,{className:`btn btn-sm btn-secondary`,onClick:()=>{if(!g?.htmlContent)return;let e=new Blob([g.htmlContent],{type:`text/html`}),t=window.URL.createObjectURL(e),n=document.createElement(`a`);n.href=t,n.setAttribute(`download`,`${g.reference}.html`),document.body.appendChild(n),n.click(),n.remove()},children:[(0,R.jsx)(`i`,{className:`bi bi-download me-1`}),`HTML`]})]})]}),(0,R.jsx)(`div`,{className:`card-body p-0`,style:{background:`#f0f0f0`},children:(0,R.jsx)(`iframe`,{ref:b,title:`Aperçu`,style:{width:`100%`,height:`80vh`,border:`none`}})})]})]})}function ws(){let[e,t]=(0,S.useState)([]),[n,r]=(0,S.useState)(``),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(``);(0,S.useEffect)(()=>{is.list().then(t)},[]);let c=e=>e?.htmlContent||(e?.content?rs(e.reference,e.content):null),l=e=>{let t=c(e);if(!t)return;let n=new Blob([t],{type:`application/msword`}),r=window.URL.createObjectURL(n),i=document.createElement(`a`);i.href=r,i.setAttribute(`download`,`${e.reference}.doc`),document.body.appendChild(i),i.click(),i.remove()},u=e=>{let t=c(e);if(!t)return;let n=document.createElement(`iframe`);n.style.position=`fixed`,n.style.top=`-9999px`,n.style.width=`0`,n.style.height=`0`,document.body.appendChild(n);let r=n.contentWindow;r.document.write(t),r.document.close(),setTimeout(()=>{r.focus(),r.print(),setTimeout(()=>document.body.removeChild(n),1e3)},300)},d=e.filter(e=>{let t=[(e.reference||``).toLowerCase(),(e.employee_name||``).toLowerCase(),(e.document_type||``).toLowerCase(),(e.created_at||``).toLowerCase()].join(` `),r=!n||t.includes(n.toLowerCase()),a=new Date(e.created_at?.replace(` `,`T`)),s=!i||a>=new Date(i),c=!o||a<=new Date(o+`T23:59:59`);return r&&s&&c});return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-clock-history`}),(0,R.jsx)(`span`,{children:`Historique des documents`})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`row g-2`,children:[(0,R.jsxs)(`div`,{className:`col-md-4 search-box`,children:[(0,R.jsx)(`i`,{className:`bi bi-search`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,placeholder:`Réf., employé, type, date...`,value:n,onChange:e=>r(e.target.value)})]}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(0,R.jsx)(`input`,{type:`date`,className:`form-control`,value:i,onChange:e=>a(e.target.value)})}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(0,R.jsx)(`input`,{type:`date`,className:`form-control`,value:o,onChange:e=>s(e.target.value)})}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(n||i||o)&&(0,R.jsxs)(`button`,{className:`btn btn-outline-secondary w-100`,onClick:()=>{r(``),a(``),s(``)},children:[(0,R.jsx)(`i`,{className:`bi bi-x-circle me-1`}),`Réinitialiser`]})})]})})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`Référence`}),(0,R.jsx)(`th`,{children:`Employé`}),(0,R.jsx)(`th`,{children:`Type`}),(0,R.jsx)(`th`,{children:`Généré le`}),(0,R.jsx)(`th`,{style:{width:120},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[d.map(e=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`fw-medium`,children:e.reference}),(0,R.jsx)(`td`,{children:e.employee_name}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-info-subtle text-info`,children:e.document_type})}),(0,R.jsx)(`td`,{className:`text-muted`,children:new Date(e.created_at?.replace(` `,`T`)).toLocaleDateString(`fr-FR`)}),(0,R.jsx)(`td`,{children:(0,R.jsxs)(`div`,{className:`d-flex gap-1`,children:[(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>u(e),title:`Imprimer / PDF`,children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-pdf`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-primary`,onClick:()=>l(e),title:`Word`,children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-word`})})]})})]},e.id)),d.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:`5`,className:`text-center text-muted py-4`,children:`Aucun document trouvé`})})]})]})})})]})}var Ts=[{key:`societe`,icon:`bi-building`,labelKey:`societe`},{key:`rhManager`,icon:`bi-person-badge`,labelKey:`rhManager`},{key:`document`,icon:`bi-file-earmark-text`,labelKey:`document`},{key:`employe`,icon:`bi-people`,labelKey:`employe`},{key:`appearance`,icon:`bi-palette`,labelKey:`appearance`}];function Es(){let{user:e}=Ao(),{societe:t,rhManager:n,document:r,employe:i,theme:a,lang:o,update:s,updateNested:c,reset:l,t:u,THEMES:d,LANGUAGES:f}=ar(),p=e?.role===`agent`,m=p?Ts.filter(e=>e.key===`appearance`):Ts,[h,g]=(0,S.useState)(p?`appearance`:`societe`),[_,v]=(0,S.useState)(!1),[y,b]=(0,S.useState)(!1),x=()=>{v(!0),setTimeout(()=>v(!1),2e3)},C=()=>{y?(l(),b(!1)):b(!0)},w=(e,t,n,r={})=>{let{type:i=`text`,options:a,small:o}=r,s=e.replace(/\s+/g,``);return(0,R.jsxs)(`div`,{className:o?`col-md-4 col-sm-6`:`col-md-6 col-sm-6`,style:r.style,children:[(0,R.jsx)(`label`,{className:`form-label small`,htmlFor:s,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:e}),i===`select`?(0,R.jsx)(`select`,{id:s,className:`form-select`,value:t,onChange:n,children:a.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))}):i===`color`?(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2`,children:[(0,R.jsx)(`input`,{id:s,type:`color`,className:`form-control form-control-color`,style:{width:44,padding:2,height:36,borderRadius:8},value:t,onChange:n}),(0,R.jsx)(`span`,{className:`small text-muted`,style:{fontFamily:`monospace`},children:t})]}):i===`checkbox`?(0,R.jsx)(`div`,{className:`form-check form-switch mt-1`,children:(0,R.jsx)(`input`,{id:s,className:`form-check-input`,type:`checkbox`,checked:t,onChange:n,style:{cursor:`pointer`}})}):i===`textarea`?(0,R.jsx)(`textarea`,{id:s,className:`form-control`,value:t,onChange:n,rows:2}):(0,R.jsx)(`input`,{id:s,type:i,className:`form-control`,value:t,onChange:n})]})};return(0,R.jsxs)(`div`,{className:`settings-page`,children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title mb-4`,children:[(0,R.jsx)(`i`,{className:`bi bi-gear`}),(0,R.jsx)(`span`,{children:u(`settings`,`title`)})]}),_&&(0,R.jsxs)(`div`,{className:`alert alert-success d-flex align-items-center gap-2 py-2 small fade-in`,style:{borderRadius:10},children:[(0,R.jsx)(`i`,{className:`bi bi-check-circle-fill`}),(0,R.jsx)(`span`,{children:u(`settings`,`saved`)})]}),(0,R.jsxs)(`div`,{className:`row g-4`,children:[(0,R.jsx)(`div`,{className:`col-md-3`,children:(0,R.jsx)(`div`,{className:`card border-0`,style:{borderRadius:14,overflow:`hidden`},children:(0,R.jsx)(`div`,{className:`list-group list-group-flush`,children:m.map(({key:e,icon:t,labelKey:n})=>(0,R.jsxs)(`button`,{className:`list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 ${h===e?`active`:``}`,style:{padding:`0.8rem 1rem`,background:h===e?`var(--primary)`:`var(--card-bg)`,color:h===e?`#fff`:`var(--text-primary)`,borderLeft:h===e?`3px solid var(--accent)`:`3px solid transparent`,fontSize:`0.88rem`,fontWeight:h===e?600:400},onClick:()=>g(e),children:[(0,R.jsx)(`i`,{className:`bi ${t}`,style:{fontSize:`1.15rem`}}),u(`settings`,n)]},e))})})}),(0,R.jsxs)(`div`,{className:`col-md-9`,children:[(0,R.jsx)(`div`,{className:`card border-0`,style:{borderRadius:14},children:(0,R.jsx)(`div`,{className:`card-body`,style:{padding:`1.5rem 1.75rem`},children:(()=>{switch(h){case`societe`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-building`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`societe`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoSociete`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[w(u(`settings`,`raisonSociale`),t.raisonSociale,e=>c(`societe`,`raisonSociale`,e.target.value)),w(u(`settings`,`sigle`),t.sigle,e=>c(`societe`,`sigle`,e.target.value)),w(u(`settings`,`formeJuridique`),t.formeJuridique,e=>c(`societe`,`formeJuridique`,e.target.value)),w(u(`settings`,`ice`),t.ice,e=>c(`societe`,`ice`,e.target.value)),w(u(`settings`,`rc`),t.rc,e=>c(`societe`,`rc`,e.target.value)),w(u(`settings`,`if`),t.if,e=>c(`societe`,`if`,e.target.value)),w(u(`settings`,`cnss`),t.cnss,e=>c(`societe`,`cnss`,e.target.value)),w(u(`settings`,`patente`),t.patente,e=>c(`societe`,`patente`,e.target.value)),w(u(`settings`,`adresse`),t.adresse,e=>c(`societe`,`adresse`,e.target.value)),w(u(`settings`,`ville`),t.ville,e=>c(`societe`,`ville`,e.target.value)),w(u(`settings`,`telephone`),t.telephone,e=>c(`societe`,`telephone`,e.target.value)),w(u(`settings`,`email`),t.email,e=>c(`societe`,`email`,e.target.value)),w(u(`settings`,`siteWeb`),t.siteWeb,e=>c(`societe`,`siteWeb`,e.target.value))]})]});case`rhManager`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-person-badge`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`rhManager`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoRH`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-4 col-sm-6`,children:[(0,R.jsx)(`label`,{className:`form-label small`,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:u(`settings`,`civilite`)}),(0,R.jsx)(`div`,{className:`d-flex gap-1`,children:[`M.`,`Mme`,`Dr`,`Pr`].map(e=>(0,R.jsx)(`button`,{className:`btn btn-sm flex-fill ${n.civilite===e?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>c(`rhManager`,`civilite`,e),children:e},e))})]}),w(u(`settings`,`nomComplet`),n.nom,e=>c(`rhManager`,`nom`,e.target.value)),w(u(`settings`,`dateNaissance`),n.dateNaissance,e=>c(`rhManager`,`dateNaissance`,e.target.value)),w(u(`settings`,`lieuNaissance`),n.lieuNaissance,e=>c(`rhManager`,`lieuNaissance`,e.target.value)),w(u(`settings`,`fonction`),n.fonction,e=>c(`rhManager`,`fonction`,e.target.value)),w(u(`settings`,`telephone`),n.telephone,e=>c(`rhManager`,`telephone`,e.target.value)),w(u(`settings`,`email`),n.email,e=>c(`rhManager`,`email`,e.target.value),{type:`email`})]})]});case`document`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`document`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoDocument`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[w(u(`settings`,`refNumber`),r.numeroReference,e=>c(`document`,`numeroReference`,e.target.value)),w(u(`settings`,`langueDoc`),r.langueDefaut,e=>c(`document`,`langueDefaut`,e.target.value),{type:`select`,options:[`fr`,`en`,`ar`]}),w(u(`settings`,`papier`),r.formatPapier,e=>c(`document`,`formatPapier`,e.target.value),{type:`select`,options:[`A4`,`A3`,`Letter`,`Legal`]}),w(u(`settings`,`police`),r.police,e=>c(`document`,`police`,e.target.value),{type:`select`,options:[`Calibri`,`Arial`,`Times New Roman`,`Segoe UI`,`Tahoma`]}),w(u(`settings`,`taillePolice`),r.taillePolice,e=>c(`document`,`taillePolice`,e.target.value),{type:`select`,options:[`9`,`10`,`11`,`12`,`14`],small:!0}),w(u(`settings`,`interligne`),r.interligne,e=>c(`document`,`interligne`,e.target.value),{type:`select`,options:[`1`,`1.15`,`1.5`,`2`],small:!0}),(0,R.jsx)(`div`,{className:`w-100`}),(0,R.jsx)(`h6`,{className:`col-12`,style:{fontSize:`0.82rem`,fontWeight:600,color:`var(--text-muted)`,marginTop:8,borderBottom:`1px solid var(--border-color)`,paddingBottom:6},children:`Marges (mm)`}),w(u(`settings`,`margeHaut`),r.margesHaut,e=>c(`document`,`margesHaut`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeBas`),r.margesBas,e=>c(`document`,`margesBas`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeGauche`),r.margesGauche,e=>c(`document`,`margesGauche`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeDroite`),r.margesDroite,e=>c(`document`,`margesDroite`,e.target.value),{type:`number`,small:!0}),(0,R.jsx)(`div`,{className:`w-100`}),(0,R.jsx)(`h6`,{className:`col-12`,style:{fontSize:`0.82rem`,fontWeight:600,color:`var(--text-muted)`,marginTop:8,borderBottom:`1px solid var(--border-color)`,paddingBottom:6},children:`Affichage`}),w(u(`settings`,`afficherLogo`),r.afficherLogo,e=>c(`document`,`afficherLogo`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`afficherEnTete`),r.afficherEnTete,e=>c(`document`,`afficherEnTete`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`afficherPiedPage`),r.afficherPiedPage,e=>c(`document`,`afficherPiedPage`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`textePiedPage`),r.textePiedPage,e=>c(`document`,`textePiedPage`,e.target.value),{type:`textarea`}),w(u(`settings`,`texteSignature`),r.texteSignature,e=>c(`document`,`texteSignature`,e.target.value)),w(u(`settings`,`couleurPrincipale`),r.couleurPrincipale,e=>c(`document`,`couleurPrincipale`,e.target.value),{type:`color`})]})]});case`employe`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-people`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`employe`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoEmploye`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-12`,children:[(0,R.jsx)(`label`,{className:`form-label small`,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:u(`settings`,`typesContrat`)}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:i.typesContrat.join(`, `),onChange:e=>c(`employe`,`typesContrat`,e.target.value.split(`,`).map(e=>e.trim())),placeholder:`CDI, CDD, Stage, Freelance, Intérim`}),(0,R.jsx)(`small`,{className:`text-muted`,style:{fontSize:`0.7rem`,marginTop:2,display:`block`},children:`Séparés par des virgules`})]}),w(u(`settings`,`defaultContrat`),i.defaultContrat,e=>c(`employe`,`defaultContrat`,e.target.value),{type:`select`,options:i.typesContrat}),w(u(`settings`,`saisieAuto`),i.saisieAuto,e=>c(`employe`,`saisieAuto`,e.target.checked),{type:`checkbox`})]})]});case`appearance`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-palette`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`appearance`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:`Personnalisez l'apparence de l'application`})]})]}),(0,R.jsxs)(`div`,{className:`row g-4`,children:[(0,R.jsx)(`div`,{className:`col-md-6`,children:(0,R.jsx)(`div`,{className:`card border`,style:{background:`var(--card-bg)`,borderRadius:12},children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsx)(`label`,{className:`form-label small d-block`,style:{fontWeight:600,marginBottom:10},children:u(`settings`,`theme`)}),(0,R.jsxs)(`div`,{className:`d-flex gap-2`,children:[(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${a===d.LIGHT?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`theme`,d.LIGHT),children:[(0,R.jsx)(`i`,{className:`bi bi-sun-fill`}),` `,u(`settings`,`light`)]}),(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${a===d.DARK?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`theme`,d.DARK),children:[(0,R.jsx)(`i`,{className:`bi bi-moon-fill`}),` `,u(`settings`,`dark`)]})]})]})})}),(0,R.jsx)(`div`,{className:`col-md-6`,children:(0,R.jsx)(`div`,{className:`card border`,style:{background:`var(--card-bg)`,borderRadius:12},children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsx)(`label`,{className:`form-label small d-block`,style:{fontWeight:600,marginBottom:10},children:u(`settings`,`language`)}),(0,R.jsx)(`div`,{className:`d-flex gap-2`,children:[{value:f.FR,label:`FR`,name:u(`settings`,`french`)},{value:f.EN,label:`EN`,name:u(`settings`,`english`)},{value:f.AR,label:`AR`,name:u(`settings`,`arabic`)}].map(e=>(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${o===e.value?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`lang`,e.value),children:[(0,R.jsx)(`span`,{className:`fw-bold`,children:e.label}),(0,R.jsx)(`small`,{children:e.name})]},e.value))})]})})})]})]})}})()})}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-3`,children:[(0,R.jsxs)(`button`,{className:`btn btn-primary d-flex align-items-center gap-2`,onClick:x,children:[(0,R.jsx)(`i`,{className:`bi bi-check-lg`}),` `,u(`settings`,`save`)]}),(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 ${y?`btn-danger`:`btn-outline-danger`}`,onClick:C,onMouseLeave:()=>b(!1),children:[(0,R.jsx)(`i`,{className:`bi ${y?`bi-exclamation-triangle-fill`:`bi-arrow-counterclockwise`}`}),y?`Confirmer ?`:u(`settings`,`reset`)]})]})]})]})]})}function Ds(){return(0,R.jsx)(ko,{children:(0,R.jsxs)(Ht,{children:[(0,R.jsx)(Bt,{path:`/`,element:(0,R.jsx)(Rt,{to:`/login`,replace:!0})}),(0,R.jsx)(Bt,{path:`/login`,element:(0,R.jsx)(Ro,{})}),(0,R.jsxs)(Bt,{element:(0,R.jsx)(Fo,{children:(0,R.jsx)(Lo,{})}),children:[(0,R.jsx)(Bt,{path:`/dashboard`,element:(0,R.jsx)(cs,{})}),(0,R.jsx)(Bt,{path:`/agents`,element:(0,R.jsx)(Fo,{route:`/agents`,children:(0,R.jsx)(ds,{})})}),(0,R.jsx)(Bt,{path:`/employees`,element:(0,R.jsx)(Fo,{route:`/employees`,children:(0,R.jsx)(ls,{})})}),(0,R.jsx)(Bt,{path:`/employees/new`,element:(0,R.jsx)(Fo,{route:`/employees/new`,children:(0,R.jsx)(us,{})})}),(0,R.jsx)(Bt,{path:`/employees/:id/edit`,element:(0,R.jsx)(Fo,{route:`/employees/:id/edit`,children:(0,R.jsx)(us,{})})}),(0,R.jsx)(Bt,{path:`/templates`,element:(0,R.jsx)(Fo,{route:`/templates`,children:(0,R.jsx)(fs,{})})}),(0,R.jsx)(Bt,{path:`/templates/new`,element:(0,R.jsx)(Fo,{route:`/templates/new`,children:(0,R.jsx)(_s,{})})}),(0,R.jsx)(Bt,{path:`/templates/:id/edit`,element:(0,R.jsx)(Fo,{route:`/templates/:id/edit`,children:(0,R.jsx)(_s,{})})}),(0,R.jsx)(Bt,{path:`/documents/generate`,element:(0,R.jsx)(Fo,{route:`/documents/generate`,children:(0,R.jsx)(Cs,{})})}),(0,R.jsx)(Bt,{path:`/documents/history`,element:(0,R.jsx)(Fo,{route:`/documents/history`,children:(0,R.jsx)(ws,{})})}),(0,R.jsx)(Bt,{path:`/settings`,element:(0,R.jsx)(Fo,{route:`/settings`,children:(0,R.jsx)(Es,{})})}),(0,R.jsx)(Bt,{path:`*`,element:(0,R.jsx)(cs,{})})]})]})})}(0,Xn.createRoot)(document.getElementById(`root`)).render((0,R.jsx)(S.StrictMode,{children:(0,R.jsx)(An,{children:(0,R.jsx)(ir,{children:(0,R.jsx)(Ds,{})})})}));
+</body></html>`}var is={async list(){return Qo(()=>To.get(`/documents`).then(e=>{let t=e.data.map(e=>({...e,htmlContent:e.html_content})),n=Ho.getAll(),r=new Set(t.map(e=>e.reference)),i=[...t,...n.filter(e=>!r.has(e.reference))];return i.sort((e,t)=>new Date(t.created_at?.replace(` `,`T`))-new Date(e.created_at?.replace(` `,`T`))),i}),()=>Ho.getAll())},async generate(e,t,n={}){return Qo(()=>To.post(`/documents/generate`,{employee_id:Number(e),template_id:Number(t),...n}).then(e=>{let t=e.data;return{...t,htmlContent:t.html_content}}),()=>{let r=Bo.getAll().find(t=>t.id===Number(e)),i=Vo.getAll().find(e=>e.id===Number(t)),a=new Date,o=`DOC-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,`0`)}${String(a.getDate()).padStart(2,`0`)}-${String(Ho.getAll().length+1).padStart(3,`0`)}`,s=r?.genre&&r.genre[0]===`F`?`Madame`:`Monsieur`,{societe:c}=ns(),l={...r,civilite:s,...n,raison_sociale:c.raisonSociale||`HS-INFRA`,capital:c.capital||``,immatricule:c.immatricule||``,date:a.toLocaleDateString(`fr-FR`,{weekday:`long`,year:`numeric`,month:`long`,day:`numeric`})},u=(i?.content||``).replace(/\{\{(\w+)\}\}/g,(e,t)=>l?.[t]===void 0?`{{${t}}}`:l[t]),d=u.trim().startsWith(`<!DOCTYPE`)||u.trim().startsWith(`<html`)?u:rs(o,u),f={id:Date.now(),reference:o,employee_id:Number(e),template_id:Number(t),content:u,htmlContent:d,employee_name:r?`${r.first_name} ${r.last_name}`:`Inconnu`,document_type:i?.title||`Document`,created_at:a.toISOString()},p=Ho.getAll();return p.push(f),Ho.saveAll(p),f})},async remove(e){return Qo(()=>To.delete(`/documents/${e}`),()=>{Ho.saveAll(Ho.getAll().filter(t=>t.id!==Number(e)))})}},as=[`Jan`,`Fév`,`Mar`,`Avr`,`Mai`,`Juin`,`Juil`,`Aoû`,`Sep`,`Oct`,`Nov`,`Déc`],os=[{key:`employees`,label:`Employés`,icon:`bi-people-fill`,gradient:`linear-gradient(135deg, #0f2b4a, #1a4a7a)`},{key:`templates`,label:`Modèles actifs`,icon:`bi-file-earmark-richtext-fill`,gradient:`linear-gradient(135deg, #0f973d, #1ab85a)`},{key:`documents`,label:`Documents générés`,icon:`bi-file-earmark-check-fill`,gradient:`linear-gradient(135deg, #0b6bcb, #2d8bf0)`},{key:`month`,label:`Ce mois-ci`,icon:`bi-calendar-check-fill`,gradient:`linear-gradient(135deg, #b76e00, #e68a00)`}],ss=[{label:`Nouvel employé`,icon:`bi-person-plus-fill`,route:`/employees/new`,color:`#0f2b4a`,perm:q.MANAGE_USERS},{label:`Gérer les agents`,icon:`bi-person-badge-fill`,route:`/agents`,color:`#6f42c1`,perm:q.MANAGE_USERS},{label:`Générer attestation`,icon:`bi-file-earmark-plus-fill`,route:`/documents/generate`,color:`#0f973d`,perm:q.GENERATE_DOCUMENTS},{label:`Voir les employés`,icon:`bi-people-fill`,route:`/employees`,color:`#0b6bcb`,perm:q.VIEW_EMPLOYEES},{label:`Historique`,icon:`bi-clock-history`,route:`/documents/history`,color:`#b76e00`,perm:q.VIEW_HISTORY}];function cs(){let{user:e}=Ao(),{t,societe:n}=ar(),r=ut(),[i,a]=(0,S.useState)({stats:{},recent:[],deptData:[],trendData:[]});(0,S.useEffect)(()=>{Promise.all([es.list(),ts.list(!0),is.list()]).then(([e,t,n])=>{let r=new Date,i={employees:e.length,templates:t.length,documents:n.length,month:n.filter(e=>{let t=new Date(e.created_at);return t.getMonth()===r.getMonth()&&t.getFullYear()===r.getFullYear()}).length},o={};e.forEach(e=>{let t=e.department||`Non défini`;o[t]=(o[t]||0)+1});let s=Object.entries(o).sort((e,t)=>t[1]-e[1]),c=s.length?Math.max(...s.map(e=>e[1])):1,l=[];for(let e=5;e>=0;e--){let t=new Date(r.getFullYear(),r.getMonth()-e,1),i=n.filter(e=>{let n=new Date(e.created_at);return n.getMonth()===t.getMonth()&&n.getFullYear()===t.getFullYear()}).length;l.push({label:`${as[t.getMonth()]} ${t.getFullYear()}`,count:i})}let u=l.length?Math.max(...l.map(e=>e.count),1):1;a({stats:i,recent:n.slice(-5).reverse(),deptData:s,trendData:l,maxDept:c,maxTrend:u})})},[]);let{stats:o,recent:s,deptData:c,trendData:l,maxDept:u,maxTrend:d}=i;return(0,R.jsxs)(`div`,{className:`dashboard`,children:[(0,R.jsxs)(`div`,{className:`welcome-banner d-flex align-items-center justify-content-between`,children:[(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`h5`,{children:[(0,R.jsx)(`i`,{className:`bi bi-hand-wave me-2`}),`Bienvenue M. `,e?.first_name]}),(0,R.jsxs)(`small`,{children:[`Vous êtes connecté en tant que `,(0,R.jsx)(`strong`,{children:e?.role===`responsable`?`Responsable RH`:`Agent`})]})]}),(0,R.jsxs)(`div`,{className:`text-end d-none d-md-block`,children:[(0,R.jsx)(`div`,{style:{fontSize:`0.75rem`,opacity:.7},children:new Date().toLocaleDateString(`fr-FR`,{weekday:`long`,year:`numeric`,month:`long`,day:`numeric`})}),(0,R.jsx)(`div`,{style:{fontSize:`1.1rem`,fontWeight:700,opacity:.9},children:n?.raisonSociale||`HS-INFRA`})]})]}),(0,R.jsx)(`div`,{className:`row g-3 mb-4`,children:os.map(({key:e,label:t,icon:n,gradient:r})=>(0,R.jsx)(`div`,{className:`col-sm-6 col-xl-3`,children:(0,R.jsx)(`div`,{className:`card stat-card h-100 border-0`,style:{background:r,color:`#fff`},children:(0,R.jsxs)(`div`,{className:`card-body d-flex align-items-center gap-3`,children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:52,height:52,borderRadius:14,background:`rgba(255,255,255,0.2)`,fontSize:`1.5rem`},children:(0,R.jsx)(`i`,{className:`bi ${n}`})}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`div`,{className:`fw-bold`,style:{fontSize:`1.6rem`,lineHeight:1.1},children:o[e]}),(0,R.jsx)(`div`,{style:{fontSize:`0.8rem`,opacity:.85,fontWeight:500},children:t})]})]})})},e))}),(0,R.jsxs)(`div`,{className:`row g-3 mb-4`,children:[(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-diagram-3-fill`,style:{color:`var(--accent)`}}),`Répartition par département`]}),(0,R.jsx)(`div`,{className:`card-body`,children:c.length>0?c.map(([e,t])=>(0,R.jsxs)(`div`,{className:`mb-3`,children:[(0,R.jsxs)(`div`,{className:`d-flex justify-content-between mb-1`,style:{fontSize:`0.82rem`},children:[(0,R.jsx)(`span`,{className:`fw-medium`,children:e}),(0,R.jsx)(`span`,{className:`text-muted`,children:t})]}),(0,R.jsx)(`div`,{className:`progress`,style:{height:8,borderRadius:4,background:`var(--border-color)`},children:(0,R.jsx)(`div`,{className:`progress-bar`,style:{width:`${t/u*100}%`,background:`linear-gradient(90deg, #2d7dd2, #4a9eff)`,borderRadius:4}})})]},e)):(0,R.jsx)(`div`,{className:`text-center text-muted py-4 small`,children:`Aucun employé`})})]})}),(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-graph-up-arrow`,style:{color:`var(--accent)`}}),`Documents générés (6 mois)`]}),(0,R.jsx)(`div`,{className:`card-body d-flex align-items-end gap-2`,style:{minHeight:200},children:l.map(({label:e,count:t})=>(0,R.jsxs)(`div`,{className:`flex-fill d-flex flex-column align-items-center`,style:{height:`100%`},children:[(0,R.jsx)(`div`,{className:`flex-grow-1 d-flex align-items-end`,style:{width:`100%`},children:(0,R.jsx)(`div`,{className:`w-100`,style:{height:`${t/d*100}%`,minHeight:t>0?16:0,background:`linear-gradient(180deg, #2d7dd2, #4a9eff)`,borderRadius:`6px 6px 0 0`,transition:`height 0.5s ease`}})}),(0,R.jsxs)(`div`,{style:{width:`100%`,textAlign:`center`,fontSize:`0.65rem`,color:`var(--text-muted)`,marginTop:4,whiteSpace:`nowrap`},children:[t>0&&(0,R.jsx)(`div`,{className:`fw-bold`,style:{fontSize:`0.75rem`,color:`var(--text-primary)`},children:t}),e]})]},e))})]})}),(0,R.jsx)(`div`,{className:`col-lg-4`,children:(0,R.jsxs)(`div`,{className:`card h-100`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-lightning-fill`,style:{color:`var(--accent)`}}),`Actions rapides`]}),(0,R.jsx)(`div`,{className:`card-body d-flex flex-column gap-2`,children:ss.filter(t=>!t.perm||No(e?.role,t.perm)).map(({label:e,icon:t,route:n,color:i})=>(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-3 w-100 text-start`,style:{borderRadius:10,padding:`0.7rem 1rem`,border:`1.5px solid var(--border-color)`,background:`var(--card-bg)`},onClick:()=>r(n),children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:38,height:38,borderRadius:10,background:`${i}15`,color:i,fontSize:`1.15rem`},children:(0,R.jsx)(`i`,{className:`bi ${t}`})}),(0,R.jsx)(`span`,{className:`fw-medium`,style:{fontSize:`0.88rem`},children:e}),(0,R.jsx)(`i`,{className:`bi bi-chevron-right ms-auto`,style:{color:`var(--text-muted)`,fontSize:`0.8rem`}})]},n))})]})})]}),(0,R.jsxs)(`div`,{className:`card`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex align-items-center gap-2`,children:[(0,R.jsx)(`i`,{className:`bi bi-clock-history`,style:{color:`var(--accent)`}}),`Documents récents`]}),(0,R.jsx)(`div`,{className:`card-body p-0`,children:s.length>0?(0,R.jsx)(`div`,{className:`list-group list-group-flush`,children:s.map((e,t)=>(0,R.jsxs)(`div`,{className:`list-group-item d-flex align-items-center gap-3`,style:{borderLeft:`3px solid ${[`#2d7dd2`,`#0f973d`,`#b76e00`,`#dc3545`,`#6f42c1`][t%5]}`,background:`var(--card-bg)`},children:[(0,R.jsx)(`div`,{className:`d-flex align-items-center justify-content-center`,style:{width:40,height:40,borderRadius:10,background:`var(--body-bg)`,fontSize:`1.1rem`},children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`,style:{color:`var(--accent)`}})}),(0,R.jsxs)(`div`,{className:`flex-grow-1`,children:[(0,R.jsx)(`div`,{className:`fw-medium`,style:{fontSize:`0.88rem`},children:e.reference}),(0,R.jsxs)(`div`,{className:`d-flex gap-3`,style:{fontSize:`0.78rem`,color:`var(--text-muted)`},children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-person me-1`}),e.employee_name]}),(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark me-1`}),e.document_type]})]})]}),(0,R.jsxs)(`div`,{className:`text-end`,children:[(0,R.jsx)(`div`,{className:`fw-medium`,style:{fontSize:`0.78rem`},children:new Date(e.created_at).toLocaleDateString(`fr-FR`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:new Date(e.created_at).toLocaleTimeString(`fr-FR`,{hour:`2-digit`,minute:`2-digit`})})]})]},e.id))}):(0,R.jsx)(`div`,{className:`text-center text-muted py-4 small`,children:`Aucun document généré récemment`})})]})]})}function ls(){let{user:e}=Ao(),t=No(e?.role,q.MANAGE_EMPLOYEES),[n,r]=(0,S.useState)([]),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(!1),c=()=>es.list().then(r);(0,S.useEffect)(()=>{c()},[]);let l=async e=>{confirm(`Supprimer cet employé ?`)&&(await es.remove(e),await c())},u=n.filter(e=>`${e.first_name} ${e.last_name} ${e.nationalite||``} ${e.ville||``} ${e.genre||``} ${e.position||``} ${e.department||``}`.toLowerCase().includes(i.toLowerCase()));return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-people`}),(0,R.jsx)(`span`,{children:`Employés`}),t&&(0,R.jsxs)(Mn,{to:`/employees/new`,className:`btn btn-primary btn-sm ms-auto`,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Ajouter`]})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`search-box`,children:[(0,R.jsx)(`i`,{className:`bi bi-search`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,placeholder:`Rechercher un employé...`,value:i,onChange:e=>a(e.target.value)})]})})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`#`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Nom`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Prénom`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Genre`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Nationalité`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Ville`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Email`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Téléphone`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Poste`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Département`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Agence`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Date embauche`}),(0,R.jsx)(`th`,{style:{color:`#1a1a1a`,fontWeight:700},children:`Salaire`}),t&&(0,R.jsx)(`th`,{style:{width:160,color:`#1a1a1a`,fontWeight:700},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[u.map((e,n)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{style:{color:`#1a1a1a`,fontWeight:600},children:n+1}),(0,R.jsx)(`td`,{style:{fontWeight:700,color:`#1a1a1a`},children:e.last_name}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.first_name}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.genre||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.nationalite||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.ville||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.email}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.phone||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-primary-subtle`,style:{color:`#1a1a1a`,fontWeight:600},children:e.position})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.department||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.agence||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`},children:e.hire_date||(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),(0,R.jsx)(`td`,{style:{color:`#1a1a1a`,fontWeight:600},children:e.salary?`${e.salary} DH`:(0,R.jsx)(`span`,{className:`text-muted`,children:`—`})}),t&&(0,R.jsxs)(`td`,{children:[(0,R.jsx)(Mn,{to:`/employees/${e.id}/edit`,className:`btn btn-sm btn-outline-warning me-1`,children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>l(e.id),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),u.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:t?15:14,className:`text-center text-muted py-4`,children:`Aucun employé trouvé`})})]})]})})})]})}function us(){let{id:e}=mt(),t=!!e,n=ut(),[r,i]=(0,S.useState)({first_name:``,last_name:``,civilite:`M.`,email:``,phone:``,genre:``,nationalite:`Marocaine`,ville:``,birth_date:``,birth_place:``,position:``,department:``,agence:``,hire_date:``,salary:``});(0,S.useEffect)(()=>{t&&es.get(e).then(e=>{e?i(e):n(`/employees`)})},[e]);let a=e=>i({...r,[e.target.name]:e.target.value}),o=async i=>{i.preventDefault();try{t?await es.update(e,r):await es.create(r),n(`/employees`)}catch(e){alert(`Erreur : `+(e.message||`Inconnue`))}},s=[{name:`last_name`,label:`Nom`,type:`text`},{name:`first_name`,label:`Prénom`,type:`text`},{name:`civilite`,label:`Civilité`,type:`select`,options:[`M.`,`Mme`]},{name:`genre`,label:`Genre`,type:`select`,options:[`Masculin`,`Féminin`]},{name:`nationalite`,label:`Nationalité`,type:`text`},{name:`ville`,label:`Ville`,type:`text`},{name:`birth_date`,label:`Date de naissance`,type:`date`},{name:`birth_place`,label:`Lieu de naissance`,type:`text`},{name:`cin`,label:`CIN`,type:`text`},{name:`cnss`,label:`CNSS`,type:`text`},{name:`email`,label:`Email`,type:`email`},{name:`phone`,label:`Téléphone`,type:`text`},{name:`bank_type`,label:`Type de banque`,type:`text`},{name:`rib`,label:`RIB`,type:`text`},{name:`cnss_remb`,label:`Remboursement CNSS (DH)`,type:`number`},{name:`montant_accorde`,label:`Montant d'aide accordé (DH)`,type:`number`}],c=[{name:`position`,label:`Poste`,type:`text`},{name:`department`,label:`Département`,type:`text`},{name:`agence`,label:`Agence`,type:`text`},{name:`hire_date`,label:`Date d'embauche`,type:`date`},{name:`salary`,label:`Salaire (DH)`,type:`number`},{name:`bank_type_pro`,label:`Type de banque (Pro)`,type:`text`},{name:`rib_pro`,label:`RIB (Pro)`,type:`text`}],l={color:`#1a1a1a`,fontWeight:600,fontSize:`0.9rem`};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-pencil-square`:`bi-person-plus`}`}),(0,R.jsxs)(`span`,{children:[t?`Modifier`:`Ajouter`,` un employé`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`form`,{onSubmit:o,children:[(0,R.jsxs)(`h6`,{className:`mb-3`,style:{color:`#1a1a1a`,fontWeight:700,borderBottom:`2px solid #1a1a1a`,paddingBottom:6},children:[(0,R.jsx)(`i`,{className:`bi bi-person me-2`}),`Informations personnelles`]}),(0,R.jsx)(`div`,{className:`row g-3 mb-4`,children:s.map(({name:e,label:t,type:n,options:i})=>(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,style:l,children:t}),n===`select`?(0,R.jsxs)(`select`,{name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0,style:{paddingLeft:`0.75rem`},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),i.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))]}):(0,R.jsx)(`input`,{type:n,name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0})]},e))}),(0,R.jsxs)(`h6`,{className:`mb-3`,style:{color:`#1a1a1a`,fontWeight:700,borderBottom:`2px solid #1a1a1a`,paddingBottom:6},children:[(0,R.jsx)(`i`,{className:`bi bi-briefcase me-2`}),`Informations professionnelles`]}),(0,R.jsx)(`div`,{className:`row g-3`,children:c.map(({name:e,label:t,type:n})=>(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,style:l,children:t}),(0,R.jsx)(`input`,{type:n,name:e,className:`form-control`,value:r[e]||``,onChange:a,required:!0})]},e))}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-4 pt-2 border-top`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-check-lg`:`bi-plus-lg`} me-1`}),t?`Enregistrer`:`Ajouter`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>n(`/employees`),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})})})]})}function ds(){let{listUsers:e,createUser:t,updateUser:n,deleteUser:r}=Ao(),[i,a]=(0,S.useState)([]),[o,s]=(0,S.useState)(!1),[c,l]=(0,S.useState)(null),[u,d]=(0,S.useState)({name:``,email:``,phone:``,password:``,role:`agent`}),[f,p]=(0,S.useState)(``),m=async()=>{a((await e()).filter(e=>e.role===`agent`))};(0,S.useEffect)(()=>{m()},[]);let h=()=>{l(null),d({name:``,email:``,phone:``,password:``,role:`agent`}),p(``),s(!0)},g=e=>{l(e),d({name:e.name,email:e.email,phone:e.phone||``,password:``,role:e.role}),p(``),s(!0)},_=async e=>{e.preventDefault(),p(``);try{if(c){let e={name:u.name,email:u.email,phone:u.phone,role:u.role};u.password&&(e.password=u.password),await n(c.id,e)}else{if(!u.password){p(`Mot de passe requis`);return}await t(u)}s(!1),m()}catch(e){p(e.message)}},v=async e=>{if(confirm(`Supprimer l'agent ${e.name} ?`))try{await r(e.id),m()}catch(e){alert(e.message)}};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-person-badge`}),(0,R.jsx)(`span`,{children:`Gestion des agents`}),(0,R.jsxs)(`button`,{className:`btn btn-primary btn-sm ms-auto`,onClick:h,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Nouvel agent`]})]}),o&&(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsxs)(`h6`,{className:`mb-3`,children:[c?`Modifier`:`Ajouter`,` un agent`]}),f&&(0,R.jsxs)(`div`,{className:`alert alert-danger d-flex align-items-center gap-2 py-2 small`,children:[(0,R.jsx)(`i`,{className:`bi bi-exclamation-circle`}),(0,R.jsx)(`span`,{children:f})]}),(0,R.jsxs)(`form`,{onSubmit:_,children:[(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Nom complet`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u.name,onChange:e=>d({...u,name:e.target.value}),required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Email`}),(0,R.jsx)(`input`,{type:`email`,className:`form-control`,value:u.email,onChange:e=>d({...u,email:e.target.value}),required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Téléphone`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u.phone,onChange:e=>d({...u,phone:e.target.value}),placeholder:`06XXXXXXXX`})]}),(0,R.jsxs)(`div`,{className:`col-md-4`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:c?`Nouveau mot de passe (laisser vide)`:`Mot de passe`}),(0,R.jsx)(`input`,{type:`password`,className:`form-control`,value:u.password,onChange:e=>d({...u,password:e.target.value}),required:!c})]})]}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-3`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${c?`bi-check-lg`:`bi-plus-lg`} me-1`}),c?`Enregistrer`:`Créer`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>s(!1),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})]})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`#`}),(0,R.jsx)(`th`,{children:`Nom`}),(0,R.jsx)(`th`,{children:`Email`}),(0,R.jsx)(`th`,{children:`Téléphone`}),(0,R.jsx)(`th`,{children:`Rôle`}),(0,R.jsx)(`th`,{style:{width:160},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[i.map((e,t)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`text-muted`,children:t+1}),(0,R.jsx)(`td`,{className:`fw-medium`,children:e.name}),(0,R.jsx)(`td`,{children:e.email}),(0,R.jsx)(`td`,{children:e.phone||`-`}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-secondary-subtle text-secondary`,children:`Agent RH`})}),(0,R.jsxs)(`td`,{children:[(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-warning me-1`,onClick:()=>g(e),children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>v(e),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),i.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:`6`,className:`text-center text-muted py-4`,children:`Aucun agent trouvé`})})]})]})})})]})}function fs(){let{user:e}=Ao(),t=No(e?.role,q.MANAGE_TEMPLATES),[n,r]=(0,S.useState)([]);(0,S.useEffect)(()=>{ts.list().then(r)},[]);let i=async(e,t)=>{await ts.update(e,{is_active:!t}),r(await ts.list())},a=async e=>{confirm(`Supprimer ce modèle ?`)&&(await ts.remove(e),r(await ts.list()))};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`}),(0,R.jsx)(`span`,{children:`Modèles de documents`}),t&&(0,R.jsxs)(Mn,{to:`/templates/new`,className:`btn btn-primary btn-sm ms-auto`,children:[(0,R.jsx)(`i`,{className:`bi bi-plus-lg me-1`}),`Nouveau modèle`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`#`}),(0,R.jsx)(`th`,{children:`Titre`}),(0,R.jsx)(`th`,{children:`Type`}),(0,R.jsx)(`th`,{children:`Statut`}),t&&(0,R.jsx)(`th`,{style:{width:240},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[n.map((e,n)=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`text-muted`,children:n+1}),(0,R.jsx)(`td`,{className:`fw-medium`,children:e.title}),(0,R.jsx)(`td`,{children:e.type}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge ${e.is_active?`bg-success-subtle text-success`:`bg-secondary-subtle text-secondary`}`,children:e.is_active?`Actif`:`Inactif`})}),t&&(0,R.jsxs)(`td`,{children:[(0,R.jsx)(Mn,{to:`/templates/${e.id}/edit`,className:`btn btn-sm btn-outline-warning me-1`,children:(0,R.jsx)(`i`,{className:`bi bi-pencil`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-info me-1`,onClick:()=>i(e.id,e.is_active),title:e.is_active?`Désactiver`:`Activer`,children:(0,R.jsx)(`i`,{className:`bi ${e.is_active?`bi-pause`:`bi-play`}`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>a(e.id),children:(0,R.jsx)(`i`,{className:`bi bi-trash`})})]})]},e.id)),n.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:t?5:4,className:`text-center text-muted py-4`,children:`Aucun modèle trouvé`})})]})]})})})]})}var ps=[`Arial`,`Calibri`,`Times New Roman`,`Courier New`,`Georgia`,`Verdana`],ms=[8,9,10,11,12,14,16,18,20,22,24,28,36,48,72],hs=[{label:`Nom`,value:`last_name`},{label:`Prénom`,value:`first_name`},{label:`Civilité`,value:`civilite`},{label:`Email`,value:`email`},{label:`Téléphone`,value:`phone`},{label:`CIN`,value:`cin`},{label:`CNSS`,value:`cnss`},{label:`Poste`,value:`position`},{label:`Département`,value:`department`},{label:`Agence`,value:`agence`},{label:`Date embauche`,value:`hire_date`},{label:`Salaire`,value:`salary`},{label:`Banque`,value:`bank_type`},{label:`RIB`,value:`rib`},{label:`Date naissance`,value:`birth_date`},{label:`Lieu naissance`,value:`birth_place`},{label:`Ville`,value:`ville`},{label:`Nationalité`,value:`nationalite`},{label:`Genre`,value:`genre`}];function gs({value:e=``,onChange:t,keyId:n}){let r=(0,S.useRef)(null),[i,a]=(0,S.useState)(`source`),[o,s]=(0,S.useState)(!1),c=e?.trim().startsWith(`<!DOCTYPE`)||e?.trim().startsWith(`<html`);(0,S.useEffect)(()=>{c&&a(`source`)},[c]),(0,S.useEffect)(()=>{i===`visual`&&r.current&&(r.current.innerHTML=e)},[i,n,e]);let l=(0,S.useCallback)(()=>{r.current&&t(r.current.innerHTML)},[t]),u=(0,S.useCallback)((e,t=null)=>{document.execCommand(e,!1,t),r.current?.focus(),l()},[l]),d=e=>{u(`fontName`,e.target.value),e.target.value=``},f=e=>{u(`fontSize`,e.target.value),e.target.value=``},p=e=>{u(`foreColor`,e.target.value)},m=e=>{u(`hiliteColor`,e.target.value)},h=n=>{if(i===`visual`){if(r.current){let e=window.getSelection();if(e?.rangeCount&&r.current.contains(e.getRangeAt(0).commonAncestorContainer)){let t=e.getRangeAt(0);t.deleteContents(),t.insertNode(document.createTextNode(`{{${n}}}`)),t.collapse(!1),e.removeAllRanges(),e.addRange(t)}else r.current.innerHTML+=`{{${n}}}`;l()}}else t(e+`{{${n}}}`);s(!1)},g=()=>{let e=prompt(`URL du lien :`,`https://`);e&&u(`createLink`,e)},_=()=>{let e=prompt(`URL de l'image :`,`https://`);e&&u(`insertImage`,e)},v=()=>{u(`insertHTML`,`<table border="1" cellpadding="5" cellspacing="0" style="width:100%;border-collapse:collapse"><tr><td>Cellule</td><td>Cellule</td></tr><tr><td>Cellule</td><td>Cellule</td></tr></table>`)},y=({cmd:e,val:t,title:n,children:r})=>(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:()=>u(e,t),title:n,children:r});return(0,R.jsxs)(`div`,{className:`html-editor`,children:[(0,R.jsxs)(`div`,{className:`html-editor-toolbar`,children:[(0,R.jsx)(y,{cmd:`bold`,title:`Gras (Ctrl+B)`,children:(0,R.jsx)(`b`,{children:`B`})}),(0,R.jsx)(y,{cmd:`italic`,title:`Italique (Ctrl+I)`,children:(0,R.jsx)(`i`,{children:`I`})}),(0,R.jsx)(y,{cmd:`underline`,title:`Souligné (Ctrl+U)`,children:(0,R.jsx)(`u`,{children:`U`})}),(0,R.jsx)(y,{cmd:`strikeThrough`,title:`Barré`,children:(0,R.jsx)(`s`,{children:`S`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h1>`,title:`Titre 1`,children:`H1`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h2>`,title:`Titre 2`,children:`H2`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<h3>`,title:`Titre 3`,children:`H3`}),(0,R.jsx)(y,{cmd:`formatBlock`,val:`<p>`,title:`Paragraphe`,children:`P`}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`justifyLeft`,title:`Aligné gauche`,children:(0,R.jsx)(`i`,{className:`bi bi-text-left`})}),(0,R.jsx)(y,{cmd:`justifyCenter`,title:`Centré`,children:(0,R.jsx)(`i`,{className:`bi bi-text-center`})}),(0,R.jsx)(y,{cmd:`justifyRight`,title:`Aligné droite`,children:(0,R.jsx)(`i`,{className:`bi bi-text-right`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`insertUnorderedList`,title:`Liste à puces`,children:(0,R.jsx)(`i`,{className:`bi bi-list-ul`})}),(0,R.jsx)(y,{cmd:`insertOrderedList`,title:`Liste numérotée`,children:(0,R.jsx)(`i`,{className:`bi bi-list-ol`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(y,{cmd:`outdent`,title:`Réduire le retrait`,children:(0,R.jsx)(`i`,{className:`bi bi-indent-decrease`})}),(0,R.jsx)(y,{cmd:`indent`,title:`Augmenter le retrait`,children:(0,R.jsx)(`i`,{className:`bi bi-indent-increase`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsxs)(`select`,{className:`html-editor-select`,onChange:d,defaultValue:``,children:[(0,R.jsx)(`option`,{value:``,disabled:!0,children:`Police`}),ps.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))]}),(0,R.jsxs)(`select`,{className:`html-editor-select`,onChange:f,defaultValue:``,children:[(0,R.jsx)(`option`,{value:``,disabled:!0,children:`Taille`}),ms.map(e=>(0,R.jsxs)(`option`,{value:e,children:[e,`px`]},e))]}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`input`,{type:`color`,className:`html-editor-color`,onChange:p,title:`Couleur du texte`}),(0,R.jsx)(`input`,{type:`color`,className:`html-editor-color`,onChange:m,title:`Couleur de fond`}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:g,title:`Insérer un lien`,children:(0,R.jsx)(`i`,{className:`bi bi-link-45deg`})}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:_,title:`Insérer une image`,children:(0,R.jsx)(`i`,{className:`bi bi-image`})}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn`,onClick:v,title:`Insérer un tableau`,children:(0,R.jsx)(`i`,{className:`bi bi-table`})}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsxs)(`div`,{className:`html-editor-var-wrap`,children:[(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn html-editor-var-btn`,onClick:()=>s(!o),title:`Insérer une variable`,children:(0,R.jsx)(`i`,{className:`bi bi-code-slash`})}),o&&(0,R.jsx)(`div`,{className:`html-editor-var-picker`,children:hs.map(e=>(0,R.jsx)(`button`,{type:`button`,className:`html-editor-var-item`,onClick:()=>h(e.value),children:`{{${e.label}}}`},e.value))})]}),(0,R.jsx)(`span`,{className:`html-editor-sep`}),(0,R.jsx)(`button`,{type:`button`,className:`html-editor-btn ${i===`source`?`active`:``}`,onClick:()=>a(i===`visual`?`source`:`visual`),title:`Code source`,children:(0,R.jsx)(`i`,{className:`bi bi-braces`})})]}),c&&i===`source`&&(0,R.jsxs)(`div`,{className:`html-editor-info`,children:[(0,R.jsx)(`i`,{className:`bi bi-info-circle`}),` Ce modèle utilise un document HTML/CSS complet (`,`{`,`variable`,`}`,` injectées). Passez en mode Visual pour voir l'aperçu.`]}),i===`visual`?(0,R.jsx)(`div`,{ref:r,className:`html-editor-content`,contentEditable:!0,suppressContentEditableWarning:!0,onInput:l}):(0,R.jsx)(`textarea`,{className:`html-editor-source form-control`,value:e,onChange:e=>t(e.target.value),rows:`20`,spellCheck:!1})]})}function _s(){let{id:e}=mt(),t=!!e,n=ut(),[r,i]=(0,S.useState)({title:``,type:``,content:``,is_active:!0}),[a,o]=(0,S.useState)([]),[s,c]=(0,S.useState)(!1);(0,S.useEffect)(()=>{ts.list().then(e=>{o([...new Set(e.map(e=>e.type).filter(Boolean))])}),t&&ts.get(e).then(e=>{e?(i(e),[`Attestation de travail`,`Attestation de salaire`,`Certificat de travail`,`Demande d'avance sur salaire`,`Demande de prime`,`Attestation de domiciliation irrévocable de salaire`].includes(e.type)||c(!0)):n(`/templates`)})},[e]);let l=[`Attestation de travail`,`Attestation de salaire`,`Certificat de travail`,`Demande d'avance sur salaire`,`Demande de prime`,`Attestation de domiciliation irrévocable de salaire`],u=e=>{let t=e.target.type===`checkbox`?e.target.checked:e.target.value;i({...r,[e.target.name]:t})};return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-pencil-square`:`bi-file-earmark-plus`}`}),(0,R.jsxs)(`span`,{children:[t?`Modifier`:`Nouveau`,` modèle`]})]}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`form`,{onSubmit:async i=>{i.preventDefault();try{t?await ts.update(e,r):await ts.create(r),n(`/templates`)}catch(e){alert(`Erreur : `+(e.message||`Inconnue`))}},children:[(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Titre`}),(0,R.jsx)(`input`,{type:`text`,name:`title`,className:`form-control`,value:r.title,onChange:u,required:!0})]}),(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Type`}),s?(0,R.jsx)(`input`,{type:`text`,name:`type`,className:`form-control`,value:r.type,onChange:u,list:`typeSuggestions`,required:!0,placeholder:`Saisir un type...`}):(0,R.jsxs)(`select`,{name:`type`,className:`form-select`,value:r.type,onChange:e=>{e.target.value===`__custom__`?(c(!0),i({...r,type:``})):i({...r,type:e.target.value})},required:!0,children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),l.map(e=>(0,R.jsx)(`option`,{children:e},e)),(0,R.jsx)(`option`,{value:`__custom__`,children:`Autre (saisir libre)...`})]}),s&&(0,R.jsx)(`button`,{type:`button`,className:`btn btn-sm btn-link p-0 mt-1`,onClick:()=>{c(!1),i({...r,type:``})},children:`Retour à la liste`}),(0,R.jsx)(`datalist`,{id:`typeSuggestions`,children:a.map(e=>(0,R.jsx)(`option`,{value:e},e))})]}),(0,R.jsxs)(`div`,{className:`col-12`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Contenu `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(éditeur HTML avec variables dynamiques)`})]}),(0,R.jsx)(gs,{value:r.content,onChange:e=>i({...r,content:e}),keyId:e||`new`})]}),(0,R.jsx)(`div`,{className:`col-12`,children:(0,R.jsxs)(`div`,{className:`form-check`,children:[(0,R.jsx)(`input`,{type:`checkbox`,name:`is_active`,className:`form-check-input`,checked:r.is_active,onChange:u,id:`isActive`}),(0,R.jsx)(`label`,{className:`form-check-label small`,htmlFor:`isActive`,children:`Modèle actif`})]})})]}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-4 pt-2 border-top`,children:[(0,R.jsxs)(`button`,{type:`submit`,className:`btn btn-primary`,children:[(0,R.jsx)(`i`,{className:`bi ${t?`bi-check-lg`:`bi-plus-lg`} me-1`}),t?`Enregistrer`:`Créer`]}),(0,R.jsxs)(`button`,{type:`button`,className:`btn btn-outline-secondary`,onClick:()=>n(`/templates`),children:[(0,R.jsx)(`i`,{className:`bi bi-x-lg me-1`}),`Annuler`]})]})]})})})]})}var vs=[`civilite`,`first_name`,`last_name`,`email`,`phone`,`genre`,`nationalite`,`ville`,`birth_date`,`birth_place`,`cin`,`cnss`,`position`,`department`,`agence`,`hire_date`,`salary`,`bank_type`,`rib`,`bank_type_pro`,`rib_pro`,`cnss_remb`,`montant_accorde`],ys=[`motif`,`montant`,`total_charges`,`date`,`raison_sociale`];function bs(e,t){let n=t.toLowerCase();return ys.includes(n)?null:vs.includes(n)?e[n]??null:null}function xs(e){if(!e)return[];let t=/\{\{(\w+)\}\}/g,n=new Set,r=[],i;for(;(i=t.exec(e))!==null;){let e=i[1].toLowerCase();n.has(e)||(n.add(e),r.push(e))}return r}function Ss({employee:e,template:t}){let[n,r]=(0,S.useState)(!1),i=xs(t?.content||t?.html||``);if(!e||!t)return null;let a=i.filter(e=>vs.includes(e)),o=i.filter(e=>ys.includes(e)),s=i.filter(e=>!vs.includes(e)&&!ys.includes(e)),c=n?i:a,l=t=>{let n=bs(e,t);return n===null?ys.includes(t)?(0,R.jsx)(`em`,{className:`text-muted`,children:`Saisi lors de la génération`}):(0,R.jsx)(`em`,{className:`text-danger`,children:`Inconnu`}):String(n)},u=i.length,d=i.filter(t=>bs(e,t)!==null).length,f=o.length,p=s.length;return(0,R.jsxs)(`div`,{className:`card mb-4`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex justify-content-between align-items-center`,children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-database me-1`}),`Données injectées`,(0,R.jsxs)(`span`,{className:`badge bg-secondary ms-2`,children:[d,`/`,u,` de l'employé`]}),f>0&&(0,R.jsxs)(`span`,{className:`badge bg-info ms-1`,children:[f,` saisie`]}),p>0&&(0,R.jsxs)(`span`,{className:`badge bg-warning ms-1`,children:[p,` inconnue(s)`]})]}),(0,R.jsxs)(`div`,{className:`form-check form-switch mb-0`,children:[(0,R.jsx)(`input`,{className:`form-check-input`,type:`checkbox`,id:`showAllToggle`,checked:n,onChange:()=>r(!n)}),(0,R.jsx)(`label`,{className:`form-check-label`,htmlFor:`showAllToggle`,children:`Tout`})]})]}),(0,R.jsx)(`div`,{className:`card-body py-2 px-3`,children:c.length===0?(0,R.jsx)(`p`,{className:`text-muted small mb-0`,children:`Aucune variable trouvée dans ce modèle.`}):(0,R.jsx)(`div`,{className:`row small`,children:c.map(e=>(0,R.jsxs)(`div`,{className:`col-md-4 col-lg-3 mb-1`,children:[(0,R.jsxs)(`span`,{className:`text-muted`,children:[e.replace(/_/g,` `),` : `]}),(0,R.jsx)(`span`,{className:`fw-bold`,children:l(e)})]},e))})})]})}function Cs(){let[e,t]=(0,S.useState)([]),[n,r]=(0,S.useState)([]),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(``),[c,l]=(0,S.useState)(``),[u,d]=(0,S.useState)(``),[f,p]=(0,S.useState)(``),[m,h]=(0,S.useState)(``),[g,_]=(0,S.useState)(``),[v,y]=(0,S.useState)(``),[b,x]=(0,S.useState)(null),[C,w]=(0,S.useState)(!1),T=(0,S.useRef)(null);(0,S.useEffect)(()=>{es.list().then(t),ts.list(!0).then(r)},[]);let E=n.find(e=>e.id===Number(o)),ee=E?.type===`Demande de prime`,D=E?.type===`Demande d'aide sociale`,O=E?.type===`Pièce de caisse dépense`,k=E?.type===`Demande d'avance`,A=E?.type===`Attestation de domiciliation irrévocable de salaire`,j=ee||D||O||k||A,te=()=>{l(``),d(``),p(``),h(``),_(``),y(``)};return(0,S.useEffect)(()=>{if(b?.htmlContent&&T.current){let e=new Blob([b.htmlContent],{type:`text/html`}),t=URL.createObjectURL(e);return T.current.src=t,()=>URL.revokeObjectURL(t)}},[b]),(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-plus`}),(0,R.jsx)(`span`,{children:`Génération de document`})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-person me-1`}),`Employé`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:i,onChange:e=>{a(e.target.value),x(null)},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner un employé...`}),e.map(e=>(0,R.jsxs)(`option`,{value:e.id,children:[e.first_name,` `,e.last_name,` — `,e.position]},e.id))]})]}),(0,R.jsxs)(`div`,{className:`col-md-6`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-text me-1`}),`Type de document`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:o,onChange:e=>{s(e.target.value),x(null),te()},children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner un modèle...`}),n.map(e=>(0,R.jsx)(`option`,{value:e.id,children:e.title},e.id))]})]}),j&&(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-question-circle me-1`}),`Motif`]}),(0,R.jsxs)(`select`,{className:`form-select`,value:c,onChange:e=>l(e.target.value),children:[(0,R.jsx)(`option`,{value:``,children:`Sélectionner...`}),ee?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Naissance`,children:`Naissance`}),(0,R.jsx)(`option`,{value:`Mariage`,children:`Mariage`}),(0,R.jsx)(`option`,{value:`Autres`,children:`Autres (à préciser)`})]}):O?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Fournitures bureau`,children:`Fournitures de bureau`}),(0,R.jsx)(`option`,{value:`Déplacement`,children:`Déplacement / Transport`}),(0,R.jsx)(`option`,{value:`Réparation`,children:`Frais de réparation`}),(0,R.jsx)(`option`,{value:`Achats divers`,children:`Achats divers`}),(0,R.jsx)(`option`,{value:`Avance s/salaire`,children:`Avance sur salaire`}),(0,R.jsx)(`option`,{value:`Remboursement`,children:`Remboursement`})]}):k?(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Frais médicaux`,children:`Frais médicaux`}),(0,R.jsx)(`option`,{value:`Scolarité`,children:`Scolarité`}),(0,R.jsx)(`option`,{value:`Voyage`,children:`Voyage`}),(0,R.jsx)(`option`,{value:`Projet personnel`,children:`Projet personnel`}),(0,R.jsx)(`option`,{value:`Urgence`,children:`Urgence`})]}):(0,R.jsxs)(R.Fragment,{children:[(0,R.jsx)(`option`,{value:`Maladie`,children:`Maladie`}),(0,R.jsx)(`option`,{value:`Hospitalisation`,children:`Hospitalisation`}),(0,R.jsx)(`option`,{value:`Décès`,children:`Décès (famille)`}),(0,R.jsx)(`option`,{value:`Scolarité`,children:`Scolarité des enfants`}),(0,R.jsx)(`option`,{value:`Logement`,children:`Logement`}),(0,R.jsx)(`option`,{value:`Urgence`,children:`Situation d'urgence`})]}),(0,R.jsx)(`option`,{value:`Autres`,children:`Autres`})]})]}),c===`Autres`&&(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsx)(`label`,{className:`form-label`,children:`Précisez le motif`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:u,onChange:e=>d(e.target.value),placeholder:`Autre motif...`})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[(0,R.jsx)(`i`,{className:`bi bi-currency-exchange me-1`}),`Montant `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`number`,className:`form-control`,value:f,onChange:e=>p(e.target.value),placeholder:`0`})]}),D&&(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Total charges `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`number`,className:`form-control`,value:m,onChange:e=>h(e.target.value),placeholder:`0`})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Remb. CNSS `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(de l'employé)`})]}),(0,R.jsxs)(`div`,{className:`form-control-plaintext fw-bold`,children:[e.find(e=>e.id===Number(i))?.cnss_remb||`—`,` DH`]})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Aide accordée `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(de l'employé)`})]}),(0,R.jsxs)(`div`,{className:`form-control-plaintext fw-bold`,children:[e.find(e=>e.id===Number(i))?.montant_accorde||`—`,` DH`]})]})]}),A&&(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Capital `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:g,onChange:e=>_(e.target.value),placeholder:`Ex: 1 000 000 DH`})]}),(0,R.jsxs)(`div`,{className:`col-md-3`,children:[(0,R.jsxs)(`label`,{className:`form-label`,children:[`Immatriculé RC n° `,(0,R.jsx)(`small`,{className:`text-muted`,children:`(opt.)`})]}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:v,onChange:e=>y(e.target.value),placeholder:`Ex: 123456`})]})]})]}),(0,R.jsx)(`div`,{className:`col-12`,children:(0,R.jsxs)(`button`,{className:`btn btn-primary`,onClick:async()=>{if(!(!i||!o)){w(!0);try{let t=e.find(e=>e.id===Number(i)),n={motif:(c===`Autres`?u:c)||``,montant:f||``,...D?{total_charges:m}:{},...A?{capital:g||``,immatricule:v||``}:{},cnss_remb:t?.cnss_remb||``,montant_accorde:t?.montant_accorde||``};x(await is.generate(i,o,n))}catch(e){alert(e.message||`Erreur lors de la génération`)}finally{w(!1)}}},disabled:!i||!o||C,children:[(0,R.jsx)(`i`,{className:`bi ${C?`bi-arrow-repeat spin`:`bi-lightning`} me-1`}),C?`Génération...`:`Générer`]})})]})})}),i&&o&&!b&&(0,R.jsx)(Ss,{employee:e.find(e=>e.id===Number(i)),template:E}),b&&(0,R.jsxs)(`div`,{className:`card`,children:[(0,R.jsxs)(`div`,{className:`card-header d-flex justify-content-between align-items-center`,children:[(0,R.jsxs)(`span`,{children:[(0,R.jsx)(`i`,{className:`bi bi-eye me-1`}),`Aperçu — `,b.reference]}),(0,R.jsxs)(`div`,{className:`d-flex gap-1`,children:[(0,R.jsxs)(`button`,{className:`btn btn-sm btn-danger`,onClick:()=>{if(!b?.htmlContent)return;let e=document.createElement(`iframe`);e.style.position=`fixed`,e.style.top=`-9999px`,e.style.width=`0`,e.style.height=`0`,document.body.appendChild(e);let t=e.contentWindow;t.document.write(b.htmlContent),t.document.close(),setTimeout(()=>{t.focus(),t.print(),setTimeout(()=>document.body.removeChild(e),1e3)},300)},children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-pdf me-1`}),`PDF`]}),(0,R.jsxs)(`button`,{className:`btn btn-sm btn-primary`,onClick:()=>{if(!b?.htmlContent)return;let e=new Blob([b.htmlContent],{type:`application/msword`}),t=window.URL.createObjectURL(e),n=document.createElement(`a`);n.href=t,n.setAttribute(`download`,`${b.reference}.doc`),document.body.appendChild(n),n.click(),n.remove()},children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-word me-1`}),`Word`]}),(0,R.jsxs)(`button`,{className:`btn btn-sm btn-secondary`,onClick:()=>{if(!b?.htmlContent)return;let e=new Blob([b.htmlContent],{type:`text/html`}),t=window.URL.createObjectURL(e),n=document.createElement(`a`);n.href=t,n.setAttribute(`download`,`${b.reference}.html`),document.body.appendChild(n),n.click(),n.remove()},children:[(0,R.jsx)(`i`,{className:`bi bi-download me-1`}),`HTML`]})]})]}),(0,R.jsx)(`div`,{className:`card-body p-0`,style:{background:`#f0f0f0`},children:(0,R.jsx)(`iframe`,{ref:T,title:`Aperçu`,style:{width:`100%`,height:`80vh`,border:`none`}})})]})]})}function ws(){let[e,t]=(0,S.useState)([]),[n,r]=(0,S.useState)(``),[i,a]=(0,S.useState)(``),[o,s]=(0,S.useState)(``);(0,S.useEffect)(()=>{is.list().then(t)},[]);let c=e=>e?.htmlContent||(e?.content?rs(e.reference,e.content):null),l=e=>{let t=c(e);if(!t)return;let n=new Blob([t],{type:`application/msword`}),r=window.URL.createObjectURL(n),i=document.createElement(`a`);i.href=r,i.setAttribute(`download`,`${e.reference}.doc`),document.body.appendChild(i),i.click(),i.remove()},u=e=>{let t=c(e);if(!t)return;let n=document.createElement(`iframe`);n.style.position=`fixed`,n.style.top=`-9999px`,n.style.width=`0`,n.style.height=`0`,document.body.appendChild(n);let r=n.contentWindow;r.document.write(t),r.document.close(),setTimeout(()=>{r.focus(),r.print(),setTimeout(()=>document.body.removeChild(n),1e3)},300)},d=e.filter(e=>{let t=[(e.reference||``).toLowerCase(),(e.employee_name||``).toLowerCase(),(e.document_type||``).toLowerCase(),(e.created_at||``).toLowerCase()].join(` `),r=!n||t.includes(n.toLowerCase()),a=new Date(e.created_at?.replace(` `,`T`)),s=!i||a>=new Date(i),c=!o||a<=new Date(o+`T23:59:59`);return r&&s&&c});return(0,R.jsxs)(R.Fragment,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title`,children:[(0,R.jsx)(`i`,{className:`bi bi-clock-history`}),(0,R.jsx)(`span`,{children:`Historique des documents`})]}),(0,R.jsx)(`div`,{className:`card mb-4`,children:(0,R.jsx)(`div`,{className:`card-body`,children:(0,R.jsxs)(`div`,{className:`row g-2`,children:[(0,R.jsxs)(`div`,{className:`col-md-4 search-box`,children:[(0,R.jsx)(`i`,{className:`bi bi-search`}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,placeholder:`Réf., employé, type, date...`,value:n,onChange:e=>r(e.target.value)})]}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(0,R.jsx)(`input`,{type:`date`,className:`form-control`,value:i,onChange:e=>a(e.target.value)})}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(0,R.jsx)(`input`,{type:`date`,className:`form-control`,value:o,onChange:e=>s(e.target.value)})}),(0,R.jsx)(`div`,{className:`col-md-2`,children:(n||i||o)&&(0,R.jsxs)(`button`,{className:`btn btn-outline-secondary w-100`,onClick:()=>{r(``),a(``),s(``)},children:[(0,R.jsx)(`i`,{className:`bi bi-x-circle me-1`}),`Réinitialiser`]})})]})})}),(0,R.jsx)(`div`,{className:`card`,children:(0,R.jsx)(`div`,{className:`table-responsive`,children:(0,R.jsxs)(`table`,{className:`table`,children:[(0,R.jsx)(`thead`,{children:(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`th`,{children:`Référence`}),(0,R.jsx)(`th`,{children:`Employé`}),(0,R.jsx)(`th`,{children:`Type`}),(0,R.jsx)(`th`,{children:`Généré le`}),(0,R.jsx)(`th`,{style:{width:120},children:`Actions`})]})}),(0,R.jsxs)(`tbody`,{children:[d.map(e=>(0,R.jsxs)(`tr`,{children:[(0,R.jsx)(`td`,{className:`fw-medium`,children:e.reference}),(0,R.jsx)(`td`,{children:e.employee_name}),(0,R.jsx)(`td`,{children:(0,R.jsx)(`span`,{className:`badge bg-info-subtle text-info`,children:e.document_type})}),(0,R.jsx)(`td`,{className:`text-muted`,children:new Date(e.created_at?.replace(` `,`T`)).toLocaleDateString(`fr-FR`)}),(0,R.jsx)(`td`,{children:(0,R.jsxs)(`div`,{className:`d-flex gap-1`,children:[(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-danger`,onClick:()=>u(e),title:`Imprimer / PDF`,children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-pdf`})}),(0,R.jsx)(`button`,{className:`btn btn-sm btn-outline-primary`,onClick:()=>l(e),title:`Word`,children:(0,R.jsx)(`i`,{className:`bi bi-file-earmark-word`})})]})})]},e.id)),d.length===0&&(0,R.jsx)(`tr`,{children:(0,R.jsx)(`td`,{colSpan:`5`,className:`text-center text-muted py-4`,children:`Aucun document trouvé`})})]})]})})})]})}var Ts=[{key:`societe`,icon:`bi-building`,labelKey:`societe`},{key:`rhManager`,icon:`bi-person-badge`,labelKey:`rhManager`},{key:`document`,icon:`bi-file-earmark-text`,labelKey:`document`},{key:`employe`,icon:`bi-people`,labelKey:`employe`},{key:`appearance`,icon:`bi-palette`,labelKey:`appearance`}];function Es(){let{user:e}=Ao(),{societe:t,rhManager:n,document:r,employe:i,theme:a,lang:o,update:s,updateNested:c,reset:l,t:u,THEMES:d,LANGUAGES:f}=ar(),p=e?.role===`agent`,m=p?Ts.filter(e=>e.key===`appearance`):Ts,[h,g]=(0,S.useState)(p?`appearance`:`societe`),[_,v]=(0,S.useState)(!1),[y,b]=(0,S.useState)(!1),x=()=>{v(!0),setTimeout(()=>v(!1),2e3)},C=()=>{y?(l(),b(!1)):b(!0)},w=(e,t,n,r={})=>{let{type:i=`text`,options:a,small:o}=r,s=e.replace(/\s+/g,``);return(0,R.jsxs)(`div`,{className:o?`col-md-4 col-sm-6`:`col-md-6 col-sm-6`,style:r.style,children:[(0,R.jsx)(`label`,{className:`form-label small`,htmlFor:s,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:e}),i===`select`?(0,R.jsx)(`select`,{id:s,className:`form-select`,value:t,onChange:n,children:a.map(e=>(0,R.jsx)(`option`,{value:e,children:e},e))}):i===`color`?(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2`,children:[(0,R.jsx)(`input`,{id:s,type:`color`,className:`form-control form-control-color`,style:{width:44,padding:2,height:36,borderRadius:8},value:t,onChange:n}),(0,R.jsx)(`span`,{className:`small text-muted`,style:{fontFamily:`monospace`},children:t})]}):i===`checkbox`?(0,R.jsx)(`div`,{className:`form-check form-switch mt-1`,children:(0,R.jsx)(`input`,{id:s,className:`form-check-input`,type:`checkbox`,checked:t,onChange:n,style:{cursor:`pointer`}})}):i===`textarea`?(0,R.jsx)(`textarea`,{id:s,className:`form-control`,value:t,onChange:n,rows:2}):(0,R.jsx)(`input`,{id:s,type:i,className:`form-control`,value:t,onChange:n})]})};return(0,R.jsxs)(`div`,{className:`settings-page`,children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 page-title mb-4`,children:[(0,R.jsx)(`i`,{className:`bi bi-gear`}),(0,R.jsx)(`span`,{children:u(`settings`,`title`)})]}),_&&(0,R.jsxs)(`div`,{className:`alert alert-success d-flex align-items-center gap-2 py-2 small fade-in`,style:{borderRadius:10},children:[(0,R.jsx)(`i`,{className:`bi bi-check-circle-fill`}),(0,R.jsx)(`span`,{children:u(`settings`,`saved`)})]}),(0,R.jsxs)(`div`,{className:`row g-4`,children:[(0,R.jsx)(`div`,{className:`col-md-3`,children:(0,R.jsx)(`div`,{className:`card border-0`,style:{borderRadius:14,overflow:`hidden`},children:(0,R.jsx)(`div`,{className:`list-group list-group-flush`,children:m.map(({key:e,icon:t,labelKey:n})=>(0,R.jsxs)(`button`,{className:`list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 ${h===e?`active`:``}`,style:{padding:`0.8rem 1rem`,background:h===e?`var(--primary)`:`var(--card-bg)`,color:h===e?`#fff`:`var(--text-primary)`,borderLeft:h===e?`3px solid var(--accent)`:`3px solid transparent`,fontSize:`0.88rem`,fontWeight:h===e?600:400},onClick:()=>g(e),children:[(0,R.jsx)(`i`,{className:`bi ${t}`,style:{fontSize:`1.15rem`}}),u(`settings`,n)]},e))})})}),(0,R.jsxs)(`div`,{className:`col-md-9`,children:[(0,R.jsx)(`div`,{className:`card border-0`,style:{borderRadius:14},children:(0,R.jsx)(`div`,{className:`card-body`,style:{padding:`1.5rem 1.75rem`},children:(()=>{switch(h){case`societe`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-building`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`societe`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoSociete`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[w(u(`settings`,`raisonSociale`),t.raisonSociale,e=>c(`societe`,`raisonSociale`,e.target.value)),w(u(`settings`,`sigle`),t.sigle,e=>c(`societe`,`sigle`,e.target.value)),w(u(`settings`,`formeJuridique`),t.formeJuridique,e=>c(`societe`,`formeJuridique`,e.target.value)),w(u(`settings`,`ice`),t.ice,e=>c(`societe`,`ice`,e.target.value)),w(u(`settings`,`rc`),t.rc,e=>c(`societe`,`rc`,e.target.value)),w(u(`settings`,`if`),t.if,e=>c(`societe`,`if`,e.target.value)),w(u(`settings`,`cnss`),t.cnss,e=>c(`societe`,`cnss`,e.target.value)),w(u(`settings`,`patente`),t.patente,e=>c(`societe`,`patente`,e.target.value)),w(u(`settings`,`adresse`),t.adresse,e=>c(`societe`,`adresse`,e.target.value)),w(u(`settings`,`ville`),t.ville,e=>c(`societe`,`ville`,e.target.value)),w(u(`settings`,`telephone`),t.telephone,e=>c(`societe`,`telephone`,e.target.value)),w(u(`settings`,`email`),t.email,e=>c(`societe`,`email`,e.target.value)),w(u(`settings`,`siteWeb`),t.siteWeb,e=>c(`societe`,`siteWeb`,e.target.value))]})]});case`rhManager`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-person-badge`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`rhManager`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoRH`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-md-4 col-sm-6`,children:[(0,R.jsx)(`label`,{className:`form-label small`,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:u(`settings`,`civilite`)}),(0,R.jsx)(`div`,{className:`d-flex gap-1`,children:[`M.`,`Mme`,`Dr`,`Pr`].map(e=>(0,R.jsx)(`button`,{className:`btn btn-sm flex-fill ${n.civilite===e?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>c(`rhManager`,`civilite`,e),children:e},e))})]}),w(u(`settings`,`nomComplet`),n.nom,e=>c(`rhManager`,`nom`,e.target.value)),w(u(`settings`,`dateNaissance`),n.dateNaissance,e=>c(`rhManager`,`dateNaissance`,e.target.value)),w(u(`settings`,`lieuNaissance`),n.lieuNaissance,e=>c(`rhManager`,`lieuNaissance`,e.target.value)),w(u(`settings`,`fonction`),n.fonction,e=>c(`rhManager`,`fonction`,e.target.value)),w(u(`settings`,`telephone`),n.telephone,e=>c(`rhManager`,`telephone`,e.target.value)),w(u(`settings`,`email`),n.email,e=>c(`rhManager`,`email`,e.target.value),{type:`email`})]})]});case`document`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-file-earmark-text`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`document`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoDocument`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[w(u(`settings`,`refNumber`),r.numeroReference,e=>c(`document`,`numeroReference`,e.target.value)),w(u(`settings`,`langueDoc`),r.langueDefaut,e=>c(`document`,`langueDefaut`,e.target.value),{type:`select`,options:[`fr`,`en`,`ar`]}),w(u(`settings`,`papier`),r.formatPapier,e=>c(`document`,`formatPapier`,e.target.value),{type:`select`,options:[`A4`,`A3`,`Letter`,`Legal`]}),w(u(`settings`,`police`),r.police,e=>c(`document`,`police`,e.target.value),{type:`select`,options:[`Calibri`,`Arial`,`Times New Roman`,`Segoe UI`,`Tahoma`]}),w(u(`settings`,`taillePolice`),r.taillePolice,e=>c(`document`,`taillePolice`,e.target.value),{type:`select`,options:[`9`,`10`,`11`,`12`,`14`],small:!0}),w(u(`settings`,`interligne`),r.interligne,e=>c(`document`,`interligne`,e.target.value),{type:`select`,options:[`1`,`1.15`,`1.5`,`2`],small:!0}),(0,R.jsx)(`div`,{className:`w-100`}),(0,R.jsx)(`h6`,{className:`col-12`,style:{fontSize:`0.82rem`,fontWeight:600,color:`var(--text-muted)`,marginTop:8,borderBottom:`1px solid var(--border-color)`,paddingBottom:6},children:`Marges (mm)`}),w(u(`settings`,`margeHaut`),r.margesHaut,e=>c(`document`,`margesHaut`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeBas`),r.margesBas,e=>c(`document`,`margesBas`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeGauche`),r.margesGauche,e=>c(`document`,`margesGauche`,e.target.value),{type:`number`,small:!0}),w(u(`settings`,`margeDroite`),r.margesDroite,e=>c(`document`,`margesDroite`,e.target.value),{type:`number`,small:!0}),(0,R.jsx)(`div`,{className:`w-100`}),(0,R.jsx)(`h6`,{className:`col-12`,style:{fontSize:`0.82rem`,fontWeight:600,color:`var(--text-muted)`,marginTop:8,borderBottom:`1px solid var(--border-color)`,paddingBottom:6},children:`Affichage`}),w(u(`settings`,`afficherLogo`),r.afficherLogo,e=>c(`document`,`afficherLogo`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`afficherEnTete`),r.afficherEnTete,e=>c(`document`,`afficherEnTete`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`afficherPiedPage`),r.afficherPiedPage,e=>c(`document`,`afficherPiedPage`,e.target.checked),{type:`checkbox`}),w(u(`settings`,`textePiedPage`),r.textePiedPage,e=>c(`document`,`textePiedPage`,e.target.value),{type:`textarea`}),w(u(`settings`,`texteSignature`),r.texteSignature,e=>c(`document`,`texteSignature`,e.target.value)),w(u(`settings`,`couleurPrincipale`),r.couleurPrincipale,e=>c(`document`,`couleurPrincipale`,e.target.value),{type:`color`})]})]});case`employe`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-people`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`employe`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:u(`settings`,`infoEmploye`)})]})]}),(0,R.jsxs)(`div`,{className:`row g-3`,children:[(0,R.jsxs)(`div`,{className:`col-12`,children:[(0,R.jsx)(`label`,{className:`form-label small`,style:{fontWeight:600,color:`var(--text-primary)`,marginBottom:4},children:u(`settings`,`typesContrat`)}),(0,R.jsx)(`input`,{type:`text`,className:`form-control`,value:i.typesContrat.join(`, `),onChange:e=>c(`employe`,`typesContrat`,e.target.value.split(`,`).map(e=>e.trim())),placeholder:`CDI, CDD, Stage, Freelance, Intérim`}),(0,R.jsx)(`small`,{className:`text-muted`,style:{fontSize:`0.7rem`,marginTop:2,display:`block`},children:`Séparés par des virgules`})]}),w(u(`settings`,`defaultContrat`),i.defaultContrat,e=>c(`employe`,`defaultContrat`,e.target.value),{type:`select`,options:i.typesContrat}),w(u(`settings`,`saisieAuto`),i.saisieAuto,e=>c(`employe`,`saisieAuto`,e.target.checked),{type:`checkbox`})]})]});case`appearance`:return(0,R.jsxs)(`div`,{children:[(0,R.jsxs)(`div`,{className:`d-flex align-items-center gap-2 mb-3`,children:[(0,R.jsx)(`i`,{className:`bi bi-palette`,style:{fontSize:`1.3rem`,color:`var(--accent)`}}),(0,R.jsxs)(`div`,{children:[(0,R.jsx)(`h6`,{className:`mb-0`,style:{fontWeight:700},children:u(`settings`,`appearance`)}),(0,R.jsx)(`small`,{className:`text-muted`,children:`Personnalisez l'apparence de l'application`})]})]}),(0,R.jsxs)(`div`,{className:`row g-4`,children:[(0,R.jsx)(`div`,{className:`col-md-6`,children:(0,R.jsx)(`div`,{className:`card border`,style:{background:`var(--card-bg)`,borderRadius:12},children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsx)(`label`,{className:`form-label small d-block`,style:{fontWeight:600,marginBottom:10},children:u(`settings`,`theme`)}),(0,R.jsxs)(`div`,{className:`d-flex gap-2`,children:[(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${a===d.LIGHT?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`theme`,d.LIGHT),children:[(0,R.jsx)(`i`,{className:`bi bi-sun-fill`}),` `,u(`settings`,`light`)]}),(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${a===d.DARK?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`theme`,d.DARK),children:[(0,R.jsx)(`i`,{className:`bi bi-moon-fill`}),` `,u(`settings`,`dark`)]})]})]})})}),(0,R.jsx)(`div`,{className:`col-md-6`,children:(0,R.jsx)(`div`,{className:`card border`,style:{background:`var(--card-bg)`,borderRadius:12},children:(0,R.jsxs)(`div`,{className:`card-body`,children:[(0,R.jsx)(`label`,{className:`form-label small d-block`,style:{fontWeight:600,marginBottom:10},children:u(`settings`,`language`)}),(0,R.jsx)(`div`,{className:`d-flex gap-2`,children:[{value:f.FR,label:`FR`,name:u(`settings`,`french`)},{value:f.EN,label:`EN`,name:u(`settings`,`english`)},{value:f.AR,label:`AR`,name:u(`settings`,`arabic`)}].map(e=>(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 flex-fill ${o===e.value?`btn-primary`:`btn-outline-secondary`}`,onClick:()=>s(`lang`,e.value),children:[(0,R.jsx)(`span`,{className:`fw-bold`,children:e.label}),(0,R.jsx)(`small`,{children:e.name})]},e.value))})]})})})]})]})}})()})}),(0,R.jsxs)(`div`,{className:`d-flex gap-2 mt-3`,children:[(0,R.jsxs)(`button`,{className:`btn btn-primary d-flex align-items-center gap-2`,onClick:x,children:[(0,R.jsx)(`i`,{className:`bi bi-check-lg`}),` `,u(`settings`,`save`)]}),(0,R.jsxs)(`button`,{className:`btn d-flex align-items-center gap-2 ${y?`btn-danger`:`btn-outline-danger`}`,onClick:C,onMouseLeave:()=>b(!1),children:[(0,R.jsx)(`i`,{className:`bi ${y?`bi-exclamation-triangle-fill`:`bi-arrow-counterclockwise`}`}),y?`Confirmer ?`:u(`settings`,`reset`)]})]})]})]})]})}function Ds(){return(0,R.jsx)(ko,{children:(0,R.jsxs)(Ht,{children:[(0,R.jsx)(Bt,{path:`/`,element:(0,R.jsx)(Rt,{to:`/login`,replace:!0})}),(0,R.jsx)(Bt,{path:`/login`,element:(0,R.jsx)(Ro,{})}),(0,R.jsxs)(Bt,{element:(0,R.jsx)(Fo,{children:(0,R.jsx)(Lo,{})}),children:[(0,R.jsx)(Bt,{path:`/dashboard`,element:(0,R.jsx)(cs,{})}),(0,R.jsx)(Bt,{path:`/agents`,element:(0,R.jsx)(Fo,{route:`/agents`,children:(0,R.jsx)(ds,{})})}),(0,R.jsx)(Bt,{path:`/employees`,element:(0,R.jsx)(Fo,{route:`/employees`,children:(0,R.jsx)(ls,{})})}),(0,R.jsx)(Bt,{path:`/employees/new`,element:(0,R.jsx)(Fo,{route:`/employees/new`,children:(0,R.jsx)(us,{})})}),(0,R.jsx)(Bt,{path:`/employees/:id/edit`,element:(0,R.jsx)(Fo,{route:`/employees/:id/edit`,children:(0,R.jsx)(us,{})})}),(0,R.jsx)(Bt,{path:`/templates`,element:(0,R.jsx)(Fo,{route:`/templates`,children:(0,R.jsx)(fs,{})})}),(0,R.jsx)(Bt,{path:`/templates/new`,element:(0,R.jsx)(Fo,{route:`/templates/new`,children:(0,R.jsx)(_s,{})})}),(0,R.jsx)(Bt,{path:`/templates/:id/edit`,element:(0,R.jsx)(Fo,{route:`/templates/:id/edit`,children:(0,R.jsx)(_s,{})})}),(0,R.jsx)(Bt,{path:`/documents/generate`,element:(0,R.jsx)(Fo,{route:`/documents/generate`,children:(0,R.jsx)(Cs,{})})}),(0,R.jsx)(Bt,{path:`/documents/history`,element:(0,R.jsx)(Fo,{route:`/documents/history`,children:(0,R.jsx)(ws,{})})}),(0,R.jsx)(Bt,{path:`/settings`,element:(0,R.jsx)(Fo,{route:`/settings`,children:(0,R.jsx)(Es,{})})}),(0,R.jsx)(Bt,{path:`*`,element:(0,R.jsx)(cs,{})})]})]})})}(0,Xn.createRoot)(document.getElementById(`root`)).render((0,R.jsx)(S.StrictMode,{children:(0,R.jsx)(An,{children:(0,R.jsx)(ir,{children:(0,R.jsx)(Ds,{})})})}));

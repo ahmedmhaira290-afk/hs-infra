@@ -34,11 +34,13 @@ class DocumentController extends Controller
         $civilite = $emp->genre && $emp->genre[0] === 'F' ? 'Madame' : 'Monsieur';
         $extraData = $request->except(['employee_id', 'template_id']);
 
-        $ctx = array_merge($emp->toArray(), ['civilite' => $civilite], $extraData, [
+        $ctx = array_merge($emp->toArray(), ['civilite' => $civilite], [
             'date' => $now->locale('fr_FR')->translatedFormat('l j F Y'),
             'raison_sociale' => 'HS-INFRA',
+            'capital' => '',
+            'immatricule' => '',
             'reference' => $ref,
-        ]);
+        ], $extraData);
 
         $content = $tpl->content;
         $content = preg_replace_callback('/\{\{(\w+)\}\}/', function ($m) use ($ctx) {
@@ -99,7 +101,7 @@ class DocumentController extends Controller
                 $body .= '<h2 style="text-align:center;color:#0d2e4a;margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">' . htmlspecialchars($t) . '</h2>';
             } else {
                 $isLabel = str_contains($line, ':') && !str_starts_with($line, ' ');
-                $style = $isLabel ? 'line-height:1.7;color:#000;font-weight:600' : 'line-height:1.7;color:#111';
+                $style = $isLabel ? 'line-height:1.7;color:#000;font-weight:700' : 'line-height:1.7;color:#000;font-weight:700';
                 $body .= '<div style="' . $style . '">' . htmlspecialchars($line) . '</div>';
             }
         }

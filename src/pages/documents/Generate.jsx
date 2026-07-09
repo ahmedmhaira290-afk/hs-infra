@@ -101,6 +101,8 @@ export default function Generate() {
   const [autreMotif, setAutreMotif] = useState('')
   const [montant, setMontant] = useState('')
   const [totalCharges, setTotalCharges] = useState('')
+  const [capital, setCapital] = useState('')
+  const [immatricule, setImmatricule] = useState('')
   const [preview, setPreview] = useState(null)
   const [generating, setGenerating] = useState(false)
   const iframeRef = useRef(null)
@@ -115,13 +117,16 @@ export default function Generate() {
   const isAideSociale = selectedTpl?.type === "Demande d'aide sociale"
   const isPieceDeCaisse = selectedTpl?.type === "Pièce de caisse dépense"
   const isDemandeAvance = selectedTpl?.type === "Demande d'avance"
-  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse || isDemandeAvance
+  const isDomiciliation = selectedTpl?.type === "Attestation de domiciliation irrévocable de salaire"
+  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse || isDemandeAvance || isDomiciliation
 
   const resetExtra = () => {
     setMotif('')
     setAutreMotif('')
     setMontant('')
     setTotalCharges('')
+    setCapital('')
+    setImmatricule('')
   }
 
   const handleGenerate = async () => {
@@ -134,6 +139,7 @@ export default function Generate() {
         motif: finalMotif || '',
         montant: montant || '',
         ...(isAideSociale ? { total_charges: totalCharges } : {}),
+        ...(isDomiciliation ? { capital: capital || '', immatricule: immatricule || '' } : {}),
         cnss_remb: emp?.cnss_remb || '',
         montant_accorde: emp?.montant_accorde || '',
       }
@@ -238,6 +244,7 @@ export default function Generate() {
                       <>
                         <option value="Naissance">Naissance</option>
                         <option value="Mariage">Mariage</option>
+                        <option value="Autres">Autres (à préciser)</option>
                       </>
                     ) : isPieceDeCaisse ? (
                       <>
@@ -296,6 +303,18 @@ export default function Generate() {
                       <div className="form-control-plaintext fw-bold">
                         {employees.find((e) => e.id === Number(selectedEmployee))?.montant_accorde || '—'} DH
                       </div>
+                    </div>
+                  </>
+                )}
+                {isDomiciliation && (
+                  <>
+                    <div className="col-md-3">
+                      <label className="form-label">Capital <small className="text-muted">(opt.)</small></label>
+                      <input type="text" className="form-control" value={capital} onChange={(e) => setCapital(e.target.value)} placeholder="Ex: 1 000 000 DH" />
+                    </div>
+                    <div className="col-md-3">
+                      <label className="form-label">Immatriculé RC n° <small className="text-muted">(opt.)</small></label>
+                      <input type="text" className="form-control" value={immatricule} onChange={(e) => setImmatricule(e.target.value)} placeholder="Ex: 123456" />
                     </div>
                   </>
                 )}
