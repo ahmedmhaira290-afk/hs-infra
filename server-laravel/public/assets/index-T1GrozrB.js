@@ -29,9 +29,8 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     display:flex; justify-content:center; padding:40px 20px; margin:0;
   }
   .sheet{
-    background:var(--paper); width:820px; max-width:100%;
-    padding:60px 70px; box-shadow:0 4px 20px rgba(0,0,0,.15);
-    min-height:1100px;
+    background:var(--paper); width:21cm; min-height:29.7cm;
+    padding:2.5cm 2.5cm; box-shadow:0 4px 20px rgba(0,0,0,.15);
   }
   .header{
     display:flex; justify-content:space-between; align-items:center;
@@ -216,8 +215,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   }
   .page {
     background: #fff;
-    width: 800px;
-    padding: 60px 70px;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     color: #000;
   }
@@ -568,8 +568,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   }
   .page {
     background: #fff;
-    width: 800px;
-    padding: 60px 70px;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     color: #000;
     font-size: 19px;
@@ -689,8 +690,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   }
   .page {
     background: #fff;
-    width: 800px;
-    padding: 60px 70px;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2.5cm 2.5cm;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     color: #000;
   }
@@ -845,8 +847,8 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     display:flex; justify-content:center; padding:40px 20px; margin:0;
   }
   .sheet{
-    background:var(--paper); width:900px; max-width:100%;
-    padding:50px 60px; box-shadow:0 4px 20px rgba(0,0,0,.15);
+    background:var(--paper); width:21cm; min-height:29.7cm;
+    padding:2.5cm 2.5cm; box-shadow:0 4px 20px rgba(0,0,0,.15);
   }
   .top-row{
     display:flex; justify-content:space-between; align-items:flex-start;
@@ -943,7 +945,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
 
 </div>
 </body>
-</html>`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=18,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
+</html>`}],qo=Bo.getAll();if(qo.length<Go.length||Wo<Uo){let e=[...qo.filter(e=>e.id>Go.length)];for(let t of Go){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]={...e[n],...t}:e.push(t)}Bo.saveAll(e),localStorage.setItem(`emp_version`,String(Uo))}var Jo=19,Yo=Number(localStorage.getItem(`tpl_version`)||0),Xo=Vo.getAll();if(Xo.length<Ko.length||Yo<Jo){let e=[...Xo.filter(e=>e.id>Ko.length)];for(let t of Ko){let n=e.findIndex(e=>e.id===t.id);n>-1?e[n]=t:e.push(t)}Vo.saveAll(e),localStorage.setItem(`tpl_version`,String(Jo))}var Zo=null;async function Qo(e,t){if(Zo===null&&(Zo=await Eo()),!Zo)return t();try{return await e()}catch{return t()}}setInterval(async()=>{Zo=await Eo()},6e4);function $o(e,t){return{async list(){return Qo(()=>To.get(`/${e}`).then(e=>e.data),()=>t.getAll())},async get(n){return Qo(()=>To.get(`/${e}/${n}`).then(e=>e.data),()=>t.getAll().find(e=>e.id===Number(n)))},async create(n){return Qo(()=>To.post(`/${e}`,n).then(e=>e.data),()=>{let e=t.getAll(),r={...n,id:Date.now()};return e.push(r),t.saveAll(e),r})},async update(n,r){return Qo(()=>To.put(`/${e}/${n}`,r).then(e=>e.data),()=>{let e=t.getAll(),i=e.findIndex(e=>e.id===Number(n));return i>-1&&(e[i]={...e[i],...r}),t.saveAll(e),e[i]})},async remove(n){return Qo(()=>To.delete(`/${e}/${n}`),()=>{t.saveAll(t.getAll().filter(e=>e.id!==Number(n)))})}}}var es=$o(`employees`,Bo),ts={...$o(`templates`,Vo),async list(e=!1){return Qo(()=>To.get(`/templates${e?`?active=1`:``}`).then(e=>e.data),()=>{let t=Vo.getAll();return e?t.filter(e=>e.is_active):t})}};function ns(){try{let e=JSON.parse(localStorage.getItem(`app_settings`)||`{}`);return{societe:e.societe||{},document:e.document||{},rhManager:e.rhManager||{}}}catch{return{societe:{},document:{},rhManager:{}}}}function rs(e,t){let{societe:n,document:r,rhManager:i}=ns(),a=n.raisonSociale||`HS-INFRA`,o=n.ville||`Tanger`,s=r.couleurPrincipale||`#0d2e4a`,c=r.police||`Calibri`,l=r.taillePolice||`11`,u=r.interligne||`1.5`,d=r.margesHaut||`12`,f=r.margesBas||`12`,p=r.margesGauche||`15`,m=r.margesDroite||`15`,h=r.afficherLogo!==!1,g=r.afficherEnTete!==!1,_=r.afficherPiedPage!==!1,v=r.textePiedPage||`${a} — ${o}, Maroc`,y=r.texteSignature||`Signature et cachet`,b=t.split(`
 `).map(e=>{let t=e.trim();return t?t===t.toUpperCase()&&t.length>3?`<h2 style="text-align:center;color:${s};margin:1.2rem 0 0.8rem 0;font-size:1.3rem;font-weight:700">${t}</h2>`:`<div style="${e.includes(`:`)&&e.startsWith(` `),`line-height:${u};color:#000;font-weight:700`}">${e}</div>`:`<div style="height:0.4rem"></div>`}).join(``);return`<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><style>
