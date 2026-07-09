@@ -184,6 +184,19 @@ class DatabaseSeeder extends Seeder
     font-size: 13px;
     margin-top: 60px;
   }
+  .salary-block {
+    margin: 30px 0;
+    font-size: 19px;
+  }
+  .salary-row {
+    margin-bottom: 16px;
+  }
+  .blank-lg {
+    display: inline-block;
+    min-width: 200px;
+    border-bottom: 1px solid #000;
+    padding: 0 4px;
+  }
 </style>
 </head>
 <body>
@@ -194,7 +207,12 @@ class DatabaseSeeder extends Seeder
     </div>
     <h1>ATTESTATION DE TRAVAIL ET SALAIRE</h1>
 
-    <p>Nous, soussign&eacute;s St&eacute; <span class=\"hl\">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class=\"hl\">{{first_name}} {{last_name}}</span> N&eacute; le : <span class=\"hl\">{{birth_date}}</span>, N&deg; C.I.N <span class=\"hl\">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class=\"hl\">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class=\"hl\">{{position}}</span>&raquo;, et ce depuis le <span class=\"hl\">{{hire_date}}</span> jusqu'&agrave; nos jours, percevant un salaire mensuel brut de <span class=\"blank\">{{salary}}</span> DH ( <span class=\"blank\"></span> Dirhams Et <span class=\"blank\" style=\"min-width:40px;\"></span> Cts ) .</p>
+    <p>Nous, soussign&eacute;s St&eacute; <span class=\"hl\">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class=\"hl\">{{first_name}} {{last_name}}</span> N&eacute; le : <span class=\"hl\">{{birth_date}}</span>, N&deg; C.I.N <span class=\"hl\">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class=\"hl\">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class=\"hl\">{{position}}</span>&raquo;, et ce depuis le <span class=\"hl\">{{hire_date}}</span> jusqu'&agrave; nos jours.</p>
+
+    <div class=\"salary-block\">
+      <div class=\"salary-row\">Salaire mensuel brut : <span class=\"blank-lg\">{{salary}}</span> Dirhams</div>
+      <div class=\"salary-row\">Soit la somme de : <span class=\"blank-lg\"></span> Dirhams</div>
+    </div>
 
     <p>Cette attestation est d&eacute;livr&eacute;e &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
 
