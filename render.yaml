@@ -1,0 +1,65 @@
+services:
+  - type: web
+    name: hs-infra-api
+    runtime: php
+    region: frankfurt
+    plan: free
+    rootDir: server-laravel
+    buildCommand: composer install --no-dev --optimize-autoloader
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    healthCheckPath: /api/ping
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://hs-infra-api.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: hs-infra-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: hs-infra-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: hs-infra-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: hs-infra-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: hs-infra-db
+          property: password
+
+  - type: static
+    name: hs-infra-front
+    region: frankfurt
+    plan: free
+    rootDir: .
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://hs-infra-api.onrender.com
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+    routes:
+      - type: rewrite
+        source: /**
+        destination: /index.html
+
+databases:
+  - name: hs-infra-db
+    region: frankfurt
+    plan: free
+    databaseType: postgres
+    ipAllowList: []
