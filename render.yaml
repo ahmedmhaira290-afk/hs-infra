@@ -1,18 +1,19 @@
 services:
   - type: web
     name: hs-infra-api
-    runtime: php
+    runtime: docker
     region: frankfurt
     plan: free
+    branch: master
     rootDir: server-laravel
-    buildCommand: composer install --no-dev --optimize-autoloader
-    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
     healthCheckPath: /api/ping
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_KEY
+        generateValue: true
       - key: APP_URL
         value: https://hs-infra-api.onrender.com
       - key: DB_CONNECTION
