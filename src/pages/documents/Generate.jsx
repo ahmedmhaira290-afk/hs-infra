@@ -104,6 +104,8 @@ export default function Generate() {
   const [capital, setCapital] = useState('')
   const [immatricule, setImmatricule] = useState('')
   const [salaire, setSalaire] = useState('')
+  const [cnssRemb, setCnssRemb] = useState('')
+  const [montantAccorde, setMontantAccorde] = useState('')
   const [preview, setPreview] = useState(null)
   const [generating, setGenerating] = useState(false)
   const iframeRef = useRef(null)
@@ -130,6 +132,8 @@ export default function Generate() {
     setCapital('')
     setImmatricule('')
     setSalaire('')
+    setCnssRemb('')
+    setMontantAccorde('')
   }
 
   const handleGenerate = async () => {
@@ -148,8 +152,8 @@ export default function Generate() {
           const words = numberToFrench(s)
           return { salary: s, salary_letters: words }
         })() : {}),
-        cnss_remb: emp?.cnss_remb || '',
-        montant_accorde: emp?.montant_accorde || '',
+        cnss_remb: cnssRemb || emp?.cnss_remb || '',
+        montant_accorde: montantAccorde || emp?.montant_accorde || '',
       }
       const data = await documentStore.generate(selectedEmployee, selectedTemplate, extra)
       setPreview(data)
@@ -301,16 +305,14 @@ export default function Generate() {
                       <input type="number" className="form-control" value={totalCharges} onChange={(e) => setTotalCharges(e.target.value)} placeholder="0" />
                     </div>
                     <div className="col-md-3">
-                      <label className="form-label">Remb. CNSS <small className="text-muted">(de l'employé)</small></label>
-                      <div className="form-control-plaintext fw-bold">
-                        {employees.find((e) => e.id === Number(selectedEmployee))?.cnss_remb || '—'} DH
-                      </div>
+                      <label className="form-label"><i className="bi bi-currency-exchange me-1"></i>Remb. CNSS</label>
+                      <input type="number" className="form-control" value={cnssRemb} onChange={(e) => setCnssRemb(e.target.value)} placeholder={employees.find((e) => e.id === Number(selectedEmployee))?.cnss_remb || '0'} />
+                      <small className="text-muted">Laissez vide pour utiliser celui de l'employé</small>
                     </div>
                     <div className="col-md-3">
-                      <label className="form-label">Aide accordée <small className="text-muted">(de l'employé)</small></label>
-                      <div className="form-control-plaintext fw-bold">
-                        {employees.find((e) => e.id === Number(selectedEmployee))?.montant_accorde || '—'} DH
-                      </div>
+                      <label className="form-label"><i className="bi bi-currency-exchange me-1"></i>Aide accordée</label>
+                      <input type="number" className="form-control" value={montantAccorde} onChange={(e) => setMontantAccorde(e.target.value)} placeholder={employees.find((e) => e.id === Number(selectedEmployee))?.montant_accorde || '0'} />
+                      <small className="text-muted">Laissez vide pour utiliser celui de l'employé</small>
                     </div>
                   </>
                 )}

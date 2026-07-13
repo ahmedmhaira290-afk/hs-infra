@@ -753,32 +753,6 @@ class DatabaseSeeder extends Seeder
   .charges .field {
     font-size: 19px;
   }
-  .cnss-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .precise-box {
-    border: 1px solid #000;
-    font-weight: bold;
-    font-size: 15px;
-    text-align: center;
-    padding: 6px 10px;
-    width: 140px;
-    line-height: 1.3;
-  }
-  .montant-row {
-    display: flex;
-    align-items: center;
-  }
-  .montant-box {
-    display: inline-block;
-    border: 1px solid #000;
-    min-width: 120px;
-    padding: 6px 14px;
-    margin-left: 20px;
-    text-align: center;
-  }
   .footer {
     text-align: right;
     font-size: 13px;
@@ -822,16 +796,10 @@ class DatabaseSeeder extends Seeder
     <div class="dots">..........................................................................................................</div>
     <div class="dots">..........................................................................................................</div>
 
-    <div class="charges">
-      <div class="field"><label>Total des charges :</label> <span class="value">{{total_charges}}</span></div>
-      <div class="field cnss-row">
-        <span><label>Remboursement CNSS :</label> <span class="value">{{cnss_remb}}</span>..., si oui</span>
-        <span class="precise-box">A pr&eacute;ciser le montant</span>
-      </div>
-      <div class="field montant-row">
-        <label>Montant d'aide accord&eacute;e :</label>
-        <span class="montant-box"><span class="value">{{montant_accorde}}</span></span>
-      </div>
+    <div class=\"charges\">
+      <div class=\"field\"><label>Total des charges :</label> <span class=\"value\">{{total_charges}}</span></div>
+      <div class=\"field\"><label>Remboursement CNSS :</label> <span class=\"blank\">{{cnss_remb}}</span> DH</div>
+      <div class=\"field\"><label>Montant d'aide accord&eacute;e :</label> <span class=\"blank\">{{montant_accorde}}</span> DH</div>
     </div>
 
     <div class="signature">SIGNATURE</div>
