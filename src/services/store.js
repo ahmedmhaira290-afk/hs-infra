@@ -1033,7 +1033,20 @@ export const templateStore = {
   ...apiCrud('templates', tplStore),
   async list(activeOnly = false) {
     return tryApi(
-      () => api.get(`/templates${activeOnly ? '?active=1' : ''}`).then((r) => r.data),
+      () => api.get(`/templates${activeOnly ? '?active=1' : ''}`).then((r) => {
+        const apiData = r.data
+        const merged = apiData.map((t) => {
+          const seed = seedTpls.find((s) => s.id === t.id)
+          if (seed && (seed.content !== t.content || seed.is_active !== t.is_active)) {
+            api.put(`/templates/${t.id}`, { content: seed.content, title: seed.title, type: seed.type, is_active: seed.is_active }).catch(() => {})
+          }
+          return seed ? { ...t, content: seed.content, title: seed.title, type: seed.type, is_active: seed.is_active } : t
+        })
+        for (const s of seedTpls) {
+          if (!merged.find((m) => m.id === s.id)) merged.push(s)
+        }
+        return activeOnly ? merged.filter((t) => t.is_active) : merged
+      }),
       () => { const all = tplStore.getAll(); return activeOnly ? all.filter((t) => t.is_active) : all }
     )
   },
@@ -1220,7 +1233,7 @@ export const documentStore = {
     )
   },
   async generate(employeeId, templateId, extraData = {}) {
-    return tryApi(() => api.post('/documents/generate', { employee_id: Number(employeeId), template_id: Number(templateId), ...extraData }).then((r) => { const d = r.data; return { ...d, htmlContent: d.html_content } }), () => {
+    return tryApi(() => { const tpl = tplStore.getAll().find((t) => t.id === Number(templateId)); return api.post('/documents/generate', { employee_id: Number(employeeId), template_id: Number(templateId), content: tpl?.content || '', ...extraData }).then((r) => { const d = r.data; return { ...d, htmlContent: d.html_content } }) }, () => {
       const emp = empStore.getAll().find((e) => e.id === Number(employeeId))
       const tpl = tplStore.getAll().find((t) => t.id === Number(templateId))
       const now = new Date()

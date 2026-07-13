@@ -42,7 +42,7 @@ class DocumentController extends Controller
             'reference' => $ref,
         ], $extraData);
 
-        $content = $tpl->content;
+        $content = $request->input('content', $tpl->content);
         $content = preg_replace_callback('/\{\{(\w+)\}\}/', function ($m) use ($ctx) {
             return $ctx[$m[1]] ?? '{{' . $m[1] . '}}';
         }, $content ?? '');
