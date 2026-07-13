@@ -188,19 +188,6 @@ const seedTpls = [
     font-size: 13px;
     margin-top: 60px;
   }
-  .salary-block {
-    margin: 30px 0;
-    font-size: 19px;
-  }
-  .salary-row {
-    margin-bottom: 16px;
-  }
-  .blank-lg {
-    display: inline-block;
-    min-width: 200px;
-    border-bottom: 1px solid #000;
-    padding: 0 4px;
-  }
 </style>
 </head>
 <body>
@@ -211,12 +198,7 @@ const seedTpls = [
     </div>
     <h1>ATTESTATION DE TRAVAIL ET SALAIRE</h1>
 
-    <p>Nous, soussign&eacute;s St&eacute; <span class="hl">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> N&eacute; le : <span class="hl">{{birth_date}}</span>, N&deg; C.I.N <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span> jusqu'&agrave; nos jours.</p>
-
-    <div class="salary-block">
-      <div class="salary-row">Salaire mensuel brut : <span class="blank-lg">{{salary}}</span> Dirhams</div>
-      <div class="salary-row">Soit la somme de : <span class="blank-lg"></span> Dirhams</div>
-    </div>
+    <p>Nous, soussign&eacute;s St&eacute; <span class="hl">{{raison_sociale}}</span>, attestons par la pr&eacute;sente que {{civilite}} : <span class="hl">{{first_name}} {{last_name}}</span> N&eacute; le : <span class="hl">{{birth_date}}</span>, N&deg; C.I.N <span class="hl">{{cin}}</span>, immatricul&eacute; &agrave; la C.N.S.S sous le <span class="hl">N&deg;{{cnss}}</span>, est employ&eacute; au sein de notre &eacute;tablissement en qualit&eacute; de &laquo;<span class="hl">{{position}}</span>&raquo;, et ce depuis le <span class="hl">{{hire_date}}</span> jusqu'&agrave; nos jours, percevant un salaire mensuel brut de <span class="blank">{{salary}}</span> DH ( {{salary_letters}} ).</p>
 
     <p>Cette attestation est d&eacute;livr&eacute;e &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
 
@@ -1144,6 +1126,85 @@ export function toHtml(title, content) {
 </body></html>`
 }
 
+export function numberToFrench(n) {
+  const num = parseFloat(String(n).replace(/\s/g, '').replace(',', '.'))
+  if (isNaN(num)) return ''
+  const entier = Math.floor(Math.abs(num))
+  const cents = Math.round((Math.abs(num) - entier) * 100)
+  if (entier === 0 && cents === 0) return 'zéro dirham'
+  const u = ['','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix',
+    'onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf']
+  const d = ['','','vingt','trente','quarante','cinquante','soixante','soixante-dix','quatre-vingt','quatre-vingt-dix']
+  function convert(n) {
+    if (n < 20) return u[n]
+    if (n < 70) {
+      const t = d[Math.floor(n / 10)]
+      const r = n % 10
+      if (r === 1) return t + ' et un'
+      if (r === 0) return t
+      return t + '-' + u[r]
+    }
+    if (n < 80) {
+      const r = n - 60
+      if (r === 11) return 'soixante et onze'
+      return 'soixante-' + u[r]
+    }
+    if (n < 90) {
+      const r = n - 80
+      if (r === 0) return 'quatre-vingts'
+      if (r === 1) return 'quatre-vingt-un'
+      return 'quatre-vingt-' + u[r]
+    }
+    if (n < 100) {
+      const r = n - 90
+      if (r === 11) return 'quatre-vingt-onze'
+      return 'quatre-vingt-' + u[r]
+    }
+    return ''
+  }
+  function millier(n) {
+    if (n === 0) return ''
+    if (n < 100) return convert(n)
+    if (n < 1000) {
+      const c = Math.floor(n / 100)
+      const r = n % 100
+      const cent = c === 1 ? 'cent' : convert(c) + ' cent'
+      if (r === 0) return c > 1 ? cent + 's' : cent
+      return cent + ' ' + convert(r)
+    }
+    return ''
+  }
+  function mots(n) {
+    if (n === 0) return ''
+    if (n < 1000) return millier(n)
+    if (n < 1000000) {
+      const m = Math.floor(n / 1000)
+      const r = n % 1000
+      const mil = m === 1 ? 'mille' : millier(m) + ' mille'
+      if (r === 0) return mil
+      return mil + ' ' + millier(r)
+    }
+    if (n < 1000000000) {
+      const m = Math.floor(n / 1000000)
+      const r = n % 1000000
+      const mil = m === 1 ? 'un million' : mots(m) + ' millions'
+      if (r === 0) return mil
+      return mil + ' ' + mots(r)
+    }
+    return ''
+  }
+  let result = mots(entier)
+  if (result === '') result = 'zéro'
+  if (cents > 0) {
+    result += ' dirhams et ' + mots(cents) + ' centimes'
+  } else if (entier > 1) {
+    result += ' dirhams'
+  } else {
+    result += ' dirham'
+  }
+  return result
+}
+
 export const documentStore = {
   async list() {
     return tryApi(
@@ -1166,7 +1227,8 @@ export const documentStore = {
       const ref = `DOC-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(docStore.getAll().length + 1).padStart(3, '0')}`
       const civilite = emp?.genre && emp.genre[0] === 'F' ? 'Madame' : 'Monsieur'
       const { societe } = loadDocSettings()
-      const ctx = { ...emp, civilite, ...extraData, raison_sociale: societe.raisonSociale || 'HS-INFRA', capital: societe.capital || '', immatricule: societe.immatricule || '', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }
+      const salary = extraData.salary || emp?.salary || ''
+      const ctx = { ...emp, civilite, ...extraData, salary, salary_letters: numberToFrench(salary), raison_sociale: societe.raisonSociale || 'HS-INFRA', capital: societe.capital || '', immatricule: societe.immatricule || '', date: now.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }
       const content = (tpl?.content || '').replace(/\{\{(\w+)\}\}/g, (_, key) => ctx?.[key] !== undefined ? ctx[key] : `{{${key}}}`)
       const isFullHtml = content.trim().startsWith('<!DOCTYPE') || content.trim().startsWith('<html')
       const htmlContent = isFullHtml ? content : toHtml(ref, content)

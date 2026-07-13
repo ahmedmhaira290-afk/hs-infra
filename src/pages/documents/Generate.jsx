@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { employeeStore, templateStore, documentStore } from '../../services/store'
+import { employeeStore, templateStore, documentStore, numberToFrench } from '../../services/store'
 
 const EMP_FIELDS = [
   'civilite', 'first_name', 'last_name', 'email', 'phone', 'genre',
@@ -103,6 +103,7 @@ export default function Generate() {
   const [totalCharges, setTotalCharges] = useState('')
   const [capital, setCapital] = useState('')
   const [immatricule, setImmatricule] = useState('')
+  const [salaire, setSalaire] = useState('')
   const [preview, setPreview] = useState(null)
   const [generating, setGenerating] = useState(false)
   const iframeRef = useRef(null)
@@ -118,7 +119,8 @@ export default function Generate() {
   const isPieceDeCaisse = selectedTpl?.type === "Pièce de caisse dépense"
   const isDemandeAvance = selectedTpl?.type === "Demande d'avance"
   const isDomiciliation = selectedTpl?.type === "Attestation de domiciliation irrévocable de salaire"
-  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse || isDemandeAvance || isDomiciliation
+  const isAttestationSalaire = selectedTpl?.type === "Attestation de salaire"
+  const needsExtra = isPrime || isAideSociale || isPieceDeCaisse || isDemandeAvance || isDomiciliation || isAttestationSalaire
 
   const resetExtra = () => {
     setMotif('')
@@ -127,6 +129,7 @@ export default function Generate() {
     setTotalCharges('')
     setCapital('')
     setImmatricule('')
+    setSalaire('')
   }
 
   const handleGenerate = async () => {
@@ -140,6 +143,11 @@ export default function Generate() {
         montant: montant || '',
         ...(isAideSociale ? { total_charges: totalCharges } : {}),
         ...(isDomiciliation ? { capital: capital || '', immatricule: immatricule || '' } : {}),
+        ...(isAttestationSalaire ? (() => {
+          const s = salaire || emp?.salary || ''
+          const words = numberToFrench(s)
+          return { salary: s, salary_letters: words }
+        })() : {}),
         cnss_remb: emp?.cnss_remb || '',
         montant_accorde: emp?.montant_accorde || '',
       }
@@ -317,6 +325,13 @@ export default function Generate() {
                       <input type="text" className="form-control" value={immatricule} onChange={(e) => setImmatricule(e.target.value)} placeholder="Ex: 123456" />
                     </div>
                   </>
+                )}
+                {isAttestationSalaire && (
+                  <div className="col-md-3">
+                    <label className="form-label"><i className="bi bi-currency-exchange me-1"></i>Salaire mensuel brut</label>
+                    <input type="number" className="form-control" value={salaire} onChange={(e) => setSalaire(e.target.value)} placeholder="Ex: 15000" />
+                    <small className="text-muted">Laissez vide pour utiliser celui de l'employé</small>
+                  </div>
                 )}
               </>
             )}
